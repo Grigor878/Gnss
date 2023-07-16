@@ -10,7 +10,7 @@ i18next
   .use(initReactI18next)
   .init({
     lng: cookies.get("lng") || "en",
-    supportedLngs: ["en", "am", "ru"],
+    supportedLngs: ["en", "am"],
     debug: false,
     detection: {
       order: ["cookie", "path", "htmlTag"],

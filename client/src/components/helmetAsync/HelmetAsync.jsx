@@ -1,7 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async"
 import { useLocation } from "react-router-dom"
 
-const HelmetAsync = () => {
+export const HelmetAsync = () => {
   const { pathname } = useLocation();
 
   function capitalize() {
@@ -24,5 +24,3 @@ const HelmetAsync = () => {
     </HelmetProvider>
   );
 };
-
-export default HelmetAsync;
