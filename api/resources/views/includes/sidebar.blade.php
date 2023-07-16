@@ -1,14 +1,14 @@
 <nav class="mt-2">
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-        <li class="nav-header">Admin Panel</li>
-        {{-- <li class="nav-item">
-            <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon fas fa-align-justify"></i>
+        {{-- <li class="nav-header">Admin Panel</li> --}}
+        <li class="nav-item">
+            <a href="" class="nav-link">
+                <i class="nav-icon fas fa-boxes"></i>
                 <p>
-                    Posts
+                    Products
                 </p>
             </a>
-        </li> --}}
+        </li>
     </ul>
 </nav>
