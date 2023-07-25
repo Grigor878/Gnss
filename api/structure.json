@@ -1,0 +1,127 @@
+[
+    {
+        "id": "",
+        "name": "Home",
+        "path": "/"
+    },
+    {
+        "id": "",
+        "name": "About",
+        "path": "/about"
+    },
+    {
+        "id": "",
+        "name": "Contact",
+        "path": "/contact"
+    },
+    {
+        "id": "",
+        "name": "Products",
+        "path": "/products",
+        "categoires": [
+            {
+                "id": "",
+                "name": "Medical Solutions",
+                "path": "/products/medical",
+                "subcategoires" : [
+                    {
+                        "id": "",
+                        "name": "ENT",
+                        "path": "/products/medical/ent",
+                        "products": [
+                            {
+                                "id": "",
+                                "name": "Surgical ENT microscopes",
+                                "path": "/products/medical/ent/surgical-microscopes"
+                            },
+                            {
+                                "id": "",
+                                "name": "ENT Instruments",
+                                "path": "/products/medical/ent/instruments"
+                            }
+                        ]
+                    },
+                    {
+                        "id": "",
+                        "name": "PLASTIC AND RECONSTRUCTIVE SURGERY",
+                        "path": "/products/medical/plastic"
+                    },
+                    {
+                        "id": "",
+                        "name": "OPHTHALMOLOGY",
+                        "path": "/products/medical/ophthalmology"
+                    },
+                    {
+                        "id": "",
+                        "name": "NEUROLOGY",
+                        "path": "/products/medical/neurology"
+                    },
+                    {
+                        "id": "",
+                        "name": "CARDIOLOGY",
+                        "path": "/products/medical/cardilogy"
+                    },
+                    {
+                        "id": "",
+                        "name": "ONCOLOGY",
+                        "path": "/products/medical/oncology"
+                    },
+                    {
+                        "id": "",
+                        "name": "UROLOGY AND GYNECOLOGY",
+                        "path": "/products/medical/urology-gynecology"
+                    },
+                    {
+                        "id": "",
+                        "name": "DENTAL",
+                        "path": "/products/medical/dental"
+                    }
+                ]
+            },
+            {
+                "id": "",
+                "name": "Laboratory Solutions",
+                "path": "/products/laboratory",
+                "subcategoires":[
+                    {
+                        "id": "",
+                        "name": "HISTOLOGY EQUIPMENT",
+                        "path": "/products/laboratory/histology-equipment"
+                    },
+                    {
+                        "id": "",
+                        "name": "DIGITAL PATHOLOGY",
+                        "path": "/products/laboratory/digital-pathalogy"
+                    },
+                    {
+                        "id": "",
+                        "name": "CLINIC MICROSCOPE",
+                        "path": "/products/laboratory/clinic-microscope"
+                    },
+                    {
+                        "id": "",
+                        "name": "HISTOLOGY CUNSUMABLES",
+                        "path": "/products/laboratory/histology-cunsumables"
+                    },
+                    {
+                        "id": "",
+                        "name": "IHC, ISH, FISH",
+                        "path": "/products/laboratory/ihc-ish-fish"
+                    }
+                ]
+            },
+            {
+                "id": "",
+                "name": "Geometrical Solutions",
+                "path": "/products/geometrical",
+                "subcategoires":[
+                    {
+                        "id": "",
+                        "name": "Demo",
+                        "path": "/products/laboratory/demo"
+                    }
+                ]
+            }
+        ]
+    }
+]
