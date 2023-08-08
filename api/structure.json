@@ -32,7 +32,12 @@
                             {
                                 "id": "",
                                 "name": "Surgical ENT microscopes",
-                                "path": "/products/medical/ent/surgical-microscopes"
+                                "path": "/products/medical/ent/surgical-microscopes",
+                                "translations": {
+                                    "am": [
+                                        "title"
+                                    ]
+                                }
                             },
                             {
                                 "id": "",

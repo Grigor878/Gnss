@@ -13,6 +13,13 @@ class Product extends Model
     use HasFactory, SoftDeletes;
 
     /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'price', 'description', 'count'];
+
+    /**
      * Get all of the productTraslations for the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -40,5 +47,15 @@ class Product extends Model
     public function subcategory(): BelongsToMany
     {
         return $this->belongsToMany(Subcategory::class); // 'product_subcategory', 'product_id', 'subcategory_id'
+    }
+
+    /**
+     * Get all of the images for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImages::class);
     }
 }

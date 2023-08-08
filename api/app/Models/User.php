@@ -7,6 +7,7 @@ use App\Models\Role;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -47,11 +48,13 @@ class User extends Authenticatable
     ];
 
     /**
-     * role
+     * Get the role that owns the User
      *
-     * @return void
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function role() {
+    public function role(): BelongsTo
+    {
         return $this->belongsTo(Role::class);
     }
+    
 }

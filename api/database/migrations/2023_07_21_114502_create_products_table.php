@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('price')->nullable();
             $table->text('description')->nullable();
-            $table->boolean('is_available')->default(1);
+            $table->boolean('count')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

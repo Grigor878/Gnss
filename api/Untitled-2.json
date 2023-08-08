@@ -1,0 +1,45 @@
+[
+    {
+        "id": "",
+        "path": "/",
+        "translations": {
+            "am": "Գլխավոր էջ",
+            "en": "Home"
+        }
+    },
+    {
+        "id": "",
+        "path": "/about",
+        "translations": {
+            "am": "",
+            "en": "About Us"
+        }
+    },
+    {
+        "id": "",
+        "path": "/contact",
+        "translations": {
+            "am": "",
+            "en": "Contact Us"
+        }
+    },
+    {
+        "id": "",
+        "path": "/products",
+        "translations": {
+            "am": "",
+            "en": "Products"
+        },
+        "categories": [
+            {
+                "id": "",
+                "path": "/products/medical",
+                "translations": {
+                    "am": "",
+                    "en": "Contact Us"
+                }
+                // stic el sub y
+            }
+        ]
+    },
+]

@@ -1,0 +1,179 @@
+{
+    "id": "",
+    "name": "Products",
+    "path": "/products",
+    "categoires": [
+        {
+            "id": "",
+            "name": "Medical Solutions",
+            "image": "Medical.png",
+            "path": "/products/medical",
+            "translations": {
+                "am": {
+                    "title": "Medical Solutions"
+                },
+                "en": {
+                    "title": "Medical Solutions"
+                }
+            },
+            "subcategoires": [
+                {
+                    "id": "",
+                    "name": "ENT",
+                    "image": "ent.png",
+                    "path": "/products/medical/ent",
+                    "translations": {
+                        "am": {
+                            "title": "ENT"
+                        },
+                        "en": {
+                            "title": "ENT"
+                        }
+                    },
+                    "products": [
+                        {
+                            "id": "",
+                            "name": "Surgical ENT microscopes",
+                            "desctrption": "Desctrption Surgical ENT microscopes",
+                            "price": 50000,
+                            "path": "/products/medical/ent/surgical-microscopes",
+                            "images": [
+                                "product-image1.jpg",
+                                "product-image2.jpg",
+                                "product-image3.jpg"
+                            ],
+                            "translations": {
+                                "am": {
+                                    "title": "Surgical ENT microscopes",
+                                    "desctrption": "Desctrption Surgical ENT microscopes"
+                                },
+                                "en": {
+                                    "title": "Surgical ENT microscopes",
+                                    "desctrption": "Desctrption Surgical ENT microscopes"
+                                }
+                            }
+                        },
+                        {
+                            "id": "",
+                            "name": "ENT Instruments",
+                            "desctrption": "Desctrption ENT Instruments",
+                            "price": 50000,
+                            "path": "/products/medical/ent/instruments",
+                            "images": [
+                                "product-image1.jpg",
+                                "product-image2.jpg",
+                                "product-image3.jpg"
+                            ],
+                            "translations": {
+                                "am": {
+                                    "title": "ENT Instruments",
+                                    "desctrption": "Desctrption ENT Instruments"
+                                },
+                                "en": {
+                                    "title": "ENT Instruments",
+                                    "desctrption": "Desctrption Surgical ENT microscopes"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "",
+                    "name": "PLASTIC AND RECONSTRUCTIVE SURGERY",
+                    "image": "PLASTIC-AND-RECONSTRUCTIVE-SURGERY.png",
+                    "path": "/products/medical/ent",
+                    "translations": {
+                        "am": {
+                            "title": "PLASTIC AND RECONSTRUCTIVE SURGERY"
+                        },
+                        "en": {
+                            "title": "PLASTIC AND RECONSTRUCTIVE SURGERY"
+                        }
+                    },
+                    "products": [
+                        {
+
+                        },
+                        {
+
+                        }
+                    ]
+                },
+                {
+                    "id": "",
+                    "name": "OPHTHALMOLOGY",
+                    "path": "/products/medical/ophthalmology"
+                },
+                {
+                    "id": "",
+                    "name": "NEUROLOGY",
+                    "path": "/products/medical/neurology"
+                },
+                {
+                    "id": "",
+                    "name": "CARDIOLOGY",
+                    "path": "/products/medical/cardilogy"
+                },
+                {
+                    "id": "",
+                    "name": "ONCOLOGY",
+                    "path": "/products/medical/oncology"
+                },
+                {
+                    "id": "",
+                    "name": "UROLOGY AND GYNECOLOGY",
+                    "path": "/products/medical/urology-gynecology"
+                },
+                {
+                    "id": "",
+                    "name": "DENTAL",
+                    "path": "/products/medical/dental"
+                }
+            ]
+        },
+        {
+            "id": "",
+            "name": "Laboratory Solutions",
+            "path": "/products/laboratory",
+            "subcategoires": [
+                {
+                    "id": "",
+                    "name": "HISTOLOGY EQUIPMENT",
+                    "path": "/products/laboratory/histology-equipment"
+                },
+                {
+                    "id": "",
+                    "name": "DIGITAL PATHOLOGY",
+                    "path": "/products/laboratory/digital-pathalogy"
+                },
+                {
+                    "id": "",
+                    "name": "CLINIC MICROSCOPE",
+                    "path": "/products/laboratory/clinic-microscope"
+                },
+                {
+                    "id": "",
+                    "name": "HISTOLOGY CUNSUMABLES",
+                    "path": "/products/laboratory/histology-cunsumables"
+                },
+                {
+                    "id": "",
+                    "name": "IHC, ISH, FISH",
+                    "path": "/products/laboratory/ihc-ish-fish"
+                }
+            ]
+        },
+        {
+            "id": "",
+            "name": "Geometrical Solutions",
+            "path": "/products/geometrical",
+            "subcategoires": [
+                {
+                    "id": "",
+                    "name": "Demo",
+                    "path": "/products/laboratory/demo"
+                }
+            ]
+        }
+    ]
+}
