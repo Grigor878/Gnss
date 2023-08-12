@@ -24,11 +24,9 @@ class ProductController extends Controller
      *
      * @param ProductService $productService
      **/
-    public function __construct
-    (
+    public function __construct (
         ProductService $productService
-    )
-    {
+    ) {
         $this->productService = $productService;
     }
 
@@ -50,7 +48,7 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->get();
-        $subCategories = Subcategory::select('id', 'name')->get();
+        $subCategories = Subcategory::select('id', 'name', 'category_id')->get();
 
         return view('dashboard.product.create', compact('categories', 'subCategories'));
     }

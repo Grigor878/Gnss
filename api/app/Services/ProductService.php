@@ -21,11 +21,9 @@ class ProductService
      *
      *  @param ProductRepository $productRepository
      **/
-    public function __construct
-    (
+    public function __construct (
         ProductRepository $productRepository
-    )
-    {
+    ) {
         $this->productRepository = $productRepository;
     }
 

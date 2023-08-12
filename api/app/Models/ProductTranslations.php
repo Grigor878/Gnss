@@ -12,6 +12,20 @@ class ProductTranslations extends Model
     use HasFactory, SoftDeletes;
 
     /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = ['product_id', 'language', 'name', 'description'];
+
+    /**
+     * timestamps
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * Get the product that owns the ProductTranslations
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

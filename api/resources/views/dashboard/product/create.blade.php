@@ -32,80 +32,164 @@
                         <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="name">Product Name</label>
-                                            <input type="text" class="form-control" id="name" placeholder="name" name="name">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card card-primary card-outline card-outline-tabs">
+
+                                        <div class="card-header p-0 border-bottom-0">
+                                            <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                                <li class="nav-item">
+                                                <a
+                                                    class="nav-link active"
+                                                    id="english-tab"
+                                                    data-toggle="pill"
+                                                    href="#english-box"
+                                                    role="tab"
+                                                    aria-controls="english-box"
+                                                    aria-selected="false"
+                                                >
+                                                    English
+                                                </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                <a
+                                                    class="nav-link"
+                                                    id="armenian-tab"
+                                                    data-toggle="pill"
+                                                    href="#armenian-box"
+                                                    role="tab"
+                                                    aria-controls="armenian-box"
+                                                    aria-selected="false"
+                                                >
+                                                    Հայերեն
+                                                </a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="price">Product price</label>
-                                            <input type="number" class="form-control" id="price" placeholder="price" name="price">
-                                        </div>
-                                    </div>
-                                </div>
+                                        <div class="card-body">
+                                            <div class="tab-content" id="custom-tabs-four-tabContent">
+                                                <div
+                                                    class="tab-pane fade active show"
+                                                    id="english-box"
+                                                    role="tabpanel"
+                                                    aria-labelledby="english-tab"
+                                                >
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="name">Product Name</label>
+                                                                <input type="text" class="form-control" placeholder="name" name="en_name">
+                                                                @error('name')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Select Category</label>
-                                            <select multiple="" class="form-control" name="categories[]">
-                                                @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label>Product Description</label>
+                                                                <textarea class="form-control" rows="3" placeholder="Description ..." name="en_description"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Select subcategory</label>
-                                            <select multiple="" class="form-control" name="subcategories[]">
-                                                @foreach ($subCategories as $subCategory)
-                                                    <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                                                <div
+                                                    class="tab-pane fade"
+                                                    id="armenian-box"
+                                                    role="tabpanel"
+                                                    aria-labelledby="armenian-tab"
+                                                >
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-group">
+                                                                <label for="name">Ապրանքի անունը</label>
+                                                                <input type="text" class="form-control" placeholder="անուն" name="am_name">
+                                                                @error('name')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label>Product Description</label>
-                                            <textarea class="form-control" rows="3" placeholder="Description ..." name="description"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="images">Product Images</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" class="custom-file-input" id="images" name="images[]" multiple>
-                                                    <label class="custom-file-label" for="images">Choose files</label>
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label>Ապրանքի նկարագրությունը</label>
+                                                                <textarea class="form-control" rows="3" placeholder="Description ..." name="am_description"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label for="count">Available count</label>
-                                            <input type="number" class="form-control" id="count" placeholder="available count" name="count">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Select Category</label>
+                                                        <select id="categories" multiple="" class="form-control" name="categories[]">
+                                                            @foreach ($categories as $category)
+                                                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Select subcategory</label>
+                                                        <select id="subCategories" multiple="" class="form-control" name="subcategories[]">
+                                                            @foreach ($subCategories as $subCategory)
+                                                                <option value="{{ $subCategory->id }}" data-category="{{ $subCategory->category_id }}">{{ $subCategory->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="price">Product price</label>
+                                                        <input type="number" class="form-control" placeholder="price" name="price">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="images">Product Images</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" name="images[]" multiple>
+                                                                <label class="custom-file-label" for="images">Choose files</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="count">Available count</label>
+                                                        <input type="number" class="form-control" placeholder="available count" name="count">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
                                 </div>
-
                             </div>
+
+
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
@@ -121,4 +205,10 @@
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+@endsection
+
+@section('scripts')
+
+    <script src="{{ asset('js\product\form.js') }}"></script>
+
 @endsection
