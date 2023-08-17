@@ -33,4 +33,15 @@ class FileServices
 
         return $filePath;
     }
+
+    /**
+     * deleteFile
+     *
+     * @param  mixed $url
+     * @return void
+     */
+    public function deleteImage($url)
+    {
+        Storage::delete($url);
+    }
 }

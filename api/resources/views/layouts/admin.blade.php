@@ -27,6 +27,10 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+
+    @yield('styles')
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -306,6 +310,14 @@
     {{-- <script src="{{ asset('dist/js/demo.js') }}"></script> --}}
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     {{-- <script src="{{ asset('dist/js/pages/dashboard.js') }}"></script> --}}
+
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
     @yield('scripts')
 

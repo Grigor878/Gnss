@@ -24,7 +24,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function productTraslations(): HasMany
+    public function translations(): HasMany
     {
         return $this->hasMany(ProductTranslations::class);
     }
@@ -36,7 +36,7 @@ class Product extends Model
      */
     public function category(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class); // 'category_products', 'product_id', 'category_id'
+        return $this->belongsToMany(Category::class);
     }
 
     /**
@@ -46,7 +46,7 @@ class Product extends Model
      */
     public function subcategory(): BelongsToMany
     {
-        return $this->belongsToMany(Subcategory::class); // 'product_subcategory', 'product_id', 'subcategory_id'
+        return $this->belongsToMany(Subcategory::class);
     }
 
     /**

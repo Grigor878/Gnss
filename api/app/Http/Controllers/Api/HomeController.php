@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function getHeaderItems() : JsonResponse
     {
 
-        $categories = Category::with('subcategories.product.productTraslations')->get();
+        $categories = Category::with('subcategories.product.translations')->get();
 
         $data = [
             [

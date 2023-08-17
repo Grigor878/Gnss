@@ -87,4 +87,80 @@ class ProductRepository
 
         return $product;
     }
+
+    public function update ($product, $data)
+    {
+        DB::beginTransaction();
+
+        $product->update([
+            'name' => $data['en_name'],
+            'price' => $data['price'],
+            'description' => $data['en_description'],
+            'count' => $data['count']
+        ]);
+
+        ProductTranslations::where('product_id', $product->id)->delete();
+
+        ProductTranslations::insert([
+            [
+                'product_id' => $product->id,
+                'language' => 'en',
+                'name' => $data['en_name'],
+                'description' => $data['en_description'],
+            ],
+            [
+                'product_id' => $product->id,
+                'language' => 'am',
+                'name' => $data['am_name'],
+                'description' => $data['am_description'],
+            ]
+        ]);
+
+        if ( isset($data['images']) ) {
+            foreach ($data['images'] as $key => $image) {
+                $imageFileName = rand(1000000, 99999999999) . '_product_' . $product->id . '_image_' . $key + 1 . '.' . strtolower($image->getClientOriginalExtension());
+
+                $path = $this->fileServices->savePhoto(1000, $image, 'products/' . $product->id, $imageFileName);
+
+                ProductImages::create([
+                    'product_id' => $product->id,
+                    'filename' => $path,
+                ]);
+            }
+        }
+
+        if ( isset($data['categories']) ) {
+            CategoryProduct::where('product_id', $product->id)->delete();
+            foreach ( $data['categories'] as $catergory ) {
+                CategoryProduct::create([
+                    'category_id' => $catergory,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+
+        if ( isset($data['subcategories']) ) {
+            ProductSubcategory::where('product_id', $product->id)->delete();
+            foreach ( $data['subcategories'] as $subcategory) {
+                ProductSubcategory::create([
+                    'subcategory_id' => $subcategory,
+                    'product_id' => $product->id
+                ]);
+            }
+        }
+
+        DB::commit();
+
+        return $product;
+    }
+
+    public function delete($product)
+    {
+        ProductTranslations::where('product_id', $product->id)->delete();
+        CategoryProduct::where('product_id', $product->id)->delete();
+        ProductSubcategory::where('product_id', $product->id)->delete();
+        ProductImages::where('product_id', $product->id)->delete();
+
+        return $product->delete();
+    }
 }

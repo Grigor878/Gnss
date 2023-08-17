@@ -11,3 +11,28 @@ $("#categories").on('change', function () {
         }
     })
 })
+
+$(".lang-tab").click(function() {
+    let lang = $(this).attr("id") == 'armenian-tab' ? 'am' : 'en'
+
+    $("#categories > option").each(function(index) {
+        let amName = $(this).data('am-name')
+        let enName = $(this).data('en-name')
+        if ( lang == 'am' ) {
+            $(this).text(amName)
+        } else {
+            $(this).text(enName)
+        }
+    })
+
+    $("#subCategories > option").each(function(index) {
+        let amName = $(this).data('am-name')
+        let enName = $(this).data('en-name')
+        if ( lang == 'am' ) {
+            $(this).text(amName)
+        } else {
+            $(this).text(enName)
+        }
+    })
+
+})

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImages;
 use App\Models\Subcategory;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with('category','subcategory', 'productTraslations', 'images')
+        $products = Product::with('category','subcategory', 'images')
         ->paginate(30);
 
         return view("dashboard.product.index", compact('products'));
@@ -47,8 +48,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = Category::select('id', 'name')->get();
-        $subCategories = Subcategory::select('id', 'name', 'category_id')->get();
+        $categories = Category::select('id', 'name')->with('translations')->get();
+        $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')->get();
 
         return view('dashboard.product.create', compact('categories', 'subCategories'));
     }
@@ -76,17 +77,25 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(string $id)
     {
-        return view('product.edit', compact('product'));
+        $product = Product::with('translations', 'images', 'category', 'subcategory')->find($id);
+        $categories = Category::select('id', 'name')->with('translations')->get();
+        $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')->get();
+
+        return view('dashboard.product.edit', compact('product','categories', 'subCategories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+        $data = $request->validated();
+
+        $this->productService->update($product, $data);
+
+        return redirect()->route('product.index');
     }
 
     /**
@@ -94,6 +103,31 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        dd('delete');
+        $product = Product::with('translations', 'images', 'category', 'subcategory')->find($id);
+
+        $this->productService->delete($product);
+
+        return redirect()->route('product.index');
+    }
+
+    /**
+     * deleteImage
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deleteImage (string $id) {
+        try {
+            $this->productService->deleteImage($id);
+            return [
+                'status' => 1,
+                'message' => 'Image Deleted'
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => 0,
+                'message' => $e
+            ];
+        }
     }
 }

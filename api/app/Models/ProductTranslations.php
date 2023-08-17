@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductTranslations extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * fillable

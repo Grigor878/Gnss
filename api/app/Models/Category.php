@@ -29,7 +29,17 @@ class Category extends Model
      */
     public function product(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class); // 'category_products', 'category_id', 'product_id'
+        return $this->belongsToMany(Product::class);
+    }
+
+    /**
+     * Get all of the translations for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function translations(): HasMany
+    {
+        return $this->hasMany(CategoryTranslations::class);
     }
 
 }

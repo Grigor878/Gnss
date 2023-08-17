@@ -17,5 +17,8 @@ Route::prefix('dashboard')
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('product', ProductController::class);
+
+    // Route::post('deleteImage', [ProductController::class, 'deleteImage']);
+    Route::post('deleteImage/{id}', [ProductController::class, 'deleteImage']);
 });
 

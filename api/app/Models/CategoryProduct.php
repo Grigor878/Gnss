@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CategoryProduct extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     /**
      * guarded

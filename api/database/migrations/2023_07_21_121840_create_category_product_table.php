@@ -16,7 +16,6 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
