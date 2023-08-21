@@ -10,5 +10,13 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('categories.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-window-restore"></i>
+                <p>
+                    Categories
+                </p>
+            </a>
+        </li>
     </ul>
 </nav>

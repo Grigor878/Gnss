@@ -165,8 +165,8 @@
                                                             @foreach ($categories as $category)
                                                                 <option
                                                                     value="{{ $category->id }}"
-                                                                    data-en-name="{{ $category->translations[0]->name }}"
-                                                                    data-am-name="{{ $category->translations[1]->name }}"
+                                                                    data-en-name="{{ @$category->translations[0]->name }}"
+                                                                    data-am-name="{{ @$category->translations[1]->name }}"
                                                                 >
                                                                     {{ $category->name }}
                                                                 </option>

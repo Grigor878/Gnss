@@ -31,6 +31,7 @@ class ProductService
      * ProductService constructor
      *
      *  @param ProductRepository $productRepository
+     *  @param FileServices $fileService
      **/
     public function __construct(
         ProductRepository $productRepository,

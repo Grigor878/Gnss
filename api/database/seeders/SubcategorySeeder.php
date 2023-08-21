@@ -80,9 +80,7 @@ class SubcategorySeeder extends Seeder
             ['subcategory_id' => '14', 'language' => 'am', 'name' => 'ԱՎՏՈՄԱՏԱՑՎԱԾ ԻՄՈՒՆԱՀԻՍԹՈԼՈԳԻԱ'],
         ];
 
-        foreach($subcategoryTranslations as $sub) {
-            SubcategoryTranslations::create($sub);
-        }
+        SubcategoryTranslations::insert($subcategoryTranslations);
 
     }
 }

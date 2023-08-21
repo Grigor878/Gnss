@@ -116,7 +116,7 @@ class HomeController extends Controller
                 "id" => "About Us",
                 "path" => "/about",
                 "translations" => [
-                    "am" => "",
+                    "am" => "Մեր մասին",
                     "en" => "About Us"
                 ]
             ],
@@ -124,7 +124,7 @@ class HomeController extends Controller
                 "id" => "Contact Us",
                 "path" => "/contact",
                 "translations" => [
-                    "am" => "",
+                    "am" => "Կենտակտներ",
                     "en" => "Contact Us"
                 ]
             ],
@@ -132,7 +132,7 @@ class HomeController extends Controller
                 "id" => "products",
                 "path" => "/products",
                 "translations" => [
-                    "am" => "",
+                    "am" => "Ապրանքեր",
                     "en" => "products"
                 ],
                 'categories' => $dataCategoryes

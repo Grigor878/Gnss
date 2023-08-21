@@ -156,11 +156,16 @@ class ProductRepository
 
     public function delete($product)
     {
+        DB::beginTransaction();
+
         ProductTranslations::where('product_id', $product->id)->delete();
         CategoryProduct::where('product_id', $product->id)->delete();
         ProductSubcategory::where('product_id', $product->id)->delete();
         ProductImages::where('product_id', $product->id)->delete();
+        $product->delete();
 
-        return $product->delete();
+        DB::commit();
+
+        return $product;
     }
 }

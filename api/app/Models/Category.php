@@ -13,6 +13,13 @@ class Category extends Model
     use HasFactory, SoftDeletes;
 
     /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'image'];
+
+    /**
      * Get all of the subcategories for the Category
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

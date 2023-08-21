@@ -35,9 +35,7 @@ class CategorySeeder extends Seeder
             ['category_id' => '3', 'language' => 'am', 'name' => 'Երկրաչափական լուծումներ'],
         ];
 
-        foreach ($categoryTranslations as $cat) {
-            CategoryTranslations::create($cat);
-        }
+        CategoryTranslations::insert($categoryTranslations);
 
     }
 }
