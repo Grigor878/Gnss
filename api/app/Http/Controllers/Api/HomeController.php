@@ -9,8 +9,9 @@ use Illuminate\Http\JsonResponse;
 class HomeController extends Controller
 {
 
-    public function getHeaderItems() : JsonResponse
+    public function getHeaderItems(string $lang) : JsonResponse
     {
+
 
         $categories = Category::with(
             'translations',
@@ -29,10 +30,10 @@ class HomeController extends Controller
             ];
 
             if (isset($cat->translations)) {
-                $thisCategory['translations'] = [];
-
                 foreach ( $cat->translations as $tr) {
-                    $thisCategory['translations'] += [$tr->language => $tr->name];
+                    if ( $tr->language == $lang  ) {
+                        $thisCategory['name'] = $tr->name;
+                    }
                 }
             }
 
@@ -47,19 +48,17 @@ class HomeController extends Controller
                     ];
 
                     if (isset($sub->translations)) {
-                        $thisSub['translations'] = [];
-
                         foreach ( $sub->translations as $tr) {
-                            $thisSub['translations'] += [$tr->language => $tr->name];
+                            if ( $tr->language == $lang  ) {
+                                $thisSub['name'] = $tr->name;
+                            }
                         }
                     }
 
                     if (isset($sub->product)) {
-
                         $thisSub['products'] = [];
 
                         foreach ( $sub->product as $product) {
-
                             $thisProduct = [
                                 'name' => $product->name,
                                 "price" => $product->price,
@@ -68,77 +67,84 @@ class HomeController extends Controller
                             ];
 
                             if (isset($product->translations)) {
-                                $thisProduct['translations'] = [];
-
                                 foreach ( $product->translations as $tr) {
 
-                                    $thisProductTr[$tr->language] = [
-                                        'name' => $tr->name,
-                                        'description' => $tr->description
-                                    ];
-
-                                    $thisProduct['translations'] += $thisProductTr;
+                                    if ( $tr->language == $lang  ) {
+                                        $thisProduct['name'] = $tr->name;
+                                        $thisProduct['description'] = $tr->description;
+                                    }
                                 }
                             }
 
                             if (isset($product->images)) {
-
                                 $thisProduct['images'] = [];
 
                                 foreach ($product->images as $image) {
                                     array_push($thisProduct['images'], $image->filename);
                                 }
-
-
                             }
 
                             $thisSub['products'] += $thisProduct;
                         }
                     }
-
                     array_push($thisCategory['subcategories'], $thisSub);
                 }
             }
-
             array_push($dataCategoryes, $thisCategory);
         }
 
-        $data = [
-            [
-                "id" => "Home",
-                "path" => "/",
-                "translations" => [
-                    "am" => "Գլխավոր էջ",
-                    "en" => "Home"
-                ]
-            ],
-            [
-                "id" => "About Us",
-                "path" => "/about",
-                "translations" => [
-                    "am" => "Մեր մասին",
-                    "en" => "About Us"
-                ]
-            ],
-            [
-                "id" => "Contact Us",
-                "path" => "/contact",
-                "translations" => [
-                    "am" => "Կենտակտներ",
-                    "en" => "Contact Us"
-                ]
-            ],
-            [
-                "id" => "products",
-                "path" => "/products",
-                "translations" => [
-                    "am" => "Ապրանքեր",
-                    "en" => "products"
+        if ($lang == 'en') {
+            $data = [
+                [
+                    "id" => "Home",
+                    "path" => "/",
+                    "title" => "Home"
                 ],
-                'categories' => $dataCategoryes
-            ],
-        ];
+                [
+                    "id" => "About Us",
+                    "path" => "/about",
+                    "title" => "About Us"
+                ],
+                [
+                    "id" => "Contact Us",
+                    "path" => "/contact",
+                    "title" => "Contact Us"
+                ],
+                [
+                    "id" => "products",
+                    "path" => "/products",
+                    "title" => "products",
+                    'categories' => $dataCategoryes
+                ],
+            ];
+        } else if ($lang == 'am') {
+            $data = [
+                [
+                    "id" => "Home",
+                    "path" => "/",
+                    "title" => "Գլխավոր էջ"
+                ],
+                [
+                    "id" => "About Us",
+                    "path" => "/about",
+                    "title" => "Մեր մասին"
+                ],
+                [
+                    "id" => "Contact Us",
+                    "path" => "/contact",
+                    "title" => "Կենտակտներ"
+                ],
+                [
+                    "id" => "products",
+                    "path" => "/products",
+                    "title" => "Ապրանքեր",
+                    'categories' => $dataCategoryes
+                ],
+            ];
+
+        }
 
         return response()->json($data);
+
     }
 }
