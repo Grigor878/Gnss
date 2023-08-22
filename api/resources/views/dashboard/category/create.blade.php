@@ -84,7 +84,8 @@
                                                                     class="form-control"
                                                                     value="{{ old('en_name') }}"
                                                                     placeholder="name"
-                                                                    name="en_name">
+                                                                    name="en_name"
+                                                                >
                                                                 @error('en_name')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
@@ -160,7 +161,3 @@
     </section>
     <!-- /.content -->
 @endsection
-
-{{-- @section('scripts')
-    <script src="{{ asset('js\product\form.js') }}"></script>
-@endsection --}}

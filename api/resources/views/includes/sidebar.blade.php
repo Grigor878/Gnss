@@ -26,5 +26,13 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('partners.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-handshake"></i>
+                <p>
+                    Partners
+                </p>
+            </a>
+        </li>
     </ul>
 </nav>
