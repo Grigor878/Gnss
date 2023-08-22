@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Categories</h1>
+                    <h1 class="m-0">Subtegories</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Categories</li>
+                        <li class="breadcrumb-item active">Subcategories</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,10 +26,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Categories Table</h3>
+                        <h3 class="card-title">Subcategories Table</h3>
                         <div class="card-tools">
                             <div>
-                                <a href="{{ route('categories.create') }}" class="btn btn-block btn-primary">Add Category</a>
+                                <a href="{{ route('subcategories.create') }}" class="btn btn-block btn-primary">Add Subcategory</a>
                             </div>
                         </div>
                     </div>
@@ -44,14 +44,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($subcategories as $subcategory)
                                     <tr>
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $subcategory->name }}</td>
                                         <td>
-                                            <span><a href="{{ route('categories.edit', $category->id) }}" class="btn btn-warning">Edit</a></span>
+                                            <span><a href="{{ route('subcategories.edit', $subcategory->id) }}" class="btn btn-warning">Edit</a></span>
                                             <span>
-                                                <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline-block">
+                                                <form action="{{ route('subcategories.destroy', $subcategory->id) }}" method="POST" class="d-inline-block">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="submit" value="DELETE" class="btn btn-danger">

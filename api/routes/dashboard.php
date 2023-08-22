@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\ProductController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\SubcategoryController;
 
 
 
@@ -19,7 +20,9 @@ Route::prefix('dashboard')
 
     Route::resource('product', ProductController::class);
     Route::resource('categories', CategoryController::class);
+    Route::resource('subcategories', SubcategoryController::class);
 
+    Route::post('subcategories/deleteImage/{id}', [SubcategoryController::class, 'deleteImage']);
     Route::post('categories/deleteImage/{id}', [CategoryController::class, 'deleteImage']);
     Route::post('product/deleteImage/{id}', [ProductController::class, 'deleteImage']);
 });

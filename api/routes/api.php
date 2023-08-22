@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('getHeaderItems/{lang}', [HomeController::class, 'getHeaderItems']);
+
+Route::post('getCategories/{lang}', [CategoryController::class, 'getCategories']);

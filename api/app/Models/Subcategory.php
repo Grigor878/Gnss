@@ -14,6 +14,13 @@ class Subcategory extends Model
     use HasFactory, SoftDeletes;
 
     /**
+     * fillable
+     *
+     * @var array
+     */
+    protected $fillable = ['name', 'category_id', 'image'];
+
+    /**
      * Get the category that owns the Subcategory
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

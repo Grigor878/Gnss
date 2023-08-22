@@ -18,5 +18,13 @@
                 </p>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="{{ route('subcategories.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-cubes"></i>
+                <p>
+                    Subcategories
+                </p>
+            </a>
+        </li>
     </ul>
 </nav>

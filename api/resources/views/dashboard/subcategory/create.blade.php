@@ -1,22 +1,18 @@
 @extends('layouts.admin')
 
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css\product\edit.css') }}">
-@endsection
-
 @section('content')
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Add Category</h1>
+                    <h1 class="m-0">Add Subcategory</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Categories</a></li>
-                        <li class="breadcrumb-item active">Edit Category</li>
+                        <li class="breadcrumb-item"><a href="{{ route('subcategories.index') }}">Subcategories</a></li>
+                        <li class="breadcrumb-item active">Add Subcategory</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,9 +28,8 @@
                 <div class="col-12">
 
                     <div class="card card-primary">
-                        <form method="POST" action="{{ route('categories.update', $category->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('subcategories.store') }}" enctype="multipart/form-data">
                             @csrf
-                            @method('PATCH')
 
                             <div class="row">
                                 <div class="col-12">
@@ -82,12 +77,12 @@
                                                     <div class="row">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="en_name">Category Name</label>
+                                                                <label for="en_name">Subategory Name</label>
                                                                 <input
                                                                     type="text"
                                                                     id="en_name"
                                                                     class="form-control"
-                                                                    value="{{ old('en_name') ?? ($category->translations[0]->name ?? '' )}}"
+                                                                    value="{{ old('en_name') }}"
                                                                     placeholder="name"
                                                                     name="en_name">
                                                                 @error('en_name')
@@ -107,12 +102,12 @@
                                                     <div class="row">
                                                         <div class="col-sm-6">
                                                             <div class="form-group">
-                                                                <label for="em_name">Կատեգորիայի անունը</label>
+                                                                <label for="am_name">Ենթակատեգորիայի անունը</label>
                                                                 <input
                                                                     type="text"
-                                                                    id="em_name"
+                                                                    id="am_name"
                                                                     class="form-control"
-                                                                    value="{{ old('am_name') ?? ($category->translations[1]->name ?? '' )}}"
+                                                                    value="{{ old('am_name') }}"
                                                                     placeholder="անուն"
                                                                     name="am_name"
                                                                 >
@@ -131,20 +126,29 @@
                                         <div class="card-body">
                                             <div class="row">
                                                 <div class="col-sm-6">
-                                                    @if(!is_null($category->image))
-                                                        <div class="image-box position-relative w-25 m-2">
-                                                            <a class="position-absolute text-danger delete-image-btn" data-category-id="{{ $category->id }}">
-                                                                <i class="nav-icon fas fa-times-circle fa-2x"></i>
-                                                            </a>
-                                                            <img
-                                                                class="w-100"
-                                                                src="{{ URL::asset('/storage/'.$category->image) }}"
-                                                                alt="img"
-                                                            >
-                                                        </div>
-                                                    @endif
+                                                    <div class="form-group">
+                                                        <label>Select Category</label>
+                                                        <select id="categories" class="form-control" name="category">
+                                                            @foreach ($categories as $category)
+                                                                <option
+                                                                    value="{{ $category->id }}"
+                                                                    data-en-name="{{ @$category->translations[0]->name }}"
+                                                                    data-am-name="{{ @$category->translations[1]->name }}"
+                                                                >
+                                                                    {{ $category->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('categories')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
 
-                                                    <div class="form-group add-image {{ !is_null($category->image) ? 'd-none' : '' }}">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
                                                         <label for="images">Ավելացնել Նկար</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
@@ -173,11 +177,12 @@
 
             </div>
 
+
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('js/category/edit.js') }}"></script>
+    <script src="{{ asset('js\product\form.js') }}"></script>
 @endsection

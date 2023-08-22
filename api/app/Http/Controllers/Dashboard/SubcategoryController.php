@@ -3,16 +3,41 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\SubcategoryRequest;
+use App\Models\Category;
+use App\Models\Subcategory;
+use App\Services\SubcategoryService;
 use Illuminate\Http\Request;
 
 class SubcategoryController extends Controller
 {
+
+    /**
+     * subcategoryService
+     *
+     * @var mixed
+     */
+    private $subcategoryService;
+
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct(
+        SubcategoryService $subcategoryService
+    ) {
+        $this->subcategoryService = $subcategoryService;
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $subcategories = Subcategory::all();
+
+        return view('dashboard.subcategory.index', compact('subcategories'));
     }
 
     /**
@@ -20,15 +45,21 @@ class SubcategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::select('id', 'name')->with('translations')->get();
+
+        return view('dashboard.subcategory.create', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SubcategoryRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $this->subcategoryService->create($data);
+
+        return redirect()->route('subcategories.index');
     }
 
     /**
@@ -44,15 +75,22 @@ class SubcategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $subcategory = Subcategory::with('translations')->find($id);
+        $categories = Category::select('id', 'name')->with('translations')->get();
+
+        return view('dashboard.subcategory.edit', compact('subcategory', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SubcategoryRequest $request, Subcategory $subcategory)
     {
-        //
+        $data = $request->validated();
+
+        $this->subcategoryService->update($subcategory, $data);
+
+        return redirect()->route('subcategories.index');
     }
 
     /**
@@ -60,6 +98,34 @@ class SubcategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $subcategory = Subcategory::with('translations')->find($id);
+
+        $this->subcategoryService->deleteImage($id);
+
+        $this->subcategoryService->delete($subcategory);
+
+        return redirect()->route('subcategories.index');
+    }
+
+    /**
+     * deleteImage
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deleteImage (string $id)
+    {
+        try {
+            $this->subcategoryService->deleteImage($id);
+            return [
+                'status' => 1,
+                'message' => 'Image Deleted'
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => 0,
+                'message' => $e
+            ];
+        }
     }
 }

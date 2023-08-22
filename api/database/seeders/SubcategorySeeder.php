@@ -51,11 +51,8 @@ class SubcategorySeeder extends Seeder
             ['subcategory_id' => '5', 'language' => 'en', 'name' => 'CARDIOLOGY'],
             ['subcategory_id' => '5', 'language' => 'am', 'name' => 'ՍՐՏԱԲԱՆՈՒԹՅՈՒՆ'],
 
-            ['subcategory_id' => '6', 'language' => 'en', 'name' => 'CARDIOLOGY'],
-            ['subcategory_id' => '6', 'language' => 'am', 'name' => 'ՍՐՏԱԲԱՆՈՒԹՅՈՒՆ'],
-
-            ['subcategory_id' => '7', 'language' => 'en', 'name' => 'ONCOLOGY'],
-            ['subcategory_id' => '7', 'language' => 'am', 'name' => 'ՈՒՌՈՒՑՔԱԲԱՆՈՒԹՅՈՒՆ'],
+            ['subcategory_id' => '6', 'language' => 'en', 'name' => 'ONCOLOGY'],
+            ['subcategory_id' => '6', 'language' => 'am', 'name' => 'ՈՒՌՈՒՑՔԱԲԱՆՈՒԹՅՈՒՆ'],
 
             ['subcategory_id' => '8', 'language' => 'en', 'name' => 'UROLOGY AND GYNECOLOGY'],
             ['subcategory_id' => '8', 'language' => 'am', 'name' => 'ՈՒՐՈԼՈԳԻԱ ԵՎ ԳԻՆԵԿՈԼՈԳԻԱ'],

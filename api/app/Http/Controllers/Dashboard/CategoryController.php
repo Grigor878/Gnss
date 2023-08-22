@@ -12,11 +12,11 @@ class CategoryController extends Controller
 {
 
     /**
-     * catrgoryService
+     * categoryService
      *
      * @var CategoryService
      */
-    private $catrgoryService;
+    private $categoryService;
 
     /**
      * __construct
@@ -24,9 +24,9 @@ class CategoryController extends Controller
      * @return void
      */
     public function __construct(
-        CategoryService $catrgoryService
+        CategoryService $categoryService
     ) {
-        $this->catrgoryService = $catrgoryService;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
 
-        $this->catrgoryService->create($data);
+        $this->categoryService->create($data);
 
         return redirect()->route('categories.index');
     }
@@ -84,7 +84,7 @@ class CategoryController extends Controller
     {
         $data = $request->validated();
 
-        $this->catrgoryService->update($category, $data);
+        $this->categoryService->update($category, $data);
 
         return redirect()->route('categories.index');
     }
@@ -96,17 +96,23 @@ class CategoryController extends Controller
     {
         $category = Category::with('translations')->find($id);
 
-        $this->catrgoryService->deleteImage($id);
+        $this->categoryService->deleteImage($id);
 
-        $this->catrgoryService->delete($category);
+        $this->categoryService->delete($category);
 
         return redirect()->route('categories.index');
     }
 
+    /**
+     * deleteImage
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function deleteImage (string $id)
     {
         try {
-            $this->catrgoryService->deleteImage($id);
+            $this->categoryService->deleteImage($id);
             return [
                 'status' => 1,
                 'message' => 'Image Deleted'
@@ -117,6 +123,5 @@ class CategoryController extends Controller
                 'message' => $e
             ];
         }
-
     }
 }

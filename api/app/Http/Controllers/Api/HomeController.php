@@ -11,8 +11,6 @@ class HomeController extends Controller
 
     public function getHeaderItems(string $lang) : JsonResponse
     {
-
-
         $categories = Category::with(
             'translations',
             'subcategories.translations',
@@ -93,56 +91,29 @@ class HomeController extends Controller
             array_push($dataCategoryes, $thisCategory);
         }
 
-        if ($lang == 'en') {
-            $data = [
-                [
-                    "id" => "Home",
-                    "path" => "/",
-                    "title" => "Home"
-                ],
-                [
-                    "id" => "About Us",
-                    "path" => "/about",
-                    "title" => "About Us"
-                ],
-                [
-                    "id" => "Contact Us",
-                    "path" => "/contact",
-                    "title" => "Contact Us"
-                ],
-                [
-                    "id" => "products",
-                    "path" => "/products",
-                    "title" => "products",
-                    'categories' => $dataCategoryes
-                ],
-            ];
-        } else if ($lang == 'am') {
-            $data = [
-                [
-                    "id" => "Home",
-                    "path" => "/",
-                    "title" => "Գլխավոր էջ"
-                ],
-                [
-                    "id" => "About Us",
-                    "path" => "/about",
-                    "title" => "Մեր մասին"
-                ],
-                [
-                    "id" => "Contact Us",
-                    "path" => "/contact",
-                    "title" => "Կենտակտներ"
-                ],
-                [
-                    "id" => "products",
-                    "path" => "/products",
-                    "title" => "Ապրանքեր",
-                    'categories' => $dataCategoryes
-                ],
-            ];
-
-        }
+        $data = [
+            [
+                "id" => "Home",
+                "path" => "/",
+                "title" => $lang == 'en' ? "Home" : ( $lang == 'am' ? "Գլխավոր էջ" : '' )
+            ],
+            [
+                "id" => "About Us",
+                "path" => "/about",
+                "title" => $lang == 'en' ? "About Us" : ( $lang == 'am' ? "Մեր մասին" : '' )
+            ],
+            [
+                "id" => "Contact Us",
+                "path" => "/contact",
+                "title" => $lang == 'en' ? "Contact Us" : ( $lang == 'am' ? "Կենտակտներ" : '' )
+            ],
+            [
+                "id" => "products",
+                "path" => "/products",
+                "title" => $lang == 'en' ? "Products" : ( $lang == 'am' ? "Ապրանքեր" : '' ),
+                'categories' => $dataCategoryes
+            ],
+        ];
 
         return response()->json($data);
 

@@ -22,7 +22,7 @@ class FileServices
      * @param  mixed $repo
      * @return void
      */
-    public function savePhoto($width,$image, $path, $imageFileName, $repo = 'public')
+    public function savePhoto($width, $image, $path, $imageFileName, $repo = 'public')
     {
         $img=Image::make($image)->resize($width, $width, function ($constraint) {
             $constraint->aspectRatio();
