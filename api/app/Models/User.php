@@ -23,7 +23,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'surname',
-        'emai;',
+        'email',
         'role_id',
         'username',
         'password',
@@ -56,5 +56,5 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
-    
+
 }

@@ -184,10 +184,10 @@
                                                         <select id="subCategories" multiple="" class="form-control" name="subcategories[]">
                                                             @foreach ($subCategories as $subCategory)
                                                                 <option
-                                                                    value="{{ $subCategory->id }}"
-                                                                    data-category="{{ $subCategory->category_id }}"
-                                                                    data-en-name="{{ $subCategory->translations[0]->name }}"
-                                                                    data-am-name="{{ $subCategory->translations[1]->name }}"
+                                                                    value="{{ @$subCategory->id }}"
+                                                                    data-category="{{ @$subCategory->category_id }}"
+                                                                    data-en-name="{{ @$subCategory->translations[0]->name }}"
+                                                                    data-am-name="{{ @$subCategory->translations[1]->name }}"
                                                                 >
                                                                     {{ $subCategory->name }}
                                                                 </option>

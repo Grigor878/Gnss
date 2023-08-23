@@ -6,8 +6,7 @@ use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\SubcategoryController;
-
-
+use App\Http\Controllers\Dashboard\UserController;
 
 Route::get('/', function () {
     return redirect()->route('dashboard');
@@ -23,6 +22,10 @@ Route::prefix('dashboard')
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('partners', PartnerController::class);
+
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('users', UserController::class);
+    });
 
     Route::post('product/deleteImage/{id}', [ProductController::class, 'deleteImage']);
     Route::post('categories/deleteImage/{id}', [CategoryController::class, 'deleteImage']);
