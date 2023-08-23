@@ -17,8 +17,8 @@ export const HelmetAsync = () => {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>Aparto {newPath}</title>
-        <link rel="canonical" href={pathname !== "/" ? `https://x.com${pathname}` : "https://x.com"} />
+        <title>GNSS {newPath}</title>
+        <link rel="canonical" href={pathname !== "/" ? `https://gnss.am${pathname}` : "https://gnss.am"} />
         <meta name="description" content={pathname !== "/" ? `x ${pathname.substring(1)} page.` : "x."} />
       </Helmet>
     </HelmetProvider>

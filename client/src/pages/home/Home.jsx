@@ -3,7 +3,11 @@ import './Home.scss'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <section className='home'>
+      <div className="container">
+        <h1>Home</h1>
+      </div>
+    </section>
   )
 }
 

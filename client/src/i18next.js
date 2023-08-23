@@ -9,8 +9,8 @@ i18next
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: cookies.get("lng") || "en",
-    supportedLngs: ["en", "am"],
+    lng: cookies.get("gnsss_i18next") || "am",
+    supportedLngs: ["en", "am", "ru"],
     debug: false,
     detection: {
       order: ["cookie", "path", "htmlTag"],

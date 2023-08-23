@@ -1,17 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-// import authSlice from "./slices/authSlice";
-import storage from "redux-persist/lib/storage";
+import homeSlice from "./slices/homeSlice";
+import storageSession from "redux-persist/lib/storage/session";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 
 const persistConfig = {
-  key: "root",
-  storage,
-  // whitelist: ["auth", "userGlobal", "users"],
+  key: "gnss",
+  storage: storageSession,
+  whitelist: ["home"],
 };
 
 const rootReducer = combineReducers({
-  // auth: authSlice,
+  home: homeSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

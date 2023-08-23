@@ -1,7 +1,7 @@
 $bg: #f3f4f8;
 $bgAdmin: #f8f8fa;
 $bgMain: #e5e5e5;
-$bgSub: #ffffff;
+$white: #ffffff;
 $text: #0f1013;
 $textSub: #323338;
 $textSmall: #61636b;
@@ -13,7 +13,7 @@ $greenSub: #e5f8ea;
 $border: #d7daf7;
 $inputBorder: #cfd1da;
 $advancedBack: #e7e9f0; 
-$red: #bb3434;
+$red: #db4242;
 
 @mixin transition {
   transition: all 0.5s ease;
