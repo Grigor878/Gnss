@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -23,14 +24,15 @@ class HomeController extends Controller
         foreach ($categories as $cat) {
 
             $thisCategory = [
-                'name' => $cat->name,
+                'title' => $cat->name,
+                'path' => '/'.Str::lower(str_replace(' ', '_', $cat->name)),
                 'image' => $cat->image
             ];
 
             if (isset($cat->translations)) {
                 foreach ( $cat->translations as $tr) {
                     if ( $tr->language == $lang  ) {
-                        $thisCategory['name'] = $tr->name;
+                        $thisCategory['title'] = $tr->name;
                     }
                 }
             }
@@ -41,50 +43,19 @@ class HomeController extends Controller
 
                 foreach ( $cat->subcategories as $sub) {
                     $thisSub = [
-                        'name' => $sub->name,
+                        'title' => $sub->name,
+                        'path' => '/'.Str::lower(str_replace(' ', '_', str_replace(',', '', $sub->name))),
                         'image' => $sub->image
                     ];
 
                     if (isset($sub->translations)) {
                         foreach ( $sub->translations as $tr) {
                             if ( $tr->language == $lang  ) {
-                                $thisSub['name'] = $tr->name;
+                                $thisSub['title'] = $tr->name;
                             }
                         }
                     }
 
-                    if (isset($sub->product)) {
-                        $thisSub['products'] = [];
-
-                        foreach ( $sub->product as $product) {
-                            $thisProduct = [
-                                'name' => $product->name,
-                                "price" => $product->price,
-                                "description" => $product->description,
-                                "count" => $product->count,
-                            ];
-
-                            if (isset($product->translations)) {
-                                foreach ( $product->translations as $tr) {
-
-                                    if ( $tr->language == $lang  ) {
-                                        $thisProduct['name'] = $tr->name;
-                                        $thisProduct['description'] = $tr->description;
-                                    }
-                                }
-                            }
-
-                            if (isset($product->images)) {
-                                $thisProduct['images'] = [];
-
-                                foreach ($product->images as $image) {
-                                    array_push($thisProduct['images'], $image->filename);
-                                }
-                            }
-
-                            $thisSub['products'] += $thisProduct;
-                        }
-                    }
                     array_push($thisCategory['subcategories'], $thisSub);
                 }
             }
