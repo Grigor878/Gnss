@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getHeaderRoutes } from '../../../../store/slices/homeSlice'
-import './Routes.scss'
 import { NavLink } from 'react-router-dom'
+import './Routes.scss'
 
 const Routes = () => {
     const { language, routes } = useSelector((state => state.home))
@@ -23,9 +23,15 @@ const Routes = () => {
                     <div key={id}>
                         <NavLink to={path} className="routes__link" >{title}</NavLink>
 
-                        {/* <ul>
-                            {categories?.map(({}))}
-                        </ul> */}
+                        <ul>
+                            {categories?.map(({ path, title }, index) => {
+                                return (
+                                    <li key={index}>
+                                        <NavLink to={path}>{title}</NavLink>
+                                    </li>
+                                )
+                            })}
+                        </ul>
                     </div>
                 )
             })}

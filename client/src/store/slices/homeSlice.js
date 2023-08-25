@@ -5,17 +5,31 @@ import baseApi from "../../apis/baseApi";
 const initialState = {
   language: cookies.get("gnsss_i18next") || "am",
   routes: [],
+  categories: [],
 };
 
 // get header routes
 export const getHeaderRoutes = createAsyncThunk("home", async (lang) => {
   try {
-    const { data } = await baseApi.post(`getHeaderItems/${lang}`);
+    const { data } = await baseApi.get(`getHeaderItems/${lang}`);
     return data;
   } catch (err) {
     console.log(`Get Header Routes Error: ${err.message}`);
   }
 });
+
+// get categories
+export const getCategories = createAsyncThunk(
+  "home/categories",
+  async (lang) => {
+    try {
+      const { data } = await baseApi.get(`getCategories/${lang}`);
+      return data;
+    } catch (err) {
+      console.log(`Get Categories Error: ${err.message}`);
+    }
+  }
+);
 
 const homeSlice = createSlice({
   name: "home",
@@ -29,6 +43,9 @@ const homeSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getHeaderRoutes.fulfilled, (state, action) => {
       state.routes = action.payload;
+    });
+    builder.addCase(getCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
     });
   },
 });

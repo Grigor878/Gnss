@@ -58,37 +58,22 @@ body {
   }
 }
 
-.loading {
-  z-index: 99;
-  @include flexCenter;
-  margin: 0 auto;
-
-  // img {
-  //   width: 222px;
-  //   height: 222px;
-  // }
-
-  @media screen and (max-width: 768px) {
-    width: 131px;
-    height: 131px;
-  }
-}
-
 .loader {
   width: 100%;
   background: $bgAdmin;
   z-index: 99;
   @include flexCenter;
   margin: 0 auto;
+  height: 100vh;
 
   img {
-    width: 77px;
-    height: 77px;
+    width: 111px;
+    height: 111px;
   }
 
   @media screen and (max-width: 768px) {
-    width: 55px;
-    height: 55px;
+    width: 77px;
+    height: 77px;
   }
 }
 
