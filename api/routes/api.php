@@ -20,6 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('getHeaderItems/{lang}', [HomeController::class, 'getHeaderItems']);
+Route::get('getHeaderItems/{lang}', [HomeController::class, 'getHeaderItems']);
 
-Route::post('getCategories/{lang}', [CategoryController::class, 'getCategories']);
+Route::get('getCategories/{lang}', [CategoryController::class, 'getCategories']);

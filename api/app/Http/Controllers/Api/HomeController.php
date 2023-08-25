@@ -76,7 +76,7 @@ class HomeController extends Controller
             [
                 "id" => "Contact Us",
                 "path" => "/contact",
-                "title" => $lang == 'en' ? "Contact Us" : ( $lang == 'am' ? "Կենտակտներ" : '' )
+                "title" => $lang == 'en' ? "Contact Us" : ( $lang == 'am' ? "Կոնտակտներ" : '' )
             ],
             [
                 "id" => "products",
