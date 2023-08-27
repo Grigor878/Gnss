@@ -2,12 +2,39 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\User;
+use App\Models\Partner;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Subcategory;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    function index() {
-        return view('dashboard.index');
+    public function index() {
+
+        $allProducts = Product::query()->count();
+        $allCategories = Category::query()->count();
+        $allSubcategories = Subcategory::query()->count();
+        $allPartners = Partner::query()->count();
+        $allUsers = User::query()->count();
+
+//         dd(
+//             $allProducts,
+// $allCategories,
+// $allSubcategories,
+// $allPartners,
+// $allUsers
+//         );
+
+        return view('dashboard.index',
+            compact (
+                'allProducts',
+                'allCategories',
+                'allSubcategories',
+                'allPartners',
+                'allUsers'
+            )
+        );
     }
 }

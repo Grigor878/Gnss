@@ -3,7 +3,7 @@
 
         {{-- <li class="nav-header">Admin Panel</li> --}}
         <li class="nav-item">
-            <a href="{{ route('product.index') }}" class="nav-link">
+            <a href="{{ route('products.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-boxes"></i>
                 <p>
                     Products
@@ -35,16 +35,16 @@
             </a>
         </li>
 
-        {{-- @can('view', auth()->user()) --}}
+        @can('view', auth()->user())
             <div class="nav-tabs"></div>
             <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-handshake"></i>
+                    <i class="nav-icon fas fa-users-cog"></i>
                     <p>
                         Users
                     </p>
                 </a>
             </li>
-        {{-- @endcan --}}
+        @endcan
     </ul>
 </nav>

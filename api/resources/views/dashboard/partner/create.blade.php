@@ -41,7 +41,7 @@
                                                     <div class="form-group">
 
                                                         <div class="form-group">
-                                                            <label for="en_name">Partner Name</label>
+                                                            <label for="name">Partner Name</label>
                                                             <input
                                                                 type="text"
                                                                 id="name"
@@ -50,7 +50,7 @@
                                                                 placeholder="name"
                                                                 name="name"
                                                             >
-                                                            @error('en_name')
+                                                            @error('name')
                                                                 <div class="text-danger">{{ $message }}</div>
                                                             @enderror
                                                         </div>

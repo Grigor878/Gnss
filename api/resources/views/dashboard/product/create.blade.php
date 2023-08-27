@@ -11,7 +11,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="{{ route('product.index') }}">Products</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('products.index') }}">Products</a></li>
                         <li class="breadcrumb-item active">Add Product</li>
                     </ol>
                 </div><!-- /.col -->
@@ -29,7 +29,7 @@
                 <div class="col-12">
 
                     <div class="card card-primary">
-                        <form method="POST" action="{{ route('product.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">

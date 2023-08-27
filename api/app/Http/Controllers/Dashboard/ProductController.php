@@ -63,7 +63,7 @@ class ProductController extends Controller
 
         $this->productService->create($data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -95,7 +95,7 @@ class ProductController extends Controller
 
         $this->productService->update($product, $data);
 
-        return redirect()->route('product.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -107,7 +107,7 @@ class ProductController extends Controller
 
         $this->productService->delete($product);
 
-        return redirect()->route('product.index');
+        return redirect()->route('products.index');
     }
 
     /**

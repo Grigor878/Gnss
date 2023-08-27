@@ -6,12 +6,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Products</h1>
+                    <h1 class="m-0">Users</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Products</li>
+                        <li class="breadcrumb-item active">Users</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -26,10 +26,10 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Products Table</h3>
+                        <h3 class="card-title">Users Table</h3>
                         <div class="card-tools">
                             <div>
-                                <a href="{{ route('products.create') }}" class="btn btn-block btn-primary">Add Product</a>
+                                <a href="{{ route('users.create') }}" class="btn btn-block btn-primary">Add User</a>
                             </div>
                         </div>
                     </div>
@@ -40,22 +40,22 @@
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Name</th>
-                                    <th>Price</th>
-                                    <th>Available</th>
+                                    <th>Surname</th>
+                                    <th>Role</th>
                                     <th style="width: 200px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($products as $product)
+                                @foreach ($users as $user)
                                     <tr>
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $product->name }}</td>
-                                        <td>{{ $product->price }}</td>
-                                        <td>{{ $product->count }}</td>
+                                        <td>{{ $user->name }}</td>
+                                        <td>{{ $user->surname }}</td>
+                                        <td>{{ $user->role->name }}</td>
                                         <td>
-                                            <span><a href="{{ route('products.edit', $product->id) }}" class="btn btn-warning">Edit</a></span>
+                                            <span><a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a></span>
                                             <span>
-                                                <form action="{{ route('products.destroy', $product->id) }}" method="POST" class="d-inline-block">
+                                                <form action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline-block">
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="submit" value="DELETE" class="btn btn-danger">
@@ -66,15 +66,8 @@
                                 @endforeach
                             </tbody>
                         </table>
-
-                        <div class="card-footer">
-                            {{ $products->withQueryString()->links() }}
-                        </div>
                     </div>
-
-
                 </div>
-
             </div>
 
         </div><!-- /.container-fluid -->
