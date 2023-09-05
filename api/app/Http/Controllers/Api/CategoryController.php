@@ -22,18 +22,19 @@ class CategoryController extends Controller
 
         foreach ($categories as $cat) {
 
-            $thisCategory = [
-                'name' => $cat->name,
-                'image' => $cat->image
-            ];
+            $thisCategory['id'] = $cat->id;
 
             if (isset($cat->translations)) {
                 foreach ( $cat->translations as $tr) {
                     if ( $tr->language == $lang  ) {
-                        $thisCategory['name'] = $tr->name;
+                        $thisCategory['title'] = $tr->name;
                     }
                 }
             }
+
+            $thisCategory['path'] = '/'.str_replace(' ', '_', strtolower($cat->name) );
+            $thisCategory['image'] = $cat->image;
+
 
             array_push($dataCategoryes, $thisCategory);
         }
