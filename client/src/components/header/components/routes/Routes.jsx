@@ -4,19 +4,18 @@ import { getHeaderRoutes } from "../../../../store/slices/homeSlice";
 import { NavLink } from "react-router-dom";
 import useOutsideClick from "../../../../hooks/useOutsideClick";
 import { MdArrowDropDown } from "react-icons/md";
-import { routes } from "./data";
+// import { routes } from "./data";
 import "./Routes.scss";
 
 const Routes = () => {
-  // const { language, routes } = useSelector((state => state.home))
-  // const { language,  } = useSelector((state => state.home))
+  const { language, routes } = useSelector((state => state.home))
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  // useEffect(() => {
-  //     dispatch(getHeaderRoutes(language))
-  // }, [dispatch, language])
-  console.log(routes);
+  useEffect(() => {
+      dispatch(getHeaderRoutes(language))
+  }, [dispatch, language])
+
   const routesRef = useRef();
 
   const [open, setopen] = useState(false);

@@ -14,10 +14,10 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        // "service_biscu9e",
-        // "template_0g5xmqs",
-        form.current
-        // "mEr9fax_gk4m8Smw5"
+        "service_a9s8hhe",
+        "template_35vd1l8",
+        form.current,
+        "D4DS8XXOlxZeLch43"
       )
       .then(
         () => {
@@ -62,7 +62,7 @@ const Contact = () => {
               <input
                 type="subject"
                 name="subject"
-                placeholder="Request *"
+                placeholder="Subject *"
                 required
               />
             </div>

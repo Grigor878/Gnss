@@ -1,14 +1,14 @@
 import React from "react";
-import "./Single.scss";
+import "./Sub.scss";
 
-const Single = ({ title }) => {
+const Sub = ({ parent, title }) => {
   return (
     <section>
       <div className="container">
-        <h2>{title}</h2>
+        <h2>{parent} - {title}</h2>
       </div>
     </section>
   );
 };
 
-export default Single;
+export default Sub;
