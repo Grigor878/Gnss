@@ -2,21 +2,33 @@
 
 .routes {
   @include flex;
-  gap: 22px;
+  gap: 33px;
 
   &__link {
-    color: $white;
+    @include flex;
+    color: $text;
     background: transparent;
-    border-radius: 4px;
-    padding: 7px;
+    font-size: 19px;
+    letter-spacing: 0.5px;
+    // border-radius: 4px;
+    // padding: 7px;
     position: relative;
+    border-bottom: 2px solid transparent;
     @include transition;
+
+    &:hover {
+      color: $red;
+    }
+    
+    &-down {
+      color: $text;
+      font-size: 33px;
+    }
   }
 
   .active {
-    background: $white;
-    color: $red;
-    // border-bottom: 1px solid $white;
+    // background: $white;
+    border-bottom: 2px solid $red;
   }
 
   &__dropdown {
@@ -24,13 +36,14 @@
   }
 
   &__dropdownOpen {
-    background: $red;
-    // border: 1px solid $white;
+    background: $white;
+    // border: 1px solid $red;
     border-radius: 4px;
     display: block;
     position: absolute;
-    top: 88px;
-    padding: 15px 0;
+    top: 90px;
+    margin-left: -15px;
+    padding: 15px;
     @include flexCol;
     gap: 22px;
   }

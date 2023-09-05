@@ -39,7 +39,7 @@ const Language = () => {
                 className="language__choose"
                 onClick={handleOpenLng}
             >
-                <Flag code={selectedLng} width="18" height="14" />
+                <Flag code={selectedLng} width="30" height="20" />
             </div>
 
             <ul className={!openLng ? "language__dropdown" : "language__dropdown-active"}>
@@ -48,8 +48,8 @@ const Language = () => {
                         <Flag
                             onClick={() => handleChangeLng(code)}
                             code={country_code}
-                            width="18"
-                            height="14"
+                            width="30"
+                            height="20"
                         />
                     </li>
                 ))}

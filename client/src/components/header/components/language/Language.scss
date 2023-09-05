@@ -8,7 +8,7 @@
     @include flexCenter;
     padding: 4px 12px;
     background: $white;
-    border: 1px solid $border;
+    // border: 2px solid $red;
     border-radius: 5px;
     cursor: pointer;
   }
@@ -26,12 +26,12 @@
 
   &__dropdown-active {
     position: absolute;
-    top: 27px;
+    top: 33px;
     @include flexCol;
     gap: 5px;
     padding: 4px 12px;
     background: $white;
-    border: 1px solid #d7daf7;
+    // border: 1px solid $red;
     border-radius: 5px;
 
     li {
