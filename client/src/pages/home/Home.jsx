@@ -1,25 +1,15 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getCategories } from '../../store/slices/homeSlice'
-import progress from '../../assets/imgs/progress.png'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import './Home.scss'
 
 const Home = () => {
-  const { language, categories } = useSelector((state => state.home))
-
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(getCategories(language))
-  }, [dispatch, language])
-
+  const { categories } = useSelector((state => state.home))
   console.log(categories)
 
   return (
     <section className='home'>
       <div className="container">
-        {/* <h1>Home</h1> */}
-        <img src={progress} alt="Work in progress" />
+        <h2>Home</h2>
       </div>
     </section>
   )

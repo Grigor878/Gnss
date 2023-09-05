@@ -1,19 +1,55 @@
 @import "../../variables";
 
 .header {
-  background: $red;
-  padding: 11px 0;
+  background: $white;
+  padding: 20px 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: 0px 0px 5px 0px $text;
 
   &__nav {
     @include flex;
     justify-content: space-between;
 
-    &-logo{
-      width: 101px;
-      height: 101px;
+    &-logo {
+      @include flex;
+      gap: 11px;
+    }
+
+    &-link {
+      width: 80px;
+      height: 80px;
+      @include flexCenter;
+    }
+
+    &-icon {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+      box-shadow: 0px 0px 7px 0px $text;
+    }
+
+    &-text {
+      @include flexCol;
+      gap: 5px;
+      border-left: 1px solid $text;
+      padding-left: 11px;
+
+      p {
+        font-weight: 600;
+        color: $text;
+
+        span {
+          color: $red;
+        }
+      }
+    }
+
+    &-right {
+      @include flex;
+      gap: 33px;
     }
   }
 }
