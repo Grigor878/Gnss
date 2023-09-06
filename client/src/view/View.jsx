@@ -10,20 +10,21 @@ import { productsMain, productsSub } from "./data";
 const Home = lazy(() => pMinDelay(import("../pages/home/Home"), 1000));
 const About = lazy(() => pMinDelay(import("../pages/about/About"), 500));
 const Contact = lazy(() => pMinDelay(import("../pages/contact/Contact"), 500));
-const Categories = lazy(() => pMinDelay(import("../pages/products/categories/Categories"), 500));
+const Categories = lazy(() =>
+  pMinDelay(import("../pages/products/categories/Categories"), 500)
+);
 const Sub = lazy(() => pMinDelay(import("../pages/products/sub/Sub"), 500));
 // const Result = lazy(() => pMinDelay(import("../pages/products/result/Result"), 500));
 const NotFound = lazy(() => pMinDelay(import("../pages/404/NotFound"), 500));
 
-
 const View = () => {
-  const { language, categories } = useSelector((state => state.home))
-  console.log(categories);//
-  const dispatch = useDispatch()
-  
+  const { language, categories } = useSelector((state) => state.home);
+  console.log(categories); //
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getCategories(language)) // kpoxarini productsMain in
-  }, [dispatch, language])
+    dispatch(getCategories(language)); // kpoxarini productsMain in
+  }, [dispatch, language]);
 
   return (
     <Router>
@@ -32,20 +33,20 @@ const View = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             {/* Main Categories of products */}
-            {productsMain.map(({ title, path }) => {
+            {productsMain.map(({ id, title, path }) => {
               return (
                 <Route
-                  key={title}
+                  key={id}
                   path={path}
                   element={<Categories title={title} />}
                 />
               );
             })}
             {/* Sub Categories of products */}
-            {productsSub.map(({ title, path, parent }) => {
+            {productsSub.map(({ id, title, path, parent }) => {
               return (
                 <Route
-                  key={title}
+                  key={id}
                   path={path}
                   element={<Sub parent={parent} title={title} />}
                 />

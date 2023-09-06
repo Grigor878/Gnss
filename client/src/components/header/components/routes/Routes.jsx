@@ -4,17 +4,18 @@ import { getHeaderRoutes } from "../../../../store/slices/homeSlice";
 import { NavLink } from "react-router-dom";
 import useOutsideClick from "../../../../hooks/useOutsideClick";
 import { MdArrowDropDown } from "react-icons/md";
-// import { routes } from "./data";
+import { routes } from "./data";
 import "./Routes.scss";
+import Skeleton from "../../../skeleton/Skeleton";
 
 const Routes = () => {
-  const { language, routes } = useSelector((state => state.home))
+  // const { language, routes } = useSelector((state => state.home))
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-      dispatch(getHeaderRoutes(language))
-  }, [dispatch, language])
+  // useEffect(() => {
+  //     dispatch(getHeaderRoutes(language))
+  // }, [dispatch, language])
 
   const routesRef = useRef();
 
@@ -23,8 +24,9 @@ const Routes = () => {
   useOutsideClick(routesRef, open, setopen);
 
   return (
-    routes && (
-      <div className="routes">
+    ! routes 
+    ? <Skeleton type="header" />
+    : <div className="routes">
         {routes?.map(({ id, path, title, categories }) => {
           return (
             <div key={id} ref={routesRef}>
@@ -39,7 +41,9 @@ const Routes = () => {
               >
                 {" "}
                 {title}
-                {path === "/products" ? <MdArrowDropDown className="routes__link-down"/> : null}
+                {path === "/products" ? (
+                  <MdArrowDropDown className="routes__link-down" />
+                ) : null}
               </NavLink>
 
               <ul
@@ -60,6 +64,5 @@ const Routes = () => {
         })}
       </div>
     )
-  );
 };
 export default Routes;

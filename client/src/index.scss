@@ -60,7 +60,7 @@ body {
 
 .loader {
   width: 100%;
-  background: $bgAdmin;
+  background: $white;
   z-index: 99;
   @include flexCenter;
   margin: 0 auto;

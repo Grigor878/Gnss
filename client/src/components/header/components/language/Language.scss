@@ -6,10 +6,7 @@
 
   &__choose {
     @include flexCenter;
-    padding: 4px 12px;
     background: $white;
-    // border: 2px solid $red;
-    border-radius: 5px;
     cursor: pointer;
   }
 
@@ -29,10 +26,7 @@
     top: 33px;
     @include flexCol;
     gap: 5px;
-    padding: 4px 12px;
     background: $white;
-    // border: 1px solid $red;
-    border-radius: 5px;
 
     li {
       cursor: pointer;
