@@ -20,7 +20,7 @@ const NotFound = lazy(() => pMinDelay(import("../pages/404/NotFound"), 500));
 
 const View = () => {
   const { language, categories } = useSelector((state) => state.home);
-  console.log(categories); //
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,13 +33,13 @@ const View = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            {/* Main Categories of products */}
-            {productsMain.map(({ id, title, path }) => {
+            {/* Main Categories of products - productsMain*/}
+            {categories?.map(({ id, title, path }) => {
               return (
                 <Route
                   key={id}
                   path={path}
-                  element={<Categories title={title} />}
+                  element={<Categories id={id} title={title}/>}
                 />
               );
             })}

@@ -1,21 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { productsSub } from "../../../view/data";
 import Skeleton from "../../../components/skeleton/Skeleton";
-import { FilteredCards } from "../../../components/cards/FilteredCards";
+import { useDispatch, useSelector } from "react-redux";
+import { getSubCategories } from "../../../store/slices/homeSlice";
+import { Cards } from "../../../components/cards/Cards";
 import "./Categories.scss";
 
-const Categories = ({ title }) => {
+const Categories = ({ id, title }) => {
+  const { language, subCategories } = useSelector((state => state.home))
+
+  // console.log(subCategories);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSubCategories({ id, language }))
+  }, [dispatch, id, language])
+
   return (
     <section className="categories">
       <div className="container">
         <h2>{title}</h2>
 
-        {!productsSub ? (
+        {!subCategories?.length ? (
           <div className="skeleton__cards">
             <Skeleton type="cards" />
           </div>
         ) : (
-          <FilteredCards data={productsSub} title={title} />
+          <Cards data={subCategories} title={title} />
         )}
       </div>
     </section>

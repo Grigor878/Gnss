@@ -6,6 +6,7 @@ const initialState = {
   language: cookies.get("gnsss_i18next") || "am",
   routes: [],
   categories: [],
+  subCategories: [],
 };
 
 // get header routes
@@ -21,12 +22,24 @@ export const getHeaderRoutes = createAsyncThunk("home", async (lang) => {
 // get categories
 export const getCategories = createAsyncThunk(
   "home/categories",
-  async (lang) => {
+  async (language) => {
     try {
-      const { data } = await baseApi.get(`getCategories/${lang}`);
+      const { data } = await baseApi.get(`getCategories/${language}`);
       return data;
     } catch (err) {
       console.log(`Get Categories Error: ${err.message}`);
+    }
+  }
+);
+// get sub categories
+export const getSubCategories = createAsyncThunk(
+  "home/subCategories",
+  async ({ id, language }) => {
+    try {
+      const { data } = await baseApi.get(`getSubcategories/${id}/${language}`);
+      return data;
+    } catch (err) {
+      console.log(`Get Sub Categories Error: ${err.message}`);
     }
   }
 );
@@ -39,6 +52,10 @@ const homeSlice = createSlice({
     setLanguage: (state, action) => {
       state.language = action.payload;
     },
+    // set global language
+    clearSubCategories: (state, action) => {
+      state.subCategories = [];
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getHeaderRoutes.fulfilled, (state, action) => {
@@ -47,9 +64,12 @@ const homeSlice = createSlice({
     builder.addCase(getCategories.fulfilled, (state, action) => {
       state.categories = action.payload;
     });
+    builder.addCase(getSubCategories.fulfilled, (state, action) => {
+      state.subCategories = action.payload;
+    });
   },
 });
 
-export const { setLanguage } = homeSlice.actions;
+export const { setLanguage, clearSubCategories } = homeSlice.actions;
 
 export default homeSlice.reducer;
