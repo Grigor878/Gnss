@@ -15,7 +15,7 @@ const Home = () => {
       <div className="container">
         <h2>Home</h2>
 
-     {! productsMain
+     {!productsMain
       ? <div className="skeleton__cards">
           <Skeleton type="cards"/>
         </div>

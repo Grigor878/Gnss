@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./Cards.scss";
+import "./styles.scss";
 
 export const Cards = ({ data }) => {
   const navigate = useNavigate();

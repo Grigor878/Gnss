@@ -10,8 +10,8 @@ $animaiton: skeleton 0.5s ease infinite alternate;
 }
 
 .skeleton {
-  // overflow-x: auto;
-  // width: 100%;
+  overflow-x: auto;
+  width: 100%;
 
   &__header {
     min-width: 100px;
@@ -26,13 +26,16 @@ $animaiton: skeleton 0.5s ease infinite alternate;
   }
 
   &__cards {
-    @include flex;
+    display: flex;
     justify-content: space-between;
-    padding: 100px 0;
-    
+    gap: 25px;
+    padding: 100px 3px;
+    overflow-x: scroll;
+
     &-card {
       min-width: 252px;
       height: 350px;
+      border-radius: 5px;
       background: $skeleton;
       animation: $animaiton;
     }
