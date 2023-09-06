@@ -6,6 +6,8 @@ import "./styles.scss";
 export const FilteredCards = ({ data, title }) => {
   const navigate = useNavigate();
 
+  const filteredData = data?.filter((el) => el.parent === title);
+
   const scrollableDivRef = useRef(null);
   const scroll = 277;
 
@@ -25,25 +27,27 @@ export const FilteredCards = ({ data, title }) => {
 
   return (
     <div className="scrollable">
-      <AiOutlineArrowLeft className="scrollLeft" onClick={scrollLeft} />
+      {filteredData?.length > 4 && (
+        <AiOutlineArrowLeft className="scrollLeft" onClick={scrollLeft} />
+      )}
       <div className="cards" ref={scrollableDivRef}>
-        {data
-          ?.filter((el) => el.parent === title)
-          ?.map(({ id, path, image, title }) => {
-            return (
-              <div
-                key={id}
-                onClick={() => navigate(path)}
-                className="cards__block"
-              >
-                <img src={image} alt="img" />
-                <h3>{title}</h3>
-                <span>See More</span>
-              </div>
-            );
-          })}
+        {filteredData?.map(({ id, path, image, title }) => {
+          return (
+            <div
+              key={id}
+              onClick={() => navigate(path)}
+              className="cards__block"
+            >
+              <img src={image} alt="img" />
+              <h3>{title}</h3>
+              <span>See More</span>
+            </div>
+          );
+        })}
       </div>
-      <AiOutlineArrowRight className="scrollRight" onClick={scrollRight} />
+      {filteredData?.length > 4 && (
+        <AiOutlineArrowRight className="scrollRight" onClick={scrollRight} />
+      )}
     </div>
   );
 };

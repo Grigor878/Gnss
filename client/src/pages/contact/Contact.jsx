@@ -1,9 +1,7 @@
 import React, { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import Swal from "sweetalert2";
-// import contact from "../../assets/imgs/contact.png";
 import contact from "../../assets/imgs/contact2.jpg";
-import "sweetalert2/src/sweetalert2.scss";
+import { oops, success } from "../../components/swal/swal";
 import "./Contact.scss";
 
 const Contact = () => {
@@ -14,22 +12,22 @@ const Contact = () => {
 
     emailjs
       .sendForm(
-        "service_a9s8hhe",
-        "template_35vd1l8",
+        process.env.REACT_APP_EMAIL_SERVICE,
+        process.env.REACT_APP_EMAIL_TEMPLATE,
         form.current,
-        "D4DS8XXOlxZeLch43"
+        process.env.REACT_APP_EMAIL_SECRET
       )
       .then(
         () => {
-          Swal.fire("Good job!", "Message has been sent!", "success");
+          success("Good job!", "Message has been sent!");
         },
         () => {
-          Swal.fire("Oops...", "Something went wrong!", "error");
+          oops("Oops...", "Something went wrong!", "error");
         }
       );
     e.target.reset();
   };
-
+  5;
   return (
     <section className="contact">
       <div className="container">

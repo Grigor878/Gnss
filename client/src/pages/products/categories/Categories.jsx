@@ -6,7 +6,7 @@ import "./Categories.scss";
 
 const Categories = ({ title }) => {
   return (
-    <section>
+    <section className="categories">
       <div className="container">
         <h2>{title}</h2>
 

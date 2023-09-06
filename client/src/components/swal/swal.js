@@ -7,25 +7,17 @@ export function success(text) {
     icon: "success",
     title: `<h6>${text}</h6>`,
     showConfirmButton: false,
-    timer: 1500,
+    timer: 1000,
     customClass: "swal",
   });
 }
 
-export function error(text) {
+export function oops(text) {
   Swal.fire({
     icon: "error",
     title: `<h6>${text}</h6>`,
     showConfirmButton: false,
-    timer: 1500,
+    timer: 1000,
     customClass: "swal",
   });
-}
-
-export function goodJob(text) {
-  Swal.fire("Good job!", text, "success");
-}
-
-export function oops() {
-  Swal.fire("Oops...", "Something went wrong!", "error");
 }

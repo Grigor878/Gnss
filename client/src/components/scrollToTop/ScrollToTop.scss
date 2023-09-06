@@ -1,0 +1,17 @@
+@import "../../variables";
+
+.scrollTop {
+  display: none;
+
+  &-visible {
+    @include transition;
+    display: block;
+    position: fixed;
+    right: 55px;
+    bottom: 252px;
+    z-index: 101;
+    cursor: pointer;
+    font-size: 55px;
+    // color: $green;
+  }
+}
