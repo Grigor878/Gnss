@@ -15,7 +15,7 @@ class SubcategoryController extends Controller
         $dataSubcategoryes = [];
 
         $subcategoryes = Subcategory::select('id', 'name', 'image', 'category_id')
-        ->with('translations')
+        ->with('translations', 'category')
         ->where('category_id', $id)
         ->get();
 
@@ -31,7 +31,10 @@ class SubcategoryController extends Controller
                 }
             }
 
-            $thisSubcategory['path'] = '/'.str_replace(' ', '_',  str_replace(',','',strtolower($sub->name)) );
+            $path_parent = str_replace(' ', '_',  str_replace(',','',strtolower($sub->category->name)) );
+            $path_sub = str_replace(' ', '_',  str_replace(',','',strtolower($sub->name)) );
+
+            $thisSubcategory['path'] = $path_parent.'/'.$path_sub;
             $thisSubcategory['image'] = $sub->image;
             $thisSubcategory['category_id'] = $sub->category_id;
 
