@@ -34,8 +34,9 @@ class SubcategoryController extends Controller
             $path_parent = str_replace(' ', '_',  str_replace(',','',strtolower($sub->category->name)) );
             $path_sub = str_replace(' ', '_',  str_replace(',','',strtolower($sub->name)) );
 
-            $thisSubcategory['path'] = $path_parent.'/'.$path_sub;
+            $thisSubcategory['path'] = '/'.$path_parent.'/'.$path_sub;
             $thisSubcategory['image'] = $sub->image;
+            $thisSubcategory['parent'] = $sub->category->name;
             $thisSubcategory['category_id'] = $sub->category_id;
 
 
