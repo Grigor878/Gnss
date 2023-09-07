@@ -40,7 +40,7 @@ export const Cards = ({ data }) => {
         {data?.map(({ id, path, image, title }) => {
           return (
             <div key={id} onClick={() => handleNavigate(path)} className="cards__block">
-              <img src={image} alt="img" />
+              <img src={`http://gnss.admin.loc/storage/` + image} alt="img" />
               <h3>{title}</h3>
               <span>See More</span>
             </div>

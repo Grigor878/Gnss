@@ -10,7 +10,7 @@ import { Title } from "../../../components/animate/Title";
 const Categories = ({ id, title }) => {
   const { language, subCategories } = useSelector((state => state.home))
 
-  // console.log(subCategories);
+  console.log(subCategories);
 
   const dispatch = useDispatch();
 
