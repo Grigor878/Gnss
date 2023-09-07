@@ -38,7 +38,7 @@ export const Footer = () => {
 
             <div className="footer__top-right-social">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/leicaarmenia2020/"
                 target="_blank"
                 className="footer__top-right-social-link"
               >

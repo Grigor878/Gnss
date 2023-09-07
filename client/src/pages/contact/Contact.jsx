@@ -27,7 +27,7 @@ const Contact = () => {
       );
     e.target.reset();
   };
-  5;
+  
   return (
     <section className="contact">
       <div className="container">

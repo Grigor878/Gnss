@@ -3,8 +3,27 @@
 .notFound {
   height: 80vh;
   @include flex;
-  background: $bg;
-  border: 1px solid $border;
-  border-right: none;
-  border-left: none;
+  background: $white;
+
+  &__card {
+    @include flexColCenter;
+    gap: 50px;
+
+    button {
+      color: $white;
+      background: $red;
+      border-radius: 5px;
+      padding: 11px 33px;
+      font-size: 20px;
+      font-weight: 600;
+      width: fit-content;
+      @include transition;
+
+      &:hover,
+      &:focus {
+        -webkit-box-shadow: 0px 0px 7px 0px $red;
+        box-shadow: 0px 0px 7px 0px $red;
+      }
+    }
+  }
 }
