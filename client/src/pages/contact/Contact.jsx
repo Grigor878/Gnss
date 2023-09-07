@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { Title } from "../../components/animate/Title";
 import emailjs from "@emailjs/browser";
 import contact from "../../assets/imgs/contact2.jpg";
 import { oops, success } from "../../components/swal/swal";
@@ -27,11 +28,11 @@ const Contact = () => {
       );
     e.target.reset();
   };
-  
+
   return (
     <section className="contact">
       <div className="container">
-        <h2>Contact Us</h2>
+        <Title text="Contact Us" />
 
         <div className="contact__main">
           <form ref={form} onSubmit={sendEmail} className="contact__main-form">

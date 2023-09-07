@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getSubCategories } from "../../../store/slices/homeSlice";
 import { Cards } from "../../../components/cards/Cards";
 import "./Categories.scss";
+import { Title } from "../../../components/animate/Title";
 
 const Categories = ({ id, title }) => {
   const { language, subCategories } = useSelector((state => state.home))
@@ -20,7 +21,7 @@ const Categories = ({ id, title }) => {
   return (
     <section className="categories">
       <div className="container">
-        <h2>{title}</h2>
+        <Title text={title}/>
 
         {!subCategories?.length ? (
           <div className="skeleton__cards">
