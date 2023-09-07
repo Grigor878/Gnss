@@ -13,6 +13,11 @@ $animaiton: skeleton 0.5s ease infinite alternate;
   overflow-x: auto;
   width: 100%;
 
+  &::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+  }
+
   &__header {
     min-width: 100px;
     height: 28px;
@@ -30,7 +35,13 @@ $animaiton: skeleton 0.5s ease infinite alternate;
     justify-content: space-between;
     gap: 25px;
     padding: 100px 5px;
-    overflow-x: scroll;
+    overflow-x: auto;
+    width: 100%;
+  
+    &::-webkit-scrollbar {
+      width: 0px !important;
+      height: 0px !important;
+    }
 
     &-card {
       min-width: 252px;

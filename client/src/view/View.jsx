@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import { getCategories } from "../store/slices/homeSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { productsMain, productsSub } from "./data";
+import { productsSub } from "./data";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 
 const Home = lazy(() => pMinDelay(import("../pages/home/Home"), 1000));
