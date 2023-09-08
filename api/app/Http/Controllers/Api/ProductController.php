@@ -37,7 +37,6 @@ class ProductController extends Controller
             array_push($dataProduct['images'], $image->filename);
         }
 
-
         return response()->json($dataProduct);
     }
 
