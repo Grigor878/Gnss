@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\Api\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PartnerController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SubcategoryController;
 
 /*
@@ -27,5 +28,9 @@ Route::get('getHeaderItems/{lang}', [HomeController::class, 'getHeaderItems']);
 Route::get('getCategories/{lang}', [CategoryController::class, 'getCategories']);
 
 Route::get('getSubcategories/{id}/{lang}', [SubcategoryController::class, 'getSubcategories']);
+
+Route::get('getSubcategoryProducts/{id}/{lang}', [SubcategoryController::class, 'getSubcategoryProducts']);
+
+Route::get('getSingleProduct/{id}/{lang}', [ProductController::class, 'getSingleProduct']);
 
 Route::get('getPartners', [PartnerController::class, 'getPartners']);
