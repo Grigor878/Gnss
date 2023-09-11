@@ -10,6 +10,52 @@ use App\Models\Subcategory;
 
 class SubcategoryController extends Controller
 {
+    /**
+     * getAllSubCategories
+     *
+     * @param  string $lang
+     * @return JsonResponse
+     */
+    public function getAllSubCategories(string $lang) : JsonResponse
+    {
+        $dataSubcategoryes = [];
+
+        $subcategoryes = Subcategory::select('id', 'name', 'image', 'category_id')
+        ->with('translations', 'category')
+        ->get();
+
+        foreach ($subcategoryes as $sub) {
+            $thisSubcategory['id'] = $sub->id;
+
+            if (isset($sub->translations)) {
+                foreach ($sub->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['title'] = $tr->name;
+                    }
+                }
+            }
+
+            $path_parent = str_replace(' ', '_',  str_replace(',', '', strtolower($sub->category->name)));
+            $path_sub = str_replace(' ', '_',  str_replace(',', '', strtolower($sub->name)));
+
+            $thisSubcategory['path'] = '/' . $path_parent . '/' . $path_sub;
+            $thisSubcategory['image'] = $sub->image;
+            $thisSubcategory['parent'] = $sub->category->name;
+            $thisSubcategory['category_id'] = $sub->category_id;
+
+            array_push($dataSubcategoryes, $thisSubcategory);
+        }
+
+        return response()->json($dataSubcategoryes);
+    }
+
+    /**
+     * getSubcategories
+     *
+     * @param  int $id
+     * @param  string $lang
+     * @return JsonResponse
+     */
     public function getSubcategories(int $id, string $lang): JsonResponse
     {
         $dataSubcategoryes = [];
@@ -46,6 +92,13 @@ class SubcategoryController extends Controller
         return response()->json($dataSubcategoryes);
     }
 
+    /**
+     * getSubcategoryProducts
+     *
+     * @param  int $id
+     * @param  string $lang
+     * @return JsonResponse
+     */
     public function getSubcategoryProducts(int $id, string $lang): JsonResponse
     {
         $dataProducts = [];
