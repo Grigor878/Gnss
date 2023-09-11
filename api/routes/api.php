@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\PartnerController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\SubcategoryController;
 
 /*
@@ -36,3 +37,5 @@ Route::get('getSubcategoryProducts/{id}/{lang}', [SubcategoryController::class, 
 Route::get('getSingleProduct/{id}/{lang}', [ProductController::class, 'getSingleProduct']);
 
 Route::get('getPartners', [PartnerController::class, 'getPartners']);
+
+Route::get('startOrder', [OrderController::class, 'startOrder']);
