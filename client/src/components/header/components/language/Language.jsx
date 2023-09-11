@@ -1,10 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch } from 'react-redux'
-import { setLanguage } from '../../../../store/slices/homeSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import { setLanguage, setLanguageValue } from '../../../../store/slices/homeSlice'
 import { languageData } from './data'
 import useOutsideClick from '../../../../hooks/useOutsideClick'
-import cookies from 'js-cookie'
 import Flag from 'react-world-flags'
 import './Language.scss'
 
@@ -15,8 +14,9 @@ const Language = () => {
 
     const dispatch = useDispatch()
 
+    const { languageValue } = useSelector((state) => state.home);
+
     const [openLng, setOpenLng] = useState(false)
-    const [selectedLng, setSelectedLng] = useState(cookies.get("lngFlag") || "am")
 
     const handleOpenLng = () => {
         setOpenLng(!openLng);
@@ -25,9 +25,7 @@ const Language = () => {
     const handleChangeLng = (code) => {
         setOpenLng(false)
         i18n.changeLanguage(code)
-        code === "en" ? setSelectedLng("gb") : setSelectedLng(code)
-        code === "en" ? cookies.set("lngFlag", "gb") : cookies.set("lngFlag", code)
-        cookies.set('i18next', code)
+        dispatch(code === "en" ? setLanguageValue("gb") : setLanguageValue(code))
         dispatch(setLanguage(code))
     };
 
@@ -39,11 +37,11 @@ const Language = () => {
                 className="language__choose"
                 onClick={handleOpenLng}
             >
-                <Flag code={selectedLng} width="30" height="20" />
+                <Flag code={languageValue} width="30" height="20" />
             </div>
 
             <ul className={!openLng ? "language__dropdown" : "language__dropdown-active"}>
-                {languageData.filter((el) => el.country_code !== selectedLng).map(({ code, country_code }) => (
+                {languageData.filter((el) => el.country_code !== languageValue).map(({ code, country_code }) => (
                     <li key={code}>
                         <Flag
                             onClick={() => handleChangeLng(code)}

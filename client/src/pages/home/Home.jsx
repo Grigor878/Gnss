@@ -7,7 +7,7 @@ import "./Home.scss";
 import { Title } from "../../components/animate/Title";
 
 const Home = () => {
-  const { categories } = useSelector((state) => state.home);
+  const { allCategories } = useSelector((state) => state.home);
 
   return (
     <section className="home">
@@ -15,12 +15,12 @@ const Home = () => {
         <Title text="Home" />
         {/* <h2 data-aos="fade-left" data-aos-duration="1500">Home</h2> */}
 
-        {!categories?.length ? (
+        {!allCategories?.length ? (
           <div className="skeleton__cards">
             <Skeleton type="cards" />
           </div>
         ) : (
-          <Cards data={categories} />
+          <Cards data={allCategories} />
         )}
       </div>
     </section>

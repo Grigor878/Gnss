@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getCurrentYear } from "../../helpers/utils";
 import logo from "../../assets/imgs/logo.png";
@@ -9,11 +10,13 @@ import {
   BiLogoGmail,
 } from "react-icons/bi";
 import { HiPhone } from "react-icons/hi";
-import { productsMain, productsSub } from "../../view/data";
+// import { productsMain, productsSub } from "../../view/data";
 import { mainPages } from "./data";
 import "./Footer.scss";
 
 export const Footer = () => {
+  const { allCategories, allSubCategories } = useSelector((state) => state.home);
+
   return (
     <footer className="footer">
       <div className="container">
@@ -41,6 +44,7 @@ export const Footer = () => {
                 href="https://www.facebook.com/leicaarmenia2020/"
                 target="_blank"
                 className="footer__top-right-social-link"
+                rel="noreferrer"
               >
                 <BiLogoFacebook />
               </a>
@@ -48,6 +52,7 @@ export const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 className="footer__top-right-social-link"
+                rel="noreferrer"
               >
                 <BiLogoTwitter />
               </a>
@@ -55,6 +60,7 @@ export const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 className="footer__top-right-social-link"
+                rel="noreferrer"
               >
                 <BiLogoInstagram />
               </a>
@@ -80,7 +86,7 @@ export const Footer = () => {
             <div className="footer__top-left-card">
               <h3>Categories</h3>
               <ul className="footer__top-left-card-list">
-                {productsMain?.map(({ id, title, path }) => {
+                {allCategories?.map(({ id, title, path }) => {
                   return (
                     <li key={id}>
                       <NavLink className="footer__top-left-card-link" to={path}>
@@ -95,7 +101,7 @@ export const Footer = () => {
             <div className="footer__top-left-card">
               <h3>Sub Categories</h3>
               <ul className="footer__top-left-card-list">
-                {productsSub?.map(({ id, title, path }) => {
+                {allSubCategories?.map(({ id, title, path }) => {
                   return (
                     <li key={id}>
                       <NavLink className="footer__top-left-card-link" to={path}>
@@ -116,7 +122,7 @@ export const Footer = () => {
             <p>ⓒ GNSS {getCurrentYear()} | All Rights Reserved</p>
             <p>
               Website design & development -{" "}
-              <a href="https://gsdev.am" target="_blank">
+              <a href="https://gsdev.am" target="_blank" rel="noreferrer">
                 GS Development
               </a>
             </p>

@@ -3,9 +3,9 @@ import pMinDelay from "p-min-delay";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Loader } from "../components/loader/Loader"
 import Layout from "../components/layout/Layout";
-import { getCategories } from "../store/slices/homeSlice";
+import { getAllCategories, getAllSubCategories } from "../store/slices/homeSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { productsSub } from "./data";
+// import { productsSub } from "./data";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
 
 const Home = lazy(() => pMinDelay(import("../pages/home/Home"), 1000));
@@ -15,16 +15,17 @@ const Categories = lazy(() =>
   pMinDelay(import("../pages/products/categories/Categories"), 500)
 );
 const Sub = lazy(() => pMinDelay(import("../pages/products/sub/Sub"), 500));
-// const Result = lazy(() => pMinDelay(import("../pages/products/result/Result"), 500));
+const Result = lazy(() => pMinDelay(import("../pages/products/result/Result"), 500));
 const NotFound = lazy(() => pMinDelay(import("../pages/404/NotFound"), 500));
 
 const View = () => {
-  const { language, categories } = useSelector((state) => state.home);
+  const { language, allCategories, allSubCategories } = useSelector((state) => state.home);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCategories(language)); // kpoxarini productsMain in
+    dispatch(getAllCategories(language));
+    dispatch(getAllSubCategories(language));
   }, [dispatch, language]);
 
   return (
@@ -34,25 +35,26 @@ const View = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             {/* Main Categories of products - productsMain*/}
-            {categories?.map(({ id, title, path }) => {
+            {allCategories?.map(({ id, title, path }) => {
               return (
                 <Route
                   key={id}
                   path={path}
-                  element={<Categories id={id} title={title}/>}
+                  element={<Categories id={id} title={title} />}
                 />
               );
             })}
             {/* Sub Categories of products */}
-            {productsSub.map(({ id, title, path, parent }) => {
+            {allSubCategories?.map(({ id, title, path, parent }) => {
               return (
                 <Route
                   key={id}
                   path={path}
-                  element={<Sub parent={parent} title={title} />}
+                  element={<Sub id={id} parent={parent} title={title} />}
                 />
               );
             })}
+            <Route path="result/:id" element={<Result />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
