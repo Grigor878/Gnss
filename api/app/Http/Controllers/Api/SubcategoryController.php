@@ -18,19 +18,21 @@ class SubcategoryController extends Controller
      */
     public function getAllSubCategories(string $lang) : JsonResponse
     {
-        $dataSubcategoryes = [];
+        $dataSubcategories = [];
 
-        $subcategoryes = Subcategory::select('id', 'name', 'image', 'category_id')
-        ->with('translations', 'category')
+        $subcategories = Subcategory::select('id', 'name', 'image', 'category_id')
+        ->with('translations', 'category.translations')
         ->get();
 
-        foreach ($subcategoryes as $sub) {
+        // dd($subcategories);
+
+        foreach ($subcategories as $sub) {
             $thisSubcategory['id'] = $sub->id;
 
             if (isset($sub->translations)) {
                 foreach ($sub->translations as $tr) {
                     if ($tr->language == $lang) {
-                        $thisSubcategory['title'] = $tr->name;
+                        $thisSubcategory['title'] = ucwords(strtolower($tr->name));
                     }
                 }
             }
@@ -40,13 +42,21 @@ class SubcategoryController extends Controller
 
             $thisSubcategory['path'] = '/' . $path_parent . '/' . $path_sub;
             $thisSubcategory['image'] = $sub->image;
-            $thisSubcategory['parent'] = $sub->category->name;
+
+            if (isset($sub->category->translations)) {
+                foreach ($sub->category->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['parent'] = ucwords(strtolower($tr->name));
+                    }
+                }
+            }
+
             $thisSubcategory['category_id'] = $sub->category_id;
 
-            array_push($dataSubcategoryes, $thisSubcategory);
+            array_push($dataSubcategories, $thisSubcategory);
         }
 
-        return response()->json($dataSubcategoryes);
+        return response()->json($dataSubcategories);
     }
 
     /**
@@ -58,21 +68,21 @@ class SubcategoryController extends Controller
      */
     public function getSubcategories(int $id, string $lang): JsonResponse
     {
-        $dataSubcategoryes = [];
+        $dataSubcategories = [];
 
-        $subcategoryes = Subcategory::select('id', 'name', 'image', 'category_id')
-            ->with('translations', 'category')
+        $subcategories = Subcategory::select('id', 'name', 'image', 'category_id')
+            ->with('translations', 'category.translations')
             ->where('category_id', $id)
             ->get();
 
-        foreach ($subcategoryes as $sub) {
+        foreach ($subcategories as $sub) {
 
             $thisSubcategory['id'] = $sub->id;
 
             if (isset($sub->translations)) {
                 foreach ($sub->translations as $tr) {
                     if ($tr->language == $lang) {
-                        $thisSubcategory['title'] = $tr->name;
+                        $thisSubcategory['title'] = ucwords(strtolower($tr->name));
                     }
                 }
             }
@@ -82,14 +92,22 @@ class SubcategoryController extends Controller
 
             $thisSubcategory['path'] = '/' . $path_parent . '/' . $path_sub;
             $thisSubcategory['image'] = $sub->image;
-            $thisSubcategory['parent'] = $sub->category->name;
+
+            if (isset($sub->category->translations)) {
+                foreach ($sub->category->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['parent'] = ucwords(strtolower($tr->name));
+                    }
+                }
+            }
+
             $thisSubcategory['category_id'] = $sub->category_id;
 
 
-            array_push($dataSubcategoryes, $thisSubcategory);
+            array_push($dataSubcategories, $thisSubcategory);
         }
 
-        return response()->json($dataSubcategoryes);
+        return response()->json($dataSubcategories);
     }
 
     /**
@@ -103,7 +121,7 @@ class SubcategoryController extends Controller
     {
         $dataProducts = [];
 
-        $products = Product::with('translations', 'images', 'subcategory')
+        $products = Product::with('translations', 'images', 'subcategory.translations')
             ->whereHas('subcategory', function ($query) use ($id) {
                 $query->where('subcategories.id', $id);
             })
@@ -118,7 +136,7 @@ class SubcategoryController extends Controller
 
                     foreach ($product->translations as $tr) {
                         if ($tr->language == $lang) {
-                            $thisProduct['title'] = $tr->name;
+                            $thisProduct['title'] = ucwords(strtolower($tr->name));
                         }
                     }
                 }
@@ -127,7 +145,13 @@ class SubcategoryController extends Controller
                     if ($cat->id != $id) {
                         unset($product->subcategory[$key]);
                     } else {
-                        $thisProduct['parent'] = $cat->name;
+                        if (isset($product->subcategory[$key]->translations)) {
+                            foreach ($product->subcategory[$key]->translations as $tr) {
+                                if ($tr->language == $lang) {
+                                    $thisProduct['parent'] = ucwords(strtolower($tr->name));
+                                }
+                            }
+                        }
                     }
                 }
 

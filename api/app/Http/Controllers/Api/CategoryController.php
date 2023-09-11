@@ -27,7 +27,7 @@ class CategoryController extends Controller
             if (isset($cat->translations)) {
                 foreach ( $cat->translations as $tr) {
                     if ( $tr->language == $lang  ) {
-                        $thisCategory['title'] = $tr->name;
+                        $thisCategory['title'] = ucwords(strtolower($tr->name));
                     }
                 }
             }
