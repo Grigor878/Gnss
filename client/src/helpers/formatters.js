@@ -1,7 +1,21 @@
 // Capitalize
-export function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+// export function capitalize(string) {
+//   return string.charAt(0).toUpperCase() + string.slice(1);
+// }
+
+// capitalize text
+export function capitalizeText(inputText) {
+  const words = inputText.split(" ");
+  const capitalizedWords = words.map((word) => {
+    if (word.length > 0) {
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    } else {
+      return "";
+    }
+  });
+  return capitalizedWords.join(" ");
 }
+
 // split before "/"
 export function splitBefore(str) {
   return str.split("/")[0];

@@ -54,7 +54,7 @@ const View = () => {
                 />
               );
             })}
-            <Route path="result/:id" element={<Result />} />
+            <Route path="product/:id" element={<Result />} />
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

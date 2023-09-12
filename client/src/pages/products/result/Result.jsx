@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import './Result.scss'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../../store/slices/homeSlice'
 
 const Result = () => {
-    const { id } = useLocation()
+    const { id } = useParams()
     console.log(id)//
     const { language, singleProduct } = useSelector((state) => state.home)
     console.log(singleProduct)//

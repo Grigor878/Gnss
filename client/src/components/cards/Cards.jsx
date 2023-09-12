@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { clearSubCategories } from "../../store/slices/homeSlice";
 import "./Cards.scss";
+import { capitalizeText } from "../../helpers/formatters";
 
 export const Cards = ({ data }) => {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ export const Cards = ({ data }) => {
           return (
             <div key={id} onClick={() => handleNavigate(path)} className="cards__block">
               <img src={`http://gnss.admin.loc/storage/` + image} alt="img" />
-              <h3>{title}</h3>
+              <h3>{capitalizeText(title)}</h3>
               <span>See More</span>
             </div>
           );

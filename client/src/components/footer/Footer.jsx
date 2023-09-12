@@ -13,6 +13,7 @@ import { HiPhone } from "react-icons/hi";
 // import { productsMain, productsSub } from "../../view/data";
 import { mainPages } from "./data";
 import "./Footer.scss";
+import { capitalizeText } from "../../helpers/formatters";
 
 export const Footer = () => {
   const { allCategories, allSubCategories } = useSelector((state) => state.home);
@@ -90,7 +91,7 @@ export const Footer = () => {
                   return (
                     <li key={id}>
                       <NavLink className="footer__top-left-card-link" to={path}>
-                        {title}
+                        {capitalizeText(title)}
                       </NavLink>
                     </li>
                   );
@@ -105,7 +106,7 @@ export const Footer = () => {
                   return (
                     <li key={id}>
                       <NavLink className="footer__top-left-card-link" to={path}>
-                        {title}
+                        {capitalizeText(title)}
                       </NavLink>
                     </li>
                   );
