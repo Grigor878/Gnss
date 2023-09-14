@@ -1,2 +1,92 @@
-@import '../../../variables';
+@import "../../../variables";
 
+.result {
+  &__top {
+    @include flex;
+    justify-content: space-between;
+
+    button {
+      background: $red;
+      border-radius: 4px;
+      padding: 8px 12px;
+      font-size: 16px;
+      font-weight: 600;
+      color: $white;
+      @include transition;
+
+      &:hover,
+      &:focus {
+        box-shadow: 0px 0px 5px 0px $red;
+      }
+    }
+  }
+
+  &__main {
+    padding-top: 70px;
+
+    &-top {
+      @include flex;
+      justify-content: space-between;
+
+      p {
+        font-size: 22px;
+        color: $text;
+      }
+
+      span {
+        @include flex;
+        gap: 7px;
+        font-size: 16px;
+        line-height: 0.5px;
+        color: $textSmall;
+      }
+    }
+
+    &-context {
+      @include flex;
+
+      &-img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+
+        img {
+          max-width: 555px;
+          object-fit: cover;
+          @include transition;
+        }
+      }
+
+      p {
+        color: $text;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 180%;
+        text-align: justify;
+      }
+    }
+
+    &-imgs {
+      @include flex;
+      gap: 24px;
+      overflow: hidden;
+
+      &-img {
+        overflow: hidden;
+        border-radius: 12px;
+
+        img {
+          width: 100%;
+          height: 222px;
+          cursor: pointer;
+          border-radius: 12px;
+          @include transition;
+        }
+
+        &:hover img {
+          transform: scale(1.2);
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'
+import { getPartners } from "../../store/slices/homeSlice";
 import { Title } from "../../components/animate/Title";
 import { aboutImages } from "./data";
 import { FullScreenSlide } from "../../components/fullScreenSlide/FullScreenSlide";
@@ -27,6 +29,15 @@ const About = () => {
     ? (document.body.style.overflow = "hidden")
     : (document.body.style.overflow = "auto");
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getPartners())
+  }, [dispatch])
+
+  const { partners } = useSelector((state) => state.home)
+  console.log(partners)
+
   return (
     <section className="about">
       <div className="container">
@@ -43,7 +54,7 @@ const About = () => {
                 className="about__main-context-img"
                 onClick={() => openFullscreen(0)}
               >
-                {aboutImages?.slice(0, 1)?.map(({ image,id }) => (
+                {aboutImages?.slice(0, 1)?.map(({ image, id }) => (
                   <img key={id} src={image} alt="About-Us" />
                 ))}
               </div>
@@ -92,6 +103,20 @@ const About = () => {
             />
           </div>
         )}
+
+        <div className="about__partners">
+          <h3>Partners</h3>
+          <div className="about__partners-block">
+            {partners?.map(({ id, title, image }) => {
+              return (
+                <div key={id} className="about__partners-card">
+                  <img src={"http://gnss.admin.loc/storage/" + image} alt={title} />
+                  {/* <h6>{title}</h6> */}
+                </div>
+              )
+            })}
+          </div>
+        </div>
       </div>
     </section>
   );

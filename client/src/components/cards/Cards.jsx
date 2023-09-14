@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { clearSubCategories } from "../../store/slices/homeSlice";
-import "./Cards.scss";
 import { capitalizeText } from "../../helpers/formatters";
+import noImg from '../../assets/imgs/noImg.png'
+import "./Cards.scss";
 
 export const Cards = ({ data }) => {
   const navigate = useNavigate();
@@ -41,7 +42,10 @@ export const Cards = ({ data }) => {
         {data?.map(({ id, path, image, title }) => {
           return (
             <div key={id} onClick={() => handleNavigate(path)} className="cards__block">
-              <img src={`http://gnss.admin.loc/storage/` + image} alt="img" />
+              <img 
+              src={image?`http://gnss.admin.loc/storage/` + image : noImg}
+               alt="img" 
+              />
               <h3>{capitalizeText(title)}</h3>
               <span>See More</span>
             </div>

@@ -69,4 +69,37 @@
       }
     }
   }
+
+  &__partners {
+    h3 {
+      color: $text;
+      width: fit-content;
+      margin: 0 auto;
+      font-size: 25px;
+      border-bottom: 1px solid $red;
+    }
+
+    &-block {
+      @include flexCenter;
+      gap: 33px;
+      padding: 70px 0;
+    }
+
+    &-card {
+      @include flexCol;
+      gap: 22px;
+
+      img {
+        width: 111px;
+        height: 111px;
+        object-fit: contain;
+      }
+
+      // h6 {
+      //   color: $text;
+      //   font-size: 17px;
+      //   line-height: 0.5px;
+      // }
+    }
+  }
 }

@@ -12,6 +12,7 @@ const initialState = {
   //
   products: [],
   singleProduct: [],
+  partners:[]
 };
 
 // get header routes
@@ -91,6 +92,19 @@ export const getSingleProduct = createAsyncThunk(
   }
 );
 
+// get single product
+export const getPartners = createAsyncThunk(
+  "home/partners",
+  async () => {
+    try {
+      const { data } = await baseApi.get(`getPartners`);
+      return data;
+    } catch (err) {
+      console.log(`Get Partners Data Error: ${err.message}`);
+    }
+  }
+);
+
 const homeSlice = createSlice({
   name: "home",
   initialState,
@@ -126,6 +140,9 @@ const homeSlice = createSlice({
     });
     builder.addCase(getSingleProduct.fulfilled, (state, action) => {
       state.singleProduct = action.payload;
+    });
+    builder.addCase(getPartners.fulfilled, (state, action) => {
+      state.partners = action.payload;
     });
   },
 });
