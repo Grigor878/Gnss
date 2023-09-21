@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('image')->nullable();
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->integer('level')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });

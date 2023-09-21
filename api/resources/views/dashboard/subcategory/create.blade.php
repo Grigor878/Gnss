@@ -144,6 +144,27 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Select subcategory</label>
+                                                        <select id="subCategories" class="form-control" name="subcategory">
+                                                            <option value="" selected>Not Selected</option>
+                                                            @foreach ($subCategories as $subCategory)
+                                                                <option
+                                                                    value="{{ @$subCategory->id }}"
+                                                                    data-category="{{ @$subCategory->category_id }}"
+                                                                    data-en-name="{{ @$subCategory->translations[0]->name }}"
+                                                                    data-am-name="{{ @$subCategory->translations[1]->name }}"
+                                                                >
+                                                                    {{ $subCategory->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('subcategories')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="row">

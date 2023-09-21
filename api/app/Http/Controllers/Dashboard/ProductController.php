@@ -49,9 +49,21 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->with('translations')->get();
-        $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')->get();
+        $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
+        ->where([
+            ['level', 1],
+            ['parent_id', NULL],
+        ])
+        ->get();
 
-        return view('dashboard.product.create', compact('categories', 'subCategories'));
+        $childSubCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
+        ->where([
+            ['level', '!=' , 1],
+            ['parent_id', '!=' , NULL],
+        ])
+        ->get();
+
+        return view('dashboard.product.create', compact('categories', 'subCategories', 'childSubCategories'));
     }
 
     /**
@@ -60,6 +72,8 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->validated();
+
+        dd($data);
 
         $this->productService->create($data);
 

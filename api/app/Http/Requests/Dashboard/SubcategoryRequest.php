@@ -25,6 +25,8 @@ class SubcategoryRequest extends FormRequest
             'en_name' => 'required',
             'am_name' => 'required',
             'category' => 'required',
+            'subcategory' => '',
+            'level' => '',
             'image' => ''
         ];
     }

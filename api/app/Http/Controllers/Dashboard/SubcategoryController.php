@@ -46,8 +46,14 @@ class SubcategoryController extends Controller
     public function create()
     {
         $categories = Category::select('id', 'name')->with('translations')->get();
+        $subCategories = Subcategory::with('translations', 'parent', 'subcategories')
+        ->where([
+            ['level', 1],
+            ['parent_id', NULL],
+        ])
+        ->get();
 
-        return view('dashboard.subcategory.create', compact('categories'));
+        return view('dashboard.subcategory.create', compact('categories', 'subCategories'));
     }
 
     /**
@@ -75,10 +81,16 @@ class SubcategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $subcategory = Subcategory::with('translations')->find($id);
+        $subcategory = Subcategory::with('translations', 'parent', 'subcategories')->find($id);
         $categories = Category::select('id', 'name')->with('translations')->get();
+        $subCategories = Subcategory::with('translations', 'parent', 'subcategories')
+        ->where([
+            ['level', 1],
+            ['parent_id', NULL],
+        ])
+        ->get();
 
-        return view('dashboard.subcategory.edit', compact('subcategory', 'categories'));
+        return view('dashboard.subcategory.edit', compact('subcategory', 'categories', 'subCategories'));
     }
 
     /**

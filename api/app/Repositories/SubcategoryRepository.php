@@ -34,7 +34,9 @@ class SubcategoryRepository
 
         $subcategory = Subcategory::create([
             'name' => $data['en_name'],
-            'category_id' => $data['category']
+            'category_id' => $data['category'],
+            'parent_id' => $data['subcategory'] ? $data['subcategory'] : NULL,
+            'level' => $data['subcategory'] ? 2 : 1
         ]);
 
         SubcategoryTranslations::insert([
@@ -70,7 +72,9 @@ class SubcategoryRepository
 
         $subcategory->update([
             'name' => $data['en_name'],
-            'category_id' => $data['category']
+            'category_id' => $data['category'],
+            'parent_id' => $data['subcategory'] ? $data['subcategory'] : NULL,
+            'level' => $data['subcategory'] ? 2 : 1
         ]);
 
         SubcategoryTranslations::where('subcategory_id', $subcategory->id)->delete();

@@ -18,7 +18,7 @@ class Subcategory extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'category_id', 'image'];
+    protected $fillable = ['name', 'category_id', 'image', 'parent_id', 'level'];
 
     /**
      * Get the category that owns the Subcategory
@@ -49,4 +49,25 @@ class Subcategory extends Model
     {
         return $this->hasMany(SubcategoryTranslations::class);
     }
+
+    /**
+     * Get the parent that owns the Subcategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Subcategory::class, 'parent_id', 'id');
+    }
+
+    /**
+     * Get all of the subcategory for the Subcategory
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function subcategories(): HasMany
+    {
+        return $this->hasMany(Subcategory::class, 'parent_id', 'id');
+    }
+
 }

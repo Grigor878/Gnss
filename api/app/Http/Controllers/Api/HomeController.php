@@ -12,12 +12,7 @@ class HomeController extends Controller
 
     public function getHeaderItems(string $lang) : JsonResponse
     {
-        $categories = Category::with(
-            'translations',
-            'subcategories.translations',
-            'subcategories.product.images',
-            'subcategories.product.translations'
-        )->get();
+        $categories = Category::with('translations')->get();
 
         $dataCategoryes = [];
 
@@ -37,28 +32,6 @@ class HomeController extends Controller
                 }
             }
 
-            if (isset($cat->subcategories)) {
-
-                $thisCategory['subcategories'] = [];
-
-                foreach ( $cat->subcategories as $sub) {
-                    $thisSub = [
-                        'title' => $sub->name,
-                        'path' => '/'.Str::lower(str_replace(' ', '_', str_replace(',', '', $sub->name))),
-                        'image' => $sub->image
-                    ];
-
-                    if (isset($sub->translations)) {
-                        foreach ( $sub->translations as $tr) {
-                            if ( $tr->language == $lang  ) {
-                                $thisSub['title'] = $tr->name;
-                            }
-                        }
-                    }
-
-                    array_push($thisCategory['subcategories'], $thisSub);
-                }
-            }
             array_push($dataCategoryes, $thisCategory);
         }
 
