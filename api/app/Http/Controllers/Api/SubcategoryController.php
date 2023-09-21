@@ -213,6 +213,7 @@ class SubcategoryController extends Controller
 
             $thisSubcategory['path'] = '/' . $path_parent . '/' . $parent_sub . '/' . $path_sub;
             $thisSubcategory['image'] = $sub->image;
+            $thisSubcategory['route'] = $sub->category->name . ' > ' . $sub->parent->name . ' > ' . $sub->name;
 
             if (isset($sub->category->translations)) {
                 foreach ($sub->category->translations as $tr) {
