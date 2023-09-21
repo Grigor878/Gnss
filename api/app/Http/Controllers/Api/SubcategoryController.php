@@ -187,7 +187,7 @@ class SubcategoryController extends Controller
         $dataChildSubcategories = [];
 
         $childSubcategories = Subcategory::select('id', 'name', 'image', 'category_id', 'parent_id', 'level')
-        ->with('translations', 'category.translations', 'parent')
+        ->with('translations', 'category.translations', 'parent.translations')
         ->where([
             ['parent_id', $id],
             ['level', 2],
@@ -213,12 +213,19 @@ class SubcategoryController extends Controller
 
             $thisSubcategory['path'] = '/' . $path_parent . '/' . $parent_sub . '/' . $path_sub;
             $thisSubcategory['image'] = $sub->image;
-            $thisSubcategory['route'] = $sub->category->name . ' > ' . $sub->parent->name . ' > ' . $sub->name;
 
             if (isset($sub->category->translations)) {
                 foreach ($sub->category->translations as $tr) {
                     if ($tr->language == $lang) {
                         $thisSubcategory['parent'] = ucwords(strtolower($tr->name));
+                    }
+                }
+            }
+
+            if (isset($sub->parent->translations)) {
+                foreach ($sub->parent->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['route'] = $thisSubcategory['parent'] . ' > ' . $tr->name . ' > ' . $thisSubcategory['title'];
                     }
                 }
             }
