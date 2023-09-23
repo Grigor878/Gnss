@@ -73,8 +73,6 @@ class ProductController extends Controller
     {
         $data = $request->validated();
 
-        dd($data);
-
         $this->productService->create($data);
 
         return redirect()->route('products.index');
@@ -95,9 +93,21 @@ class ProductController extends Controller
     {
         $product = Product::with('translations', 'images', 'category', 'subcategory')->find($id);
         $categories = Category::select('id', 'name')->with('translations')->get();
-        $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')->get();
+        $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
+        ->where([
+            ['level', 1],
+            ['parent_id', NULL],
+        ])
+        ->get();
 
-        return view('dashboard.product.edit', compact('product','categories', 'subCategories'));
+        $childSubCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
+        ->where([
+            ['level', '!=' , 1],
+            ['parent_id', '!=' , NULL],
+        ])
+        ->get();
+
+        return view('dashboard.product.edit', compact('product','categories', 'subCategories', 'childSubCategories'));
     }
 
     /**

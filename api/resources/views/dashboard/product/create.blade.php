@@ -202,7 +202,7 @@
                                                 <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label>Select subcategory</label>
-                                                        <select id="subCategories" multiple="" class="form-control" name="subcategories[]">
+                                                        <select id="childSubCategories" multiple="" class="form-control" name="subcategories[]">
                                                             @foreach ($childSubCategories as $subCategory)
                                                                 <option
                                                                     value="{{ @$subCategory->id }}"
