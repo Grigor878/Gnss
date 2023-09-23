@@ -34,6 +34,8 @@ Route::get('getChildSubcategories/{id}/{lang}', [SubcategoryController::class, '
 
 Route::get('getAllSubCategories/{lang}', [SubcategoryController::class, 'getAllSubCategories']);
 
+Route::get('getAllChildSubCategories/{lang}', [SubcategoryController::class, 'getAllChildSubCategories']);
+
 Route::get('getSubcategoryProducts/{id}/{lang}', [SubcategoryController::class, 'getSubcategoryProducts']);
 
 Route::get('getSingleProduct/{id}/{lang}', [ProductController::class, 'getSingleProduct']);

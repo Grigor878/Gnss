@@ -28,8 +28,6 @@ class SubcategoryController extends Controller
         ])
         ->get();
 
-        // dd($subcategories);
-
         foreach ($subcategories as $sub) {
             $thisSubcategory['id'] = $sub->id;
 
@@ -61,6 +59,67 @@ class SubcategoryController extends Controller
         }
 
         return response()->json($dataSubcategories);
+    }
+
+    /**
+     * getAllChildSubCategories
+     *
+     * @param  mixed $lang
+     * @return JsonResponse
+     */
+    public function getAllChildSubCategories(string $lang) : JsonResponse
+    {
+        $dataChildSubcategories = [];
+
+        $childSubcategories = Subcategory::select('id', 'name', 'image', 'category_id', 'parent_id', 'level')
+        ->with('translations', 'category.translations', 'parent.translations')
+        ->where([
+            ['level', '!=', 1],
+            ['parent_id', '!=', NULL],
+        ])
+        ->get();
+
+
+        foreach ($childSubcategories as $sub) {
+            $thisSubcategory['id'] = $sub->id;
+
+            if (isset($sub->translations)) {
+                foreach ($sub->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['title'] = ucwords(strtolower($tr->name));
+                    }
+                }
+            }
+
+            $path_parent = str_replace(' ', '_',  str_replace(',', '', strtolower($sub->category->name)));
+            $parent_sub = str_replace(' ', '_',  str_replace(',', '', strtolower($sub->parent->name)));
+            $path_sub = str_replace(' ', '_',  str_replace(',', '', strtolower($sub->name)));
+
+            $thisSubcategory['path'] = '/' . $path_parent . '/' . $parent_sub . '/' . $path_sub;
+            $thisSubcategory['image'] = $sub->image;
+
+            if (isset($sub->category->translations)) {
+                foreach ($sub->category->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['parent'] = ucwords(strtolower($tr->name));
+                    }
+                }
+            }
+
+            if (isset($sub->parent->translations)) {
+                foreach ($sub->parent->translations as $tr) {
+                    if ($tr->language == $lang) {
+                        $thisSubcategory['route'] = $thisSubcategory['parent'] . ' > ' . $tr->name . ' > ' . $thisSubcategory['title'];
+                    }
+                }
+            }
+
+            $thisSubcategory['category_id'] = $sub->category_id;
+
+            array_push($dataChildSubcategories, $thisSubcategory);
+        }
+
+        return response()->json($dataChildSubcategories);
     }
 
     /**
