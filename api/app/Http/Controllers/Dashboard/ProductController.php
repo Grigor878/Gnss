@@ -91,7 +91,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::with('translations', 'images', 'category', 'subcategory')->find($id);
+        $product = Product::with('translations', 'images', 'category', 'subcategory', 'links')->find($id);
         $categories = Category::select('id', 'name')->with('translations')->get();
         $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
         ->where([

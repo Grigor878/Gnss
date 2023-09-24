@@ -58,4 +58,14 @@ class Product extends Model
     {
         return $this->hasMany(ProductImages::class);
     }
+
+    /**
+     * Get all of the links for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function links(): HasMany
+    {
+        return $this->hasMany(Link::class);
+    }
 }

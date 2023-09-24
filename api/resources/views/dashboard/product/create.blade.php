@@ -237,6 +237,41 @@
                                                         @enderror
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="count">Available count</label>
+                                                        <input
+                                                            type="number"
+                                                            class="form-control"
+                                                            value="{{ old('count') }}"
+                                                            placeholder="available count"
+                                                            name="count"
+                                                        >
+                                                        @error('count')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="images">Links</label>
+                                                        <div class="input-group my-1">
+                                                            <input type="text" class="form-control" name="links[]" value="{{ old('links')[0] ?? '' }}">
+                                                        </div>
+                                                        <div class="input-group my-1">
+                                                            <input type="text" class="form-control" name="links[]" value="{{ old('links')[1] ?? '' }}">
+                                                        </div>
+                                                        <div class="input-group my-1">
+                                                            <input type="text" class="form-control" name="links[]" value="{{ old('links')[2] ?? '' }}">
+                                                        </div>
+                                                        @error('links')
+                                                            <div class="text-danger">{{ $message }}</div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="row">
@@ -254,23 +289,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label for="count">Available count</label>
-                                                        <input
-                                                            type="number"
-                                                            class="form-control"
-                                                            value="{{ old('count') }}"
-                                                            placeholder="available count"
-                                                            name="count"
-                                                        >
-                                                        @error('count')
-                                                            <div class="text-danger">{{ $message }}</div>
-                                                        @enderror
-                                                    </div>
-                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
 

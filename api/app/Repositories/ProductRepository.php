@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CategoryProduct;
+use App\Models\Link;
 use App\Models\Product;
 use App\Models\ProductImages;
 use App\Models\ProductSubcategory;
@@ -83,6 +84,17 @@ class ProductRepository
             }
         }
 
+        if ( isset($data['links']) ) {
+            foreach ( $data['links'] as $link) {
+                $link = str_replace('watch?v=', 'embed/', $link);
+
+                Link::create([
+                    'product_id' => $product->id,
+                    'path' => $link,
+                ]);
+            }
+        }
+
         DB::commit();
 
         return $product;
@@ -149,6 +161,17 @@ class ProductRepository
             }
         }
 
+        if ( isset($data['links']) ) {
+            Link::where('product_id', $product->id)->delete();
+            foreach ( $data['links'] as $link) {
+                $link = str_replace('watch?v=', 'embed/', $link);
+                Link::create([
+                    'product_id' => $product->id,
+                    'path' => $link,
+                ]);
+            }
+        }
+
         DB::commit();
 
         return $product;
@@ -162,6 +185,7 @@ class ProductRepository
         CategoryProduct::where('product_id', $product->id)->delete();
         ProductSubcategory::where('product_id', $product->id)->delete();
         ProductImages::where('product_id', $product->id)->delete();
+        Link::where('product_id', $product->id)->delete();
         $product->delete();
 
         DB::commit();

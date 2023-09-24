@@ -15,7 +15,7 @@ class ProductController extends Controller
 
         $dataProduct = [];
 
-        $product = Product::with('translations','images')->find($id);
+        $product = Product::with('translations','images','links')->find($id);
 
         $dataProduct = [];
 
@@ -35,6 +35,11 @@ class ProductController extends Controller
         $dataProduct['images'] = [];
         foreach ($product->images as $image ) {
             array_push($dataProduct['images'], $image->filename);
+        }
+
+        $dataProduct['links'] = [];
+        foreach ($product->links as $image ) {
+            array_push($dataProduct['links'], $image->path);
         }
 
         return response()->json($dataProduct);
