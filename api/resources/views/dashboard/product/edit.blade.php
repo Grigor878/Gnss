@@ -304,12 +304,15 @@
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
-
                                                         </div>
                                                         <div class="d-flex">
                                                             @foreach ($product->images as $image)
                                                                 <div class="image-box position-relative w-25 m-2">
-                                                                    <a class="position-absolute text-danger delete-image-btn" data-image-id="{{ $image->id }}">
+                                                                    <a
+                                                                        class="position-absolute text-danger delete-file-btn"
+                                                                        data-file-id="{{ $image->id }}"
+                                                                        data-file-type="image"
+                                                                    >
                                                                         <i class="nav-icon fas fa-times-circle fa-2x"></i>
                                                                     </a>
                                                                     <img
@@ -322,8 +325,47 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
+
+
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="files">Product Files</label>
+
+                                                    <div class="input-group">
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input" name="files[]" multiple>
+                                                            <label class="custom-file-label" for="images">Choose files</label>
+                                                            @error('files')
+                                                                <div class="text-danger">{{ $message }}</div>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        @foreach ($product->files as $file)
+                                                            <div class="image-box position-relative w-50 m-2">
+                                                                <a
+                                                                    href="{{ URL::asset('/storage/'.$file->path) }}"
+                                                                    class="w-100"
+                                                                    target="blank"
+                                                                    >
+                                                                    {{ $file->path }}
+                                                                </a>
+                                                                <a
+                                                                    class="text-danger delete-file-btn"
+                                                                    data-file-id="{{ $file->id }}"
+                                                                    data-file-type="file"
+                                                                >
+                                                                    <i class="nav-icon fas fa-times-circle fa-2x"></i>
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                     </div>
 

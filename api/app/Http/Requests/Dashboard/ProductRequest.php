@@ -32,6 +32,7 @@ class ProductRequest extends FormRequest
             'categories' => '',
             'subcategories' => '',
             'links' => '',
+            'files' => '',
         ];
     }
 }

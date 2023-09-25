@@ -91,7 +91,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $product = Product::with('translations', 'images', 'category', 'subcategory', 'links')->find($id);
+        $product = Product::with('translations', 'images', 'category', 'subcategory', 'links', 'files')->find($id);
         $categories = Category::select('id', 'name')->with('translations')->get();
         $subCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
         ->where([
@@ -134,23 +134,25 @@ class ProductController extends Controller
         return redirect()->route('products.index');
     }
 
+
     /**
-     * deleteImage
+     * deleteFile
      *
      * @param  mixed $id
+     * @param  mixed $type
      * @return void
      */
-    public function deleteImage (string $id) {
+    public function deleteFile (string $id, string $type) {
         try {
-            $this->productService->deleteImage($id);
+            $this->productService->deleteFile($id, $type);
             return [
                 'status' => 1,
-                'message' => 'Image Deleted'
+                'message' => 'File Deleted'
             ];
         } catch (\Exception $e) {
             return [
                 'status' => 0,
-                'message' => $e
+                'message' => $e->getMessage()
             ];
         }
     }

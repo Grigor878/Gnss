@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\File;
 use App\Models\ProductImages;
 use App\Services\FileServices;
 use Illuminate\Support\Facades\DB;
@@ -73,20 +74,26 @@ class ProductService
     }
 
     /**
-     * deleteImage
+     * deleteFile
      *
      * @param  mixed $id
+     * @param  mixed $type
      * @return void
      */
-    public function deleteImage($id)
+    public function deleteFile(string $id, string $type)
     {
         DB::beginTransaction();
 
-        $image = ProductImages::find($id);
-        $url = 'public/' . $image->filename;
+        if ($type == 'image') {
+            $file = ProductImages::find($id);
+            $url = 'public/' . $file->filename;
+        } else if  ($type == 'file') {
+            $file = File::find($id);
+            $url = 'public/' . $file->path;
+        }
 
-        $this->fileService->deleteImage($url);
-        $image->delete();
+        $this->fileService->deleteFile($url);
+        $file->delete();
 
         DB::commit();
 

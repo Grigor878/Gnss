@@ -15,7 +15,7 @@ class ProductController extends Controller
 
         $dataProduct = [];
 
-        $product = Product::with('translations','images','links')->find($id);
+        $product = Product::with('translations','images','links','files')->find($id);
 
         $dataProduct = [];
 
@@ -35,6 +35,11 @@ class ProductController extends Controller
         $dataProduct['images'] = [];
         foreach ($product->images as $image ) {
             array_push($dataProduct['images'], $image->filename);
+        }
+
+        $dataProduct['files'] = [];
+        foreach ($product->files as $file ) {
+            array_push($dataProduct['files'], $file->path);
         }
 
         $dataProduct['links'] = [];

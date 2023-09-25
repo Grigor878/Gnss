@@ -27,7 +27,7 @@ Route::prefix('dashboard')
         Route::resource('users', UserController::class);
     });
 
-    Route::post('product/deleteImage/{id}', [ProductController::class, 'deleteImage']);
+    Route::post('product/deleteFile/{id}/{type}', [ProductController::class, 'deleteFile']);
     Route::post('categories/deleteImage/{id}', [CategoryController::class, 'deleteImage']);
     Route::post('subcategories/deleteImage/{id}', [SubcategoryController::class, 'deleteImage']);
     Route::post('partners/deleteImage/{id}', [PartnerController::class, 'deleteImage']);

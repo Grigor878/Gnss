@@ -2,14 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\CategoryProduct;
+use App\Models\File;
 use App\Models\Link;
 use App\Models\Product;
 use App\Models\ProductImages;
-use App\Models\ProductSubcategory;
-use App\Models\ProductTranslations;
 use App\Services\FileServices;
+use App\Models\CategoryProduct;
+use App\Models\ProductSubcategory;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductTranslations;
 
 class ProductRepository
 {
@@ -62,6 +63,18 @@ class ProductRepository
                 ProductImages::create([
                     'product_id' => $product->id,
                     'filename' => $path,
+                ]);
+            }
+        }
+
+        if ( isset($data['files']) ) {
+            foreach ($data['files'] as $key => $file) {
+                $fileName = rand(1000000, 99999999999) . '_file_' . $key + 1 . '.' . strtolower($file->getClientOriginalExtension());
+                $path = $this->fileServices->saveFile($file, 'products/' . $product->id . '/files', $fileName);
+
+                File::create([
+                    'product_id' => $product->id,
+                    'path' => $path,
                 ]);
             }
         }
@@ -137,6 +150,18 @@ class ProductRepository
                 ProductImages::create([
                     'product_id' => $product->id,
                     'filename' => $path,
+                ]);
+            }
+        }
+
+        if ( isset($data['files']) ) {
+            foreach ($data['files'] as $key => $file) {
+                $fileName = rand(1000000, 99999999999) . '_file_' . $key + 1 . '.' . strtolower($file->getClientOriginalExtension());
+                $path = $this->fileServices->saveFile($file, 'products/' . $product->id . '/files', $fileName);
+
+                File::create([
+                    'product_id' => $product->id,
+                    'path' => $path,
                 ]);
             }
         }

@@ -257,7 +257,7 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="images">Links</label>
+                                                        <label for="links">Links</label>
                                                         <div class="input-group my-1">
                                                             <input type="text" class="form-control" name="links[]" value="{{ old('links')[0] ?? '' }}">
                                                         </div>
@@ -280,9 +280,24 @@
                                                         <label for="images">Product Images</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" name="images[]" multiple>
+                                                                <input id="images" type="file" class="custom-file-input" name="images[]" multiple>
                                                                 <label class="custom-file-label" for="images">Choose files</label>
                                                                 @error('images')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="files">Product Files</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input id="files" type="file" class="custom-file-input" name="files[]" multiple>
+                                                                <label class="custom-file-label" for="files">Choose files</label>
+                                                                @error('files')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>

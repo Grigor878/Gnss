@@ -68,4 +68,14 @@ class Product extends Model
     {
         return $this->hasMany(Link::class);
     }
+
+    /**
+     * Get all of the files for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function files(): HasMany
+    {
+        return $this->hasMany(File::class);
+    }
 }

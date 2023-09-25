@@ -35,12 +35,30 @@ class FileServices
     }
 
     /**
+     * saveFile
+     *
+     * @param  mixed $file
+     * @param  mixed $path
+     * @param  mixed $imageFileName
+     * @param  mixed $repo
+     * @return void
+     */
+    public function saveFile($file, $path, $imageFileName, $repo = 'public'){
+        $publicDisk = Storage::disk($repo);
+        $filePath = $path . '/' . $imageFileName;
+        $publicDisk->put($filePath, file_get_contents($file), 'public');
+
+        return $filePath;
+    }
+
+
+    /**
      * deleteFile
      *
      * @param  mixed $url
      * @return void
      */
-    public function deleteImage($url)
+    public function deleteFile($url)
     {
         Storage::delete($url);
     }

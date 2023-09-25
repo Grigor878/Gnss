@@ -1,11 +1,12 @@
+$(".delete-file-btn").click(function () {
+    let fileId = $(this).data('file-id')
+    let type = $(this).data('file-type')
 
-$(".delete-image-btn").click(function () {
-    let imageId = $(this).data('image-id')
+    console.log(fileId, type);
 
-    $.post( "/dashboard/product/deleteImage/"+imageId)
+    $.post( "/dashboard/product/deleteFile/"+fileId+"/"+type)
     .done(function( data ) {
         alert( data.message );
-        $('.delete-image-btn[data-image-id='+imageId+']').closest('.image-box').remove()
+        $('.delete-file-btn[data-file-id='+fileId+']').closest('.image-box').remove()
     });
-
 })

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Link extends Model
+class File extends Model
 {
     use HasFactory;
 
@@ -26,5 +26,4 @@ class Link extends Model
     {
         return $this->belongsTo(Product::class);
     }
-
 }
