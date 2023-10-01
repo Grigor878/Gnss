@@ -31,7 +31,7 @@ const ScrollToTop = () => {
 
   return (
     <BsFillArrowUpCircleFill
-      style={{ color: scrollToFooter <= 450 ? "#ffffff" : "#E22403" }}
+      style={{ color: scrollToFooter <= 500 ? "#ffffff" : "#E22403" }}
       className={`${isVisible ? "scrollTop-visible" : "scrollTop"}`}
       onClick={handleScrollToTop}
     />

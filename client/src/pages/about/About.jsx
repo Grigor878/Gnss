@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from 'react-redux'
 import { getPartners } from "../../store/slices/homeSlice";
 import { Title } from "../../components/animate/Title";
@@ -7,6 +8,8 @@ import { FullScreenSlide } from "../../components/fullScreenSlide/FullScreenSlid
 import "./About.scss";
 
 const About = () => {
+  const { t } = useTranslation()
+
   const [fullscreenImageIndex, setFullscreenImageIndex] = useState(0);
   const [fullscreenOpen, setFullscreenOpen] = useState(false);
 
@@ -41,12 +44,12 @@ const About = () => {
   return (
     <section className="about">
       <div className="container">
-        <Title text="About Page" />
+        <Title text={t("about")} />
 
         <div className="about">
           <div className="about__main">
             <h3>
-              Authorized distributor for Leica LLC in the Republic of Armenia
+              {t("about_subtitle")}
             </h3>
 
             <div className="about__main-context">
@@ -59,23 +62,7 @@ const About = () => {
                 ))}
               </div>
 
-              <p>
-                Our company was founded in 2000 and since then has been
-                successfully operating in the field of importing various types
-                of high-tech equipment to Armenia. Geo-Nal LLC has started its
-                first cooperation with the Swiss company Leica Geosystems, which
-                is one of the largest manufacturers and producers of
-                metrographic and geodetic systems in the world. At present, our
-                company offers a wide range of equipment for construction,
-                mining and other industries, from more than 10 leading German,
-                Swiss and Italian companies. Since 2007 our company has been
-                engaged in the import of medical equipment. Our first partner in
-                this field is the German company Leica Microsystems, which is
-                one of the most well-known and reputable companies in the world
-                in the production of various types of microscopes. We also
-                represent other well-known companies producing ophthalmology,
-                dentistry, histology and other research equipment.
-              </p>
+              <p>{t("about_text")}</p>
             </div>
 
             <div className="about__main-imgs">

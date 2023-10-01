@@ -3,7 +3,7 @@ import pMinDelay from "p-min-delay";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import { Loader } from "../components/loader/Loader"
 import Layout from "../components/layout/Layout";
-import { getAllCategories, getAllSubCategories } from "../store/slices/homeSlice";
+import { getAllCategories, getAllChildSubCategories, getAllSubCategories } from "../store/slices/homeSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { productsSub } from "./data";
 import ScrollToTop from "../components/scrollToTop/ScrollToTop";
@@ -15,17 +15,19 @@ const Categories = lazy(() =>
   pMinDelay(import("../pages/products/categories/Categories"), 500)
 );
 const Sub = lazy(() => pMinDelay(import("../pages/products/sub/Sub"), 500));
+const ChildSub = lazy(() => pMinDelay(import("../pages/products/childSub/ChildSub"), 500));
 const Result = lazy(() => pMinDelay(import("../pages/products/result/Result"), 500));
 const NotFound = lazy(() => pMinDelay(import("../pages/404/NotFound"), 500));
 
 const View = () => {
-  const { language, allCategories, allSubCategories } = useSelector((state) => state.home);
+  const { language, allCategories, allSubCategories, allChildSubCategories } = useSelector((state) => state.home);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllCategories(language));
     dispatch(getAllSubCategories(language));
+    dispatch(getAllChildSubCategories(language));
   }, [dispatch, language]);
 
   return (
@@ -44,13 +46,23 @@ const View = () => {
                 />
               );
             })}
-            {/* Sub Categories of products */}
+            {/*All Sub Categories of products */}
             {allSubCategories?.map(({ id, title, path, parent }) => {
               return (
                 <Route
                   key={id}
                   path={path}
                   element={<Sub id={id} parent={parent} title={title} />}
+                />
+              );
+            })}
+            {/*All Child Sub Categories of products */}
+            {allChildSubCategories?.map(({ id, title, path, parent }) => {
+              return (
+                <Route
+                  key={id}
+                  path={path}
+                  element={<ChildSub id={id} parent={parent} title={title} />}
                 />
               );
             })}

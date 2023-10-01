@@ -8,8 +8,11 @@ const initialState = {
   routes: [],
   allCategories: [],
   allSubCategories: [],
+  allChildSubCategories: [],//
+
   subCategories: [],
-  //
+  childSubcategories: [],//
+
   products: [],
   singleProduct: [],
   partners:[]
@@ -38,7 +41,7 @@ export const getAllCategories = createAsyncThunk(
   }
 );
 
-// get categories
+// get all sub categories
 export const getAllSubCategories = createAsyncThunk(
   "home/allSubCategories",
   async (language) => {
@@ -47,6 +50,19 @@ export const getAllSubCategories = createAsyncThunk(
       return data;
     } catch (err) {
       console.log(`Get All Sub Categories Error: ${err.message}`);
+    }
+  }
+);
+
+// get all child sub categories
+export const getAllChildSubCategories = createAsyncThunk(
+  "home/allChildSubCategories",
+  async (language) => {
+    try {
+      const { data } = await baseApi.get(`getAllChildSubCategories/${language}`);
+      return data;
+    } catch (err) {
+      console.log(`Get All Child Sub Categories Error: ${err.message}`);
     }
   }
 );
@@ -60,6 +76,19 @@ export const getSubCategories = createAsyncThunk(
       return data;
     } catch (err) {
       console.log(`Get Sub Categories Error: ${err.message}`);
+    }
+  }
+);
+
+// get child sub categories
+export const getChildSubCategories = createAsyncThunk(
+  "home/childSubCategories",
+  async ({ id, language }) => {
+    try {
+      const { data } = await baseApi.get(`getChildSubcategories/${id}/${language}`);
+      return data;
+    } catch (err) {
+      console.log(`Get Child Sub Categories Error: ${err.message}`);
     }
   }
 );
@@ -92,7 +121,7 @@ export const getSingleProduct = createAsyncThunk(
   }
 );
 
-// get single product
+// get partners
 export const getPartners = createAsyncThunk(
   "home/partners",
   async () => {
@@ -132,8 +161,14 @@ const homeSlice = createSlice({
     builder.addCase(getAllSubCategories.fulfilled, (state, action) => {
       state.allSubCategories = action.payload;
     });
+    builder.addCase(getAllChildSubCategories.fulfilled, (state, action) => {
+      state.allChildSubCategories = action.payload;
+    });
     builder.addCase(getSubCategories.fulfilled, (state, action) => {
       state.subCategories = action.payload;
+    });
+    builder.addCase(getChildSubCategories.fulfilled, (state, action) => {
+      state.childSubcategories = action.payload;
     });
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.products = action.payload;

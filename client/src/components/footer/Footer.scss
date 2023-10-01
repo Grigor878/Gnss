@@ -27,11 +27,11 @@
       &-social {
         @include flexCol;
         // @include flex;
-        gap: 50px;
+        gap: 33px;
 
         &-link {
           @include flexCenter;
-          font-size: 30px;
+          font-size: 25px;
           color: $white;
           border: 3px solid $white;
           padding: 11px;
@@ -55,7 +55,7 @@
 
       h3 {
         width: fit-content;
-        font-size: 22px;
+        font-size: 20px;
         letter-spacing: 0.5px;
         border-bottom: 1px solid $white;
         padding-bottom: 5px;
@@ -63,7 +63,7 @@
 
       &-card {
         @include flexCol;
-        gap: 45px;
+        gap: 33px;
 
         &-list {
           @include flexCol;
@@ -73,7 +73,7 @@
         &-link {
           color: $white;
           letter-spacing: 0.5px;
-          font-size: 18px;
+          font-size: 16px;
           text-transform: capitalize;
           border-bottom: 1px solid transparent;
           @include transition;

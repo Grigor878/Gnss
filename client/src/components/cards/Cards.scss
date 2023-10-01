@@ -65,7 +65,7 @@
 
 .cards {
   display: flex;
-  justify-content: space-between;
+  // justify-content: space-between;
   gap: 25px;
   padding: 100px 5px;
   overflow-x: scroll;
@@ -87,6 +87,8 @@
     @include transition;
     position: relative;
     // overflow: hidden;
+    max-width: 303px;
+
 
     &:hover,
     &focus {

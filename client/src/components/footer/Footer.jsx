@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { getCurrentYear } from "../../helpers/utils";
@@ -11,12 +12,16 @@ import {
 } from "react-icons/bi";
 import { HiPhone } from "react-icons/hi";
 // import { productsMain, productsSub } from "../../view/data";
-import { mainPages } from "./data";
+import { mainPagesAm, mainPagesEn } from "./data";
 import "./Footer.scss";
-import { capitalizeText } from "../../helpers/formatters";
+import { capitalizeText, cutText } from "../../helpers/formatters";
 
 export const Footer = () => {
+  const { t } = useTranslation()
+
   const { allCategories, allSubCategories } = useSelector((state) => state.home);
+
+  const { language } = useSelector((state) => state.home)
 
   return (
     <footer className="footer">
@@ -70,22 +75,32 @@ export const Footer = () => {
 
           <div className="footer__top-left">
             <div className="footer__top-left-card">
-              <h3>Main Pages</h3>
+              <h3>{t("main_pages")}</h3>
               <ul className="footer__top-left-card-list">
-                {mainPages?.map(({ id, title, path }) => {
-                  return (
-                    <li key={id}>
-                      <NavLink className="footer__top-left-card-link" to={path}>
-                        {title}
-                      </NavLink>
-                    </li>
-                  );
-                })}
+                {language === "am"
+                  ? mainPagesAm?.map(({ id, title, path }) => {
+                    return (
+                      <li key={id}>
+                        <NavLink className="footer__top-left-card-link" to={path}>
+                          {title}
+                        </NavLink>
+                      </li>
+                    );
+                  })
+                  : mainPagesEn?.map(({ id, title, path }) => {
+                    return (
+                      <li key={id}>
+                        <NavLink className="footer__top-left-card-link" to={path}>
+                          {title}
+                        </NavLink>
+                      </li>
+                    );
+                  })}
               </ul>
             </div>
 
             <div className="footer__top-left-card">
-              <h3>Categories</h3>
+              <h3>{t("categories")}</h3>
               <ul className="footer__top-left-card-list">
                 {allCategories?.map(({ id, title, path }) => {
                   return (
@@ -100,13 +115,13 @@ export const Footer = () => {
             </div>
 
             <div className="footer__top-left-card">
-              <h3>Sub Categories</h3>
+              <h3>{t("sub_categories")}</h3>
               <ul className="footer__top-left-card-list">
                 {allSubCategories?.map(({ id, title, path }) => {
                   return (
                     <li key={id}>
                       <NavLink className="footer__top-left-card-link" to={path}>
-                        {capitalizeText(title)}
+                        {language === "am" ? cutText(capitalizeText(title), 26) : capitalizeText(title)}
                       </NavLink>
                     </li>
                   );

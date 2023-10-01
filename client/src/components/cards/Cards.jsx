@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -6,8 +7,11 @@ import { clearSubCategories } from "../../store/slices/homeSlice";
 import { capitalizeText } from "../../helpers/formatters";
 import noImg from '../../assets/imgs/noImg.png'
 import "./Cards.scss";
+import { APP_BASE_URL } from "../../apis/config";
 
 export const Cards = ({ data }) => {
+  const { t } = useTranslation();
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -42,12 +46,12 @@ export const Cards = ({ data }) => {
         {data?.map(({ id, path, image, title }) => {
           return (
             <div key={id} onClick={() => handleNavigate(path)} className="cards__block">
-              <img 
-              src={image?`http://gnss.admin.loc/storage/` + image : noImg}
-               alt="img" 
+              <img
+                src={image ? APP_BASE_URL + image : noImg}
+                alt="img"
               />
               <h3>{capitalizeText(title)}</h3>
-              <span>See More</span>
+              <span>{t("see_more")}</span>
             </div>
           );
         })}

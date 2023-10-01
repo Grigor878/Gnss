@@ -1,8 +1,11 @@
-// Capitalize
-// export function capitalize(string) {
-//   return string.charAt(0).toUpperCase() + string.slice(1);
-// }
-
+// format long text
+export function cutText(text, maxLength) {
+  if (text.length > maxLength) {
+    return text.slice(0, maxLength) + "...";
+  } else {
+    return text;
+  }
+}
 // capitalize text
 export function capitalizeText(inputText) {
   const words = inputText.split(" ");
@@ -15,7 +18,6 @@ export function capitalizeText(inputText) {
   });
   return capitalizedWords.join(" ");
 }
-
 // split before "/"
 export function splitBefore(str) {
   return str.split("/")[0];
@@ -27,20 +29,14 @@ export function splitAfter(str) {
 // money formater
 export function moneyFormater(num) {
   let usd = Intl.NumberFormat("en-US");
-  let formated = "$ " + usd.format(num);
+  let formated = "֏ " + usd.format(num);
   return formated;
 }
-
-// money formater without $ symbol
-export function moneyFormaterNoUsd(num) {
-  let usd = Intl.NumberFormat("en-US");
-  let formated = usd.format(num);
-  return formated;
-}
-
-// date formatter for deactivate home
-export function formatDateString(date) {
-  const isoString = date.toISOString();
-  const formattedDate = isoString.replace("T", " ").split(".")[0];
-  return formattedDate;
+// extract fileName
+export function extractFileName(url) {
+  const parts = url.split("files/");
+  if (parts.length === 2) {
+    return parts[1];
+  }
+  return null;
 }

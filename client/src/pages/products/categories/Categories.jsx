@@ -9,7 +9,7 @@ import "./Categories.scss";
 
 const Categories = ({ id, title }) => {
   const { language, subCategories } = useSelector((state => state.home))
-
+  // console.log(subCategories);//
   const dispatch = useDispatch();
 
   useEffect(() => {

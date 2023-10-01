@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Title } from "../../components/animate/Title";
 import emailjs from "@emailjs/browser";
 import contact from "../../assets/imgs/contact2.jpg";
@@ -6,6 +7,8 @@ import { oops, success } from "../../components/swal/swal";
 import "./Contact.scss";
 
 const Contact = () => {
+  const { t } = useTranslation()
+
   const form = useRef();
 
   const sendEmail = (e) => {
@@ -32,7 +35,7 @@ const Contact = () => {
   return (
     <section className="contact">
       <div className="container">
-        <Title text="Contact Us" />
+        <Title text={t("contact")} />
 
         <div className="contact__main">
           <form ref={form} onSubmit={sendEmail} className="contact__main-form">

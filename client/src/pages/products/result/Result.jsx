@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../../store/slices/homeSlice'
+import { useSesionState } from '../../../hooks/useSessionState'
 import { Title } from '../../../components/animate/Title'
 import { BsFillCalendarCheckFill } from 'react-icons/bs'
 import noImg from '../../../assets/imgs/noImg.png'
 import { moneyFormater } from '../../../helpers/formatters'
 import { FullScreenSlide } from '../../../components/fullScreenSlide/FullScreenSlide'
-import './Result.scss'
 import { Loader } from '../../../components/loader/Loader'
+import './Result.scss'
+import { Tab } from './components/tab/Tab'
+import { APP_BASE_URL } from '../../../apis/config'
 
 const Result = () => {
+    const { t } = useTranslation()
+
     const { id } = useParams()
 
     const { language, singleProduct } = useSelector((state) => state.home)
@@ -21,15 +27,13 @@ const Result = () => {
         dispatch(getSingleProduct({ id, language }))
     }, [dispatch, id, language])
 
-    // const navigate = useNavigate()
-
     const [fullscreenImageIndex, setFullscreenImageIndex] = useState(0);
     const [fullscreenOpen, setFullscreenOpen] = useState(false);
 
     const sliderImages =
         singleProduct?.images?.map((url) => ({
-            original: "http://gnss.admin.loc/storage/" + url,
-            thumbnail: "http://gnss.admin.loc/storage/" + url
+            original: APP_BASE_URL + url,
+            thumbnail: APP_BASE_URL + url
         }) || []);
 
     const openFullscreen = (index) => {
@@ -45,50 +49,68 @@ const Result = () => {
         ? (document.body.style.overflow = "hidden")
         : (document.body.style.overflow = "auto");
 
+    const [modal, setModal] = useState(false)
+    const [active, setActive] = useSesionState("description","gnss-tab")
+
     return (
         singleProduct?.length
             ? <Loader />
             : <section className='result'>
                 <div className="container">
-                    {/* <div className='result__top'> */}
                     <Title text={singleProduct?.title} />
-                    {/* <button onClick={() => navigate(-1)}>Go Back</button>
-                </div> */}
 
                     {singleProduct &&
                         <div className='result__main'>
-                            <div className='result__main-top'>
-                                <p>{moneyFormater(singleProduct?.price)}</p>
-                                <span><BsFillCalendarCheckFill /> {singleProduct?.updated_at}</span>
-                            </div>
-
                             <div className='result__main-context'>
+                                <div className="result__main-context-imgs">
+                                    {sliderImages?.slice(1, 5)?.map((el, index) => {
+                                        return (
+                                            <div
+                                                key={el.original}
+                                                className="result__main-context-imgs-img"
+                                                onClick={() => openFullscreen(index + 1)}
+                                            >
+                                                <img src={el.original} alt="productImgs" />
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
                                 <div
                                     className="result__main-context-img"
                                     onClick={() => openFullscreen(0)}
                                 >
                                     <img
-                                        src={singleProduct?.images?.length ? `http://gnss.admin.loc/storage/` + singleProduct?.images[0] : noImg}
+                                        src={singleProduct?.images?.length ? APP_BASE_URL + singleProduct?.images[0] : noImg}
                                         alt="productImg"
                                     />
                                 </div>
 
-                                <p>{singleProduct?.description}</p>
+                                <div className="result__main-context-box">
+                                    <div className="result__main-context-box-top">
+                                        <span># {id}</span>
+                                        <p>{t("available")}</p>
+                                    </div>
+
+                                    <p className="result__main-context-box-price">{moneyFormater(singleProduct?.price)}</p>
+
+                                    <button onClick={() => setModal(true)}>{t("order")}</button>
+
+                                    <div className="result__main-context-box-top">
+                                        <p>{t("created")}</p>
+                                        <span><BsFillCalendarCheckFill /> {singleProduct?.updated_at}</span>
+                                    </div>
+
+                                </div>
                             </div>
 
-                            <div className="result__main-imgs">
-                                {sliderImages?.slice(1, 5)?.map((el, index) => {
-                                    return (
-                                        <div
-                                            key={el.original}
-                                            className="result__main-imgs-img"
-                                            onClick={() => openFullscreen(index + 1)}
-                                        >
-                                            <img src={el.original} alt="productImgs" />
-                                        </div>
-                                    );
-                                })}
-                            </div>
+                            <Tab
+                                active={active}
+                                setActive={setActive}
+                                description={singleProduct?.description}
+                                files={singleProduct?.files}
+                                media={singleProduct?.links}
+                            />
                         </div>
                     }
 

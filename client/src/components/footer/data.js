@@ -1,4 +1,4 @@
-export const mainPages = [
+export const mainPagesEn = [
   {
     id: "Home",
     path: "/",
@@ -13,5 +13,23 @@ export const mainPages = [
     id: "Contact Us",
     path: "/contact",
     title: "Contact Us",
+  },
+];
+
+export const mainPagesAm = [
+  {
+    id: "Home",
+    path: "/",
+    title: "Գլխավոր էջ",
+  },
+  {
+    id: "About Us",
+    path: "/about",
+    title: "Մեր մասին",
+  },
+  {
+    id: "Contact Us",
+    path: "/contact",
+    title: "Կոնտակտներ",
   },
 ];
