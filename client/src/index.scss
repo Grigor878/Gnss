@@ -13,11 +13,6 @@
   scroll-behavior: smooth;
 }
 
-input,
-button {
-  cursor: pointer;
-}
-
 html,
 body {
   width: 100%;
@@ -42,6 +37,14 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background-color: darken($red, 3%);
   }
+}
+
+input,
+button,
+textarea {
+  font-family: "Noto Sans Armenian";
+  font-style: normal;
+  cursor: pointer;
 }
 
 .container {

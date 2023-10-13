@@ -1,8 +1,8 @@
 import React from "react";
 import Zoom from "react-reveal/Zoom";
 import { capitalizeText } from "../../helpers/formatters";
-import "./styles.scss";
 import { useLocation } from "react-router-dom";
+import "./styles.scss";
 
 export const Title = ({ text }) => {
   const { pathname } = useLocation()
