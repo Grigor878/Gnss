@@ -39,7 +39,6 @@ const About = () => {
   }, [dispatch])
 
   const { partners } = useSelector((state) => state.home)
-  console.log(partners)
 
   return (
     <section className="about">

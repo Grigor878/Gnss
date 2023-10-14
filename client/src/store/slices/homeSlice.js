@@ -8,14 +8,16 @@ const initialState = {
   routes: [],
   allCategories: [],
   allSubCategories: [],
-  allChildSubCategories: [],//
+  allChildSubCategories: [], //
 
   subCategories: [],
-  childSubcategories: [],//
+  childSubcategories: [], //
 
   products: [],
   singleProduct: [],
-  partners:[]
+  partners: [],
+
+  orderStatus: "",
 };
 
 // get header routes
@@ -59,7 +61,9 @@ export const getAllChildSubCategories = createAsyncThunk(
   "home/allChildSubCategories",
   async (language) => {
     try {
-      const { data } = await baseApi.get(`getAllChildSubCategories/${language}`);
+      const { data } = await baseApi.get(
+        `getAllChildSubCategories/${language}`
+      );
       return data;
     } catch (err) {
       console.log(`Get All Child Sub Categories Error: ${err.message}`);
@@ -85,7 +89,9 @@ export const getChildSubCategories = createAsyncThunk(
   "home/childSubCategories",
   async ({ id, language }) => {
     try {
-      const { data } = await baseApi.get(`getChildSubcategories/${id}/${language}`);
+      const { data } = await baseApi.get(
+        `getChildSubcategories/${id}/${language}`
+      );
       return data;
     } catch (err) {
       console.log(`Get Child Sub Categories Error: ${err.message}`);
@@ -122,17 +128,24 @@ export const getSingleProduct = createAsyncThunk(
 );
 
 // get partners
-export const getPartners = createAsyncThunk(
-  "home/partners",
-  async () => {
-    try {
-      const { data } = await baseApi.get(`getPartners`);
-      return data;
-    } catch (err) {
-      console.log(`Get Partners Data Error: ${err.message}`);
-    }
+export const getPartners = createAsyncThunk("home/partners", async () => {
+  try {
+    const { data } = await baseApi.get(`getPartners`);
+    return data;
+  } catch (err) {
+    console.log(`Get Partners Data Error: ${err.message}`);
   }
-);
+});
+
+// order
+export const order = createAsyncThunk("home/order", async ({ orderData }) => {
+  try {
+    const { data } = await baseApi.post(`startOrder`, orderData);
+    return data;
+  } catch (err) {
+    console.log(`Order Error: ${err.message}`);
+  }
+});
 
 const homeSlice = createSlice({
   name: "home",
@@ -173,11 +186,17 @@ const homeSlice = createSlice({
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.products = action.payload;
     });
+    builder.addCase(getSingleProduct.pending, (state) => {
+      state.singleProduct = [];
+    });
     builder.addCase(getSingleProduct.fulfilled, (state, action) => {
       state.singleProduct = action.payload;
     });
     builder.addCase(getPartners.fulfilled, (state, action) => {
       state.partners = action.payload;
+    });
+    builder.addCase(order.fulfilled, (state, action) => {
+      state.orderStatus = action.payload?.status;
     });
   },
 });
