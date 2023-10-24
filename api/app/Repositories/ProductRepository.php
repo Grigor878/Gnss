@@ -99,12 +99,14 @@ class ProductRepository
 
         if ( isset($data['links']) ) {
             foreach ( $data['links'] as $link) {
-                $link = str_replace('watch?v=', 'embed/', $link);
+                if (!empty($link)) {
+                    $link = str_replace('watch?v=', 'embed/', $link);
 
-                Link::create([
-                    'product_id' => $product->id,
-                    'path' => $link,
-                ]);
+                    Link::create([
+                        'product_id' => $product->id,
+                        'path' => $link,
+                    ]);
+                }
             }
         }
 
@@ -189,11 +191,13 @@ class ProductRepository
         if ( isset($data['links']) ) {
             Link::where('product_id', $product->id)->delete();
             foreach ( $data['links'] as $link) {
-                $link = str_replace('watch?v=', 'embed/', $link);
-                Link::create([
-                    'product_id' => $product->id,
-                    'path' => $link,
-                ]);
+                if (!empty($link)) {
+                    $link = str_replace('watch?v=', 'embed/', $link);
+                    Link::create([
+                        'product_id' => $product->id,
+                        'path' => $link,
+                    ]);
+                }
             }
         }
 

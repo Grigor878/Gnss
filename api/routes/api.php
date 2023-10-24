@@ -42,4 +42,4 @@ Route::get('getSingleProduct/{id}/{lang}', [ProductController::class, 'getSingle
 
 Route::get('getPartners', [PartnerController::class, 'getPartners']);
 
-Route::get('startOrder', [OrderController::class, 'startOrder']);
+Route::post('startOrder', [OrderController::class, 'startOrder']);
