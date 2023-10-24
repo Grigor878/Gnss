@@ -42,31 +42,25 @@ const Contact = () => {
             <div className="contact__main-form-flex">
               <input
                 type="text"
-                name="firstname"
+                name="fullname"
                 placeholder="First Name *"
                 required
               />
-              <input
-                type="text"
-                name="lastname"
-                placeholder="Last Name *"
-                required
-              />
-            </div>
-
-            <div className="contact__main-form-flex">
               <input
                 type="email"
                 name="email"
                 placeholder="Contact back info *"
                 required
               />
-              <input
+            </div>
+
+            <div className="contact__main-form-flex2">
+              <textarea
                 type="subject"
                 name="subject"
                 placeholder="Subject *"
                 required
-              />
+              ></textarea>
             </div>
 
             <button type="submit" value="Send">

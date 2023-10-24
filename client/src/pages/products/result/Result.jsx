@@ -10,9 +10,10 @@ import noImg from '../../../assets/imgs/noImg.png'
 import { moneyFormater } from '../../../helpers/formatters'
 import { FullScreenSlide } from '../../../components/fullScreenSlide/FullScreenSlide'
 import { Loader } from '../../../components/loader/Loader'
-import './Result.scss'
 import { Tab } from './components/tab/Tab'
 import { APP_BASE_URL } from '../../../apis/config'
+import './Result.scss'
+import { Modal } from './components/modal/Modal'
 
 const Result = () => {
     const { t } = useTranslation()
@@ -49,8 +50,8 @@ const Result = () => {
         ? (document.body.style.overflow = "hidden")
         : (document.body.style.overflow = "auto");
 
-    const [modal, setModal] = useState(false)
-    const [active, setActive] = useSesionState("description","gnss-tab")
+    const [open, setOpen] = useState(false)
+    const [active, setActive] = useSesionState("description", "gnss-tab")
 
     return (
         singleProduct?.length
@@ -94,7 +95,7 @@ const Result = () => {
 
                                     <p className="result__main-context-box-price">{moneyFormater(singleProduct?.price)}</p>
 
-                                    <button onClick={() => setModal(true)}>{t("order")}</button>
+                                    <button onClick={() => setOpen(true)}>{t("order")}</button>
 
                                     <div className="result__main-context-box-top">
                                         <p>{t("created")}</p>
@@ -125,6 +126,7 @@ const Result = () => {
                     )}
 
                 </div>
+                <Modal open={open} setOpen={setOpen} />
             </section >
     )
 }

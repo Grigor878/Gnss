@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { clearSubCategories } from "../../store/slices/homeSlice";
@@ -11,7 +11,8 @@ import { APP_BASE_URL } from "../../apis/config";
 
 export const Cards = ({ data }) => {
   const { t } = useTranslation();
-  
+
+  const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -42,7 +43,7 @@ export const Cards = ({ data }) => {
       {data?.length > 4 && (
         <AiOutlineArrowLeft className="scrollLeft" onClick={scrollLeft} />
       )}
-      <div className="cards" ref={scrollableDivRef}>
+      <div className="cards" ref={scrollableDivRef} style={{ justifyContent: pathname === "/" ? "center" : null }}>
         {data?.map(({ id, path, image, title }) => {
           return (
             <div key={id} onClick={() => handleNavigate(path)} className="cards__block">
@@ -56,9 +57,11 @@ export const Cards = ({ data }) => {
           );
         })}
       </div>
-      {data?.length > 4 && (
-        <AiOutlineArrowRight className="scrollRight" onClick={scrollRight} />
-      )}
-    </div>
+      {
+        data?.length > 4 && (
+          <AiOutlineArrowRight className="scrollRight" onClick={scrollRight} />
+        )
+      }
+    </div >
   );
 };
