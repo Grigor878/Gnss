@@ -1,0 +1,48 @@
+.content-header {
+    background: #DCDCDC;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex: 1 1 auto;
+    background: #DCDCDC;
+
+}
+
+#orders .column>div {
+
+    background-color: white;
+    margin: 5px;
+
+}
+
+#orders .small-box-footer {
+    display: flex !important;
+    justify-content: space-around;
+}
+
+.thumb-sm {
+    height: 36px;
+    width: 36px;
+}
+
+.card-box {
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: #fff;
+}
+
+
+#orders .opened-box .move-left-btn {
+    visibility: hidden;
+}
+
+#orders .closed-box .move-right-btn {
+    visibility: hidden;
+    opacity: 0;
+}

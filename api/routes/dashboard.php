@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\SubcategoryController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -22,6 +23,9 @@ Route::prefix('dashboard')
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('partners', PartnerController::class);
+    Route::resource('orders', OrderController::class);
+
+    Route::post('orders/updateStatus', [OrderController::class, 'updateStatus']);
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('users', UserController::class);
