@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\InquiryController;
+use App\Http\Controllers\Dashboard\OpportunityController;
 use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\SubcategoryController;
@@ -24,8 +26,11 @@ Route::prefix('dashboard')
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('partners', PartnerController::class);
     Route::resource('orders', OrderController::class);
+    Route::resource('opportunities', OpportunityController::class);
 
-    Route::post('orders/updateStatus', [OrderController::class, 'updateStatus']);
+    Route::post('opportunities/updateStatus', [OpportunityController::class, 'updateStatus']);
+
+    // Route::post('orders/updateStatus', [OrderController::class, 'updateStatus']);
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('users', UserController::class);
@@ -35,5 +40,10 @@ Route::prefix('dashboard')
     Route::post('categories/deleteImage/{id}', [CategoryController::class, 'deleteImage']);
     Route::post('subcategories/deleteImage/{id}', [SubcategoryController::class, 'deleteImage']);
     Route::post('partners/deleteImage/{id}', [PartnerController::class, 'deleteImage']);
+
+    Route::get('inquiries', [InquiryController::class, 'index'])->name('inquiries');
+    Route::get('inquiries/{id}', [InquiryController::class, 'show'])->name('inquiries.show');
+    Route::post('inquiries/{id}/reject', [InquiryController::class, 'reject'])->name('inquiries.reject');
+    Route::post('inquiries/{inquiry}/toOpportunity', [InquiryController::class, 'toOpportunity'])->name('inquiries.toOpportunity');
 });
 

@@ -48,14 +48,25 @@
         @endcan
 
         <div class="nav-tabs"></div>
+
         <li class="nav-item">
-            <a href="{{ route('orders.index') }}" class="nav-link">
+            <a href="{{ route('inquiries') }}" class="nav-link">
                 <i class="nav-icon fas fa-handshake"></i>
                 <p>
-                    Orders
+                    Inquiries
                 </p>
             </a>
         </li>
+
+        <li class="nav-item">
+            <a href="{{ route('opportunities.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-handshake"></i>
+                <p>
+                    Opportunities
+                </p>
+            </a>
+        </li>
+
         <div class="nav-tabs"></div>
     </ul>
 </nav>

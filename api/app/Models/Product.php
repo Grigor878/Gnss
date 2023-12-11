@@ -89,4 +89,24 @@ class Product extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    /**
+     * Get all of the inquiries for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function inquiries(): HasMany
+    {
+        return $this->hasMany(Inquiry::class);
+    }
+
+    /**
+     * Get all of the opportunity for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function opportunity(): HasMany
+    {
+        return $this->hasMany(Opportunity::class);
+    }
 }

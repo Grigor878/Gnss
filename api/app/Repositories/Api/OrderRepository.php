@@ -4,7 +4,7 @@ namespace App\Repositories\Api;
 
 use App\Models\Order;
 use App\Models\Customer;
-use App\Services\ResponceService;
+use App\Services\ResponseService;
 use Illuminate\Support\Facades\DB;
 
 class OrderRepository
@@ -24,7 +24,7 @@ class OrderRepository
      * @return void
      */
     public function __construct(
-        ResponceService $response
+        ResponseService $response
     ) {
         $this->response = $response;
     }

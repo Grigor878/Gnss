@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             CategorySeeder::class,
             SubcategorySeeder::class,
-            RolesSeeder::class
+            RolesSeeder::class,
+            OpportunityStatusesSeeder::class
         ]);
     }
 }

@@ -19,6 +19,16 @@ class Customer extends Model
     protected $fillable = ['email', 'phone', 'fullName', 'company'];
 
     /**
+     * Get all of the opportunities for the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function opportunities(): HasMany
+    {
+        return $this->hasMany(Opportunity::class);
+    }
+
+    /**
      * Get all of the orders for the Customer
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

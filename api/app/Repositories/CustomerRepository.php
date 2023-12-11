@@ -23,4 +23,21 @@ class CustomerRepository
             return false;
         }
     }
+
+    public function CheckAndCreate($data)
+    {
+        try {
+            $customer = Customer::where('phone', $data['phone'])->first();
+            if ($customer == null) {
+                $customer = Customer::create($data);
+            }
+            return $customer;
+        } catch (\Exception $e) {
+            return [
+                'status' => 400,
+                'message' => "Something went wrong",
+                'data' => $e->getMessage(),
+            ];
+        }
+    }
 }

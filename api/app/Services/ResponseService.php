@@ -4,7 +4,7 @@ namespace App\Services;
 
 use Illuminate\Http\JsonResponse;
 
-class ResponceService
+class ResponseService
 {
     const SUCCESS = 200;
     const NOTFOUND = 404;
