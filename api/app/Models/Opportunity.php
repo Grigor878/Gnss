@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -46,5 +47,35 @@ class Opportunity extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * Get all of the notes for the Opportunity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notes(): HasMany
+    {
+        return $this->hasMany(OpportunityNotes::class)->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Get all of the attachments for the Opportunity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(OpportunityAttachments::class)->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Get all of the tasks for the Opportunity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(OpportunityTasks::class)->orderBy('created_at', 'DESC');
     }
 }

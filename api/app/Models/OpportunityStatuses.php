@@ -19,4 +19,24 @@ class OpportunityStatuses extends Model
     {
         return $this->hasMany(Opportunity::class);
     }
+
+    /**
+     * Get all of the opportunityNotes for the OpportunityStatuses
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function opportunityNotes(): HasMany
+    {
+        return $this->hasMany(OpportunityNotes::class);
+    }
+
+    /**
+     * Get all of the opportunityAttachments for the OpportunityStatuses
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function opportunityAttachments(): HasMany
+    {
+        return $this->hasMany(OpportunityAttachments::class);
+    }
 }

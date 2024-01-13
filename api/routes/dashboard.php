@@ -29,8 +29,14 @@ Route::prefix('dashboard')
     Route::resource('opportunities', OpportunityController::class);
 
     Route::post('opportunities/updateStatus', [OpportunityController::class, 'updateStatus']);
+    Route::post('opportunities/addNote', [OpportunityController::class, 'addNote']);
+    Route::post('opportunities/deleteNote', [OpportunityController::class, 'deleteNote']);
+    Route::post('opportunities/attachFile', [OpportunityController::class, 'attachFile']);
+    Route::post('opportunities/deleteFile', [OpportunityController::class, 'deleteFile']);
 
-    // Route::post('orders/updateStatus', [OrderController::class, 'updateStatus']);
+    Route::post('opportunities/addTask', [OpportunityController::class, 'addTask']);
+    Route::post('opportunities/completeTask', [OpportunityController::class, 'completeTask']);
+    Route::post('opportunities/deleteTask', [OpportunityController::class, 'deleteTask']);
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('users', UserController::class);

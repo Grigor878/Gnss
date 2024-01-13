@@ -22,12 +22,24 @@ class ProductRepository
      */
     private $fileServices;
 
+    /**
+     * __construct
+     *
+     * @param  FileServices $fileServices
+     * @return void
+     */
     public function __construct(
         FileServices $fileServices
     ) {
         $this->fileServices = $fileServices;
     }
 
+    /**
+     * create
+     *
+     * @param  mixed $data
+     * @return void
+     */
     public function create($data)
     {
         DB::beginTransaction();
@@ -115,6 +127,13 @@ class ProductRepository
         return $product;
     }
 
+    /**
+     * update
+     *
+     * @param  mixed $product
+     * @param  mixed $data
+     * @return void
+     */
     public function update ($product, $data)
     {
         DB::beginTransaction();
@@ -206,6 +225,12 @@ class ProductRepository
         return $product;
     }
 
+    /**
+     * delete
+     *
+     * @param  mixed $product
+     * @return void
+     */
     public function delete($product)
     {
         DB::beginTransaction();

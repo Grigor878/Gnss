@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Customer;
+use App\Models\OpportunityAttachments;
 use App\Repositories\CustomerRepository;
 use App\Repositories\OpportunityRepository;
 
@@ -16,6 +17,13 @@ class OpportunityService
     private $opportunityRepository;
 
     /**
+     * opportunityNoteService
+     *
+     * @var mixed
+     */
+    private $opportunityNoteService;
+
+    /**
      * customerRepository
      *
      * @var mixed
@@ -27,14 +35,17 @@ class OpportunityService
      *
      * @param  OpportunityRepository $opportunityRepository
      * @param  CustomerRepository $customerRepository
+     * @param  OpportunityNotesService $opportunityNoteService
      * @return void
      */
     public function __construct(
         OpportunityRepository $opportunityRepository,
-        CustomerRepository $customerRepository
+        CustomerRepository $customerRepository,
+        OpportunityNotesService $opportunityNoteService
     ) {
         $this->opportunityRepository = $opportunityRepository;
         $this->customerRepository = $customerRepository;
+        $this->opportunityNoteService = $opportunityNoteService;
     }
 
     /**
@@ -55,13 +66,19 @@ class OpportunityService
         $opportunity = [
             'product_id' => $data['product_id'],
             'count' => $data['count'],
-            'note' => $data['note'],
             'status_id' => 1
         ];
 
         $customer = $this->customerRepository->CheckAndCreate($thisCostomer);
         $opportunity['customer_id'] = $customer->id;
         $opportunity = $this->opportunityRepository->create($opportunity);
+
+        $note = [
+            'text' => $data['note'],
+            'opportunity_id' => $opportunity->id,
+            'status_id' => 1
+        ];
+        $opportunityNote = $this->opportunityNoteService->create($note);
 
         return $opportunity;
     }
@@ -76,6 +93,88 @@ class OpportunityService
     public function updateStatus(string $opportunityId, string $statusId)
     {
         return $this->opportunityRepository->updateStatus($opportunityId, $statusId);
+    }
+
+    /**
+     * addNote
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function addNote($data)
+    {
+        $note = [
+            'opportunity_id' => $data['opportunity'],
+            'text' => $data['note'],
+            'status_id' => $data['status']
+        ];
+        return $this->opportunityNoteService->create($note);
+    }
+
+    /**
+     * attachFile
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function attachFile($data)
+    {
+        return $this->opportunityRepository->attachFile($data);
+    }
+
+    /**
+     * deleteFile
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function deleteFile($data)
+    {
+        return $this->opportunityRepository->deleteFile($data);
+    }
+
+    /**
+     * addTask
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function addTask($data)
+    {
+        $task = [
+            'opportunity_id' => $data['opportunity'],
+            'title' => $data['title'],
+            'status_id' => $data['status'],
+            'complete_date' => null
+        ];
+
+        return $this->opportunityRepository->addTask($task);
+    }
+
+    /**
+     * completeTask
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function completeTask($data)
+    {
+        $update = [
+            'complete_date' => $data['done'] == 'true' ? date('Y-m-d H:i:s') : null
+        ];
+
+        return $this->opportunityRepository->completeTask($data['id'], $update);
+    }
+
+    /**
+     * deleteTask
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function deleteTask($data)
+    {
+        return $this->opportunityRepository->deleteTask($data);
     }
 
 }

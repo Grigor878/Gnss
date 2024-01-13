@@ -117,3 +117,20 @@
         max-width: 70px;
     }
 }
+
+
+.side-stick {
+    position: absolute;
+    width: 3px;
+    height: 35px;
+    left: 0;
+    background-color: rgba(44, 208, 126, .5);
+}
+
+.down-icon {
+    transition: .3s;
+}
+
+.rotate {
+    transform: rotate(180deg);
+}
