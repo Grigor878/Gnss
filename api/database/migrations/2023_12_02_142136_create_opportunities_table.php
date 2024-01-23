@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('customer_id');
             $table->integer('count');
-            $table->string('status_id');
+            $table->string('opportunity_statuses_id');
             $table->timestamps();
             $table->softDeletes();
         });

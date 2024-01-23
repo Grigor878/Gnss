@@ -62,7 +62,7 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="images">Ավելացնել Նկար</label>
+                                                        <label for="images">Add</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
                                                                 <input type="file" class="custom-file-input" name="image">

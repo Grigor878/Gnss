@@ -24,9 +24,39 @@
         <div class="container-fluid">
 
             <div class="col-12">
+                <h5 class="mb-2">Info</h5>
+                <div class="row">
+
+                    @foreach ($statuses as $status)
+                        <div class="col-md-3 col-sm-6 col-12">
+                            <div class="info-box">
+                                <span class="info-box-icon bg-info"><i class="far fa-window-restore"></i></span>
+                                <div class="info-box-content">
+                                    <span class="info-box-text">{{ $status->name }}</span>
+                                    <a href="{{ route('byStatus', $status->id) }}" class="info-box-number">
+                                        <span class="text-green text-xl" style="line-height: 1;">{{ $status->opportunities_count }}</span>
+                                        <span class="text-dark">Opportunities</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+
+            <div class="col-12">
+                <h5 class="mb-2">Opportunities Table</h5>
+
                 <div class="card">
+
                     <div class="card-header">
-                        <h3 class="card-title">Opportunities Table</h3>
+                        <h3 class="card-title">{{ isset($selectedStatus->name) ? $selectedStatus->name.' Table' : 'Opportunities Table' }}</h3>
+                        <div class="card-tools">
+                            <div>
+                                <a href="{{ route('opportunities.create') }}" class="btn btn-block btn-primary">Add Opportunity</a>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="card-body p-0">

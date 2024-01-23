@@ -3,15 +3,20 @@ $('.step-status-btn').click(function() {
     let oldStatus = parent.find('.active-status')
     oldStatus.removeClass('active-status')
     $(this).parent().addClass('active-status')
-})
 
+    text = $(this).text().trim()
+    if (text == "Close") {
+        $(".close-final-stage").show()
+    } else {
+        $(".close-final-stage").hide()
+    }
+})
 
 $('.update-status-btn').click(function() {
     let selectedStatus = $('.steps-list').find('.active-status').find('.content').data('id')
     let opportunityId = $('#oppId').data('id')
     let oppStatusId = $('#oppStatusId').data('status-id')
 
-    console.log(oppStatusId, selectedStatus);
 
     if (oppStatusId != selectedStatus ) {
 

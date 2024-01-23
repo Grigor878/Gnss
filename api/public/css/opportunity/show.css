@@ -80,6 +80,10 @@
     align-items: center;
     padding: 5px 0px 5px 6px;
     cursor: pointer;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .progress-bar-custom .step:first-child::before {

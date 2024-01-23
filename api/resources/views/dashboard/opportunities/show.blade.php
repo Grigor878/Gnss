@@ -33,18 +33,6 @@
                     <div class="row">
                         <div class="col-12">
 
-
-                            {{-- <div class="card">
-                                <div class="d-flex">
-                                    @foreach ($statuses as $status)
-                                        <div class="step bg-info">
-                                            <button class="btn btn-info">{{ $status->name }}</button>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div> --}}
-
-
                             <div>
                                 <div class="row mx-0 card progress-bar-custom">
                                     <div class="col-12 p-0">
@@ -59,7 +47,34 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <button class="btn btn-info mb-3 update-status-btn">Update Status</button>
+                                <div class="row">
+                                    <div class="col-lg-4 h-100">
+                                        <button class="btn btn-info mb-3 update-status-btn">Update Status</button>
+                                    </div>
+
+                                    <div class="col-lg-8 close-final-stage"
+                                        @if ( !in_array($opportunity->status->id, ["6", "7", "8"]) )
+                                            style="display: none";
+                                        @endif
+                                    >
+                                        <form action="closeOpportunity" method="POST" class="card px-4 py-2">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $opportunity->id }}">
+                                            <div class="form-group close-selection">
+                                                <label for="close-stage">Select final stage</label>
+                                                <select class="form-control" name="status" id="close-stage">
+                                                    @foreach ($secondaryStatuses as $status)
+                                                        <option value="{{ $status->id }}" {{ $opportunity->status->name == $status->name ? 'selected' : '' }}>
+                                                            {{ $status->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <input type="submit" value="Close Oppotyunity" class="btn btn-secondary mt-2">
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                </div>
                             </div>
 
                             <div class="card card-primary card-tabs">
@@ -105,7 +120,7 @@
                                                 </div>
                                                 <div class="card-body row">
                                                     <div class="col-lg-6">
-                                                        <h5>Order</h5>
+                                                        <h5>Count</h5>
                                                         <p class="order-count">{{ $opportunity->count }}</p>
                                                         <div>
                                                             <h5>Product</h5>
@@ -114,9 +129,12 @@
                                                             </p>
                                                             <p class="product-description">
                                                                 {{ $opportunity->product->description }}</p>
-                                                            <img class="product-image w-25"
-                                                                src="{{ asset('storage/' . $opportunity->product->images[0]->filename) }}"
-                                                                alt="image">
+
+                                                            @if ( count($opportunity->product->images) > 0 )
+                                                                <img class="product-image w-25"
+                                                                    src="{{ asset('storage/' . $opportunity->product->images[0]->filename) }}"
+                                                                    alt="image">
+                                                            @endif
                                                         </div>
                                                         <hr>
                                                     </div>
@@ -131,10 +149,7 @@
                                                     </div>
 
                                                 </div>
-
-
                                             </div>
-
                                         </div>
 
                                         <div class="tab-pane fade" id="notes-attachments-box" role="tabpanel"
@@ -155,7 +170,7 @@
                                                             <form action="addNote" style="display:none" class="card p-2 add-note-form" method="post">
                                                                 @csrf
                                                                 <div class="col-10">
-                                                                    <input type="hidden" name="status" value="{{ $opportunity->status_id }}">
+                                                                    <input type="hidden" name="status" value="{{ $opportunity->opportunity_statuses_id }}">
                                                                     <input type="hidden" name="opportunity" value="{{ $opportunity->id }}">
 
                                                                     <label for="newNote">Add note text</label>
@@ -211,7 +226,7 @@
                                                                 @csrf
 
                                                                 <div class="col-10">
-                                                                    <input type="hidden" name="status" value="{{ $opportunity->status_id }}">
+                                                                    <input type="hidden" name="status" value="{{ $opportunity->opportunity_statuses_id }}">
                                                                     <input type="hidden" name="opportunity" value="{{ $opportunity->id }}">
 
                                                                     <label for="file">Upload file</label>
@@ -287,7 +302,7 @@
                                                             <form action="addTask" style="display:none" class="card p-2 add-task-form" method="post">
                                                                 @csrf
                                                                 <div class="col-10">
-                                                                    <input type="hidden" name="status" value="{{ $opportunity->status_id }}">
+                                                                    <input type="hidden" name="status" value="{{ $opportunity->opportunity_statuses_id }}">
                                                                     <input type="hidden" name="opportunity" value="{{ $opportunity->id }}">
 
                                                                     <label for="newNote">Add task text</label>

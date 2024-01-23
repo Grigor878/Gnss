@@ -15,7 +15,7 @@ class OpportunityStatuses extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function opportunity(): HasMany
+    public function opportunities(): HasMany
     {
         return $this->hasMany(Opportunity::class);
     }

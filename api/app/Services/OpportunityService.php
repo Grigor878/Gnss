@@ -66,19 +66,21 @@ class OpportunityService
         $opportunity = [
             'product_id' => $data['product_id'],
             'count' => $data['count'],
-            'status_id' => 1
+            'opportunity_statuses_id' => 1
         ];
 
         $customer = $this->customerRepository->CheckAndCreate($thisCostomer);
         $opportunity['customer_id'] = $customer->id;
         $opportunity = $this->opportunityRepository->create($opportunity);
 
-        $note = [
-            'text' => $data['note'],
-            'opportunity_id' => $opportunity->id,
-            'status_id' => 1
-        ];
-        $opportunityNote = $this->opportunityNoteService->create($note);
+        if (isset($data['note'])) {
+            $note = [
+                'text' => $data['note'],
+                'opportunity_id' => $opportunity->id,
+                'status_id' => 1
+            ];
+            $opportunityNote = $this->opportunityNoteService->create($note);
+        }
 
         return $opportunity;
     }
@@ -108,6 +110,7 @@ class OpportunityService
             'text' => $data['note'],
             'status_id' => $data['status']
         ];
+
         return $this->opportunityNoteService->create($note);
     }
 
@@ -175,6 +178,17 @@ class OpportunityService
     public function deleteTask($data)
     {
         return $this->opportunityRepository->deleteTask($data);
+    }
+
+    /**
+     * closeOpportunity
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function closeOpportunity($data)
+    {
+        return  $this->opportunityRepository->updateStatus($data['id'], $data['status']);
     }
 
 }

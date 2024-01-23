@@ -61,7 +61,7 @@ class OpportunityRepository
         DB::beginTransaction();
         try {
             $opportunity = Opportunity::find($opportunityId)->update([
-                'status_id' => $statusId
+                'opportunity_statuses_id' => $statusId
             ]);
 
             DB::commit();

@@ -25,8 +25,8 @@ Route::prefix('dashboard')
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('partners', PartnerController::class);
-    Route::resource('orders', OrderController::class);
     Route::resource('opportunities', OpportunityController::class);
+    Route::get('opportunities/byStatus/{status}', [OpportunityController::class, 'byStatus'])->name('byStatus');
 
     Route::post('opportunities/updateStatus', [OpportunityController::class, 'updateStatus']);
     Route::post('opportunities/addNote', [OpportunityController::class, 'addNote']);
@@ -37,6 +37,8 @@ Route::prefix('dashboard')
     Route::post('opportunities/addTask', [OpportunityController::class, 'addTask']);
     Route::post('opportunities/completeTask', [OpportunityController::class, 'completeTask']);
     Route::post('opportunities/deleteTask', [OpportunityController::class, 'deleteTask']);
+
+    Route::post('opportunities/closeOpportunity', [OpportunityController::class, 'closeOpportunity']);
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('users', UserController::class);
