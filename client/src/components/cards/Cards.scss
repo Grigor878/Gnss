@@ -76,8 +76,9 @@
   }
 
   &__block {
-    min-width: 252px;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+    // min-width: 252px;
+    min-width: 373px;
+    box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.25);
     @include flexColCenter;
     text-align: center;
     gap: 44px;
@@ -87,13 +88,18 @@
     @include transition;
     position: relative;
     // overflow: hidden;
-    max-width: 303px;
+    // max-width: 303px;
+    padding: 111px 0 55px 0;//
 
 
     &:hover,
     &focus {
       transform: translateY(-11px);
       box-shadow: 0px 5px 5px 5px rgba(0, 0, 0, 0.25);
+
+      h3{
+        color: $red;
+      }
 
       span {
         color: $red;
@@ -111,9 +117,14 @@
     }
 
     h3 {
+      padding: 6px;
+      border-radius: 6px;
+      background-color: rgba(255,255,255,.5);
+      // color: white;
       font-size: 20px;
       letter-spacing: 0.5px;
       text-transform: capitalize;
+      @include transition;
     }
 
     span {

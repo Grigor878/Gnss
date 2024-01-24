@@ -1,13 +1,13 @@
 import React, { useRef } from "react";
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { clearSubCategories } from "../../store/slices/homeSlice";
 import { capitalizeText } from "../../helpers/formatters";
-import noImg from '../../assets/imgs/noImg.png'
-import "./Cards.scss";
+import noImg from "../../assets/imgs/noImg.png";
 import { APP_BASE_URL } from "../../apis/config";
+import "./Cards.scss";
 
 export const Cards = ({ data }) => {
   const { t } = useTranslation();
@@ -34,34 +34,45 @@ export const Cards = ({ data }) => {
   };
 
   const handleNavigate = (path) => {
-    dispatch(clearSubCategories())
-    navigate(path)
-  }
+    dispatch(clearSubCategories());
+    navigate(path);
+  };
 
   return (
     <div className="scrollable">
       {data?.length > 4 && (
         <AiOutlineArrowLeft className="scrollLeft" onClick={scrollLeft} />
       )}
-      <div className="cards" ref={scrollableDivRef} style={{ justifyContent: pathname === "/" ? "center" : null }}>
+      <div
+        className="cards"
+        ref={scrollableDivRef}
+        style={{ justifyContent: pathname === "/" ? "center" : null }}
+      >
         {data?.map(({ id, path, image, title }) => {
           return (
-            <div key={id} onClick={() => handleNavigate(path)} className="cards__block">
-              <img
+            <div
+              style={{
+                backgroundImage: `url(${APP_BASE_URL + image})`,
+                backgroundSize: "cover",
+              }}
+              key={id}
+              onClick={() => handleNavigate(path)}
+              className="cards__block"
+            >
+              {/* <img
                 src={image ? APP_BASE_URL + image : noImg}
                 alt="img"
-              />
+              /> */}
+
               <h3>{capitalizeText(title)}</h3>
-              <span>{t("see_more")}</span>
+              {/* <span>{t("see_more")}</span> */}
             </div>
           );
         })}
       </div>
-      {
-        data?.length > 4 && (
-          <AiOutlineArrowRight className="scrollRight" onClick={scrollRight} />
-        )
-      }
-    </div >
+      {data?.length > 4 && (
+        <AiOutlineArrowRight className="scrollRight" onClick={scrollRight} />
+      )}
+    </div>
   );
 };

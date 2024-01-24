@@ -39,7 +39,7 @@ class HomeController extends Controller
             [
                 "id" => "Home",
                 "path" => "/",
-                "title" => $lang == 'en' ? "Home" : ( $lang == 'am' ? "Գլխավոր էջ" : '' )
+                "title" => $lang == 'en' ? "Home" : ( $lang == 'am' ? "Գլխավոր" : '' )
             ],
             [
                 "id" => "About Us",

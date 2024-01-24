@@ -99,7 +99,7 @@ $(".complete-task").change(function() {
 
 $(".task-delete-button").click(function(){
     let taskId = $(this).data("id")
-    let taskBox = $(this).closest(".single-task-item")
+    let taskBox = $(this).closest("li")
 
     $.post("deleteTask", {
         id: taskId,

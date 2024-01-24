@@ -3,10 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\InquiryController;
 use App\Http\Controllers\Api\PartnerController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\InquiryController;
 use App\Http\Controllers\Api\SubcategoryController;
 
 /*
@@ -42,5 +42,4 @@ Route::get('getSingleProduct/{id}/{lang}', [ProductController::class, 'getSingle
 
 Route::get('getPartners', [PartnerController::class, 'getPartners']);
 
-// Route::post('startOrder', [OrderController::class, 'startOrder']);
-Route::post('newInquiry', [InquiryController::class, 'index']);
+Route::post('startOrder', [InquiryController::class, 'index']);

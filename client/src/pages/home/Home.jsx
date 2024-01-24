@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <section className="home">
       <div className="container">
-        <Title text={t("home")} />
+        {/* <Title text={t("home")} /> */}
         {/* <h2 data-aos="fade-left" data-aos-duration="1500">Home</h2> */}
 
         {!allCategories?.length ? (

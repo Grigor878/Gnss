@@ -271,16 +271,13 @@
                                                                         </button>
                                                                     </div>
 
-                                                                    {{-- <div class="align-items-center d-flex"><span class=mr-1><i class="fa fa-star favourite-note"></i></span> <span class=mr-1><i class="fa fa-trash remove-note"></i></span><div class=ml-auto><div class="btn-group category-selector"><a class="category-dropdown dropdown-toggle label-group nav-link p-0"href=# aria-expanded=true aria-haspopup=true data-toggle=dropdown role=button><div class=category><div class=category-business></div><div class=category-social></div><div class=category-important></div><span class="more-options text-dark"><i class=icon-options-vertical></i></span></div></a><div class="category-menu dropdown-menu dropdown-menu-right"><a class="badge-group-item dropdown-item position-relative badge-business category-business note-business text-success"href=javascript:void(0);><i class="mr-1 mdi mdi-checkbox-blank-circle-outline"></i>Business </a><a class="badge-group-item dropdown-item position-relative badge-social category-social note-social text-info"href=javascript:void(0);><i class="mr-1 mdi mdi-checkbox-blank-circle-outline"></i> Social </a><a class="badge-group-item dropdown-item position-relative badge-important category-important note-important text-danger"href=javascript:void(0);><i class="mr-1 mdi mdi-checkbox-blank-circle-outline"></i> Important</a></div></div></div></div> --}}
                                                                 </div>
                                                             </div>
                                                         @endforeach
                                                     </div>
 
-
                                                 </div>
                                             </div>
-
 
                                         </div>
 
@@ -288,75 +285,72 @@
                                             aria-labelledby="armenian-tab">
                                             <div class="row">
                                                <div class="col-lg-6">
-                                                    <div class="row mb-4">
-                                                        <div class="col-6">
-                                                            <h5>Tasks</h5>
-                                                        </div>
-                                                        <div class="col-6">
-                                                            <button class="btn btn-primary mr-4 add-task-btn">Add Task <i class="down-icon fas fa-angle-down"></i></button>
-                                                        </div>
-                                                    </div>
 
                                                     <div class="row">
-                                                        <div class="col-lg-10">
-                                                            <form action="addTask" style="display:none" class="card p-2 add-task-form" method="post">
-                                                                @csrf
-                                                                <div class="col-10">
-                                                                    <input type="hidden" name="status" value="{{ $opportunity->opportunity_statuses_id }}">
-                                                                    <input type="hidden" name="opportunity" value="{{ $opportunity->id }}">
+                                                        <div class="col-12">
 
-                                                                    <label for="newNote">Add task text</label>
-                                                                    <input class="form-control" type="text" name="title">
 
-                                                                    <input type="submit" class="btn btn-success mt-1">
+                                                            <div class="card">
+                                                                <div class="card-header ui-sortable-handle" style="cursor: move;">
+                                                                    <h3 class="card-title">
+                                                                        <i class="ion ion-clipboard mr-1"></i>
+                                                                        To Do List
+                                                                    </h3>
                                                                 </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="row">
-                                                        @foreach ($opportunity->tasks as $task)
-                                                            <div class="col-md-8 single-task-item all-category" style="display: block">
-                                                                <div class="card card-body task" data-task-id="{{ $task->id }}">
-                                                                    <span class="side-stick"></span>
+                                                                <div class="card-body">
+                                                                    <ul class="todo-list ui-sortable" data-widget="todo-list">
+
+                                                                        @foreach ($opportunity->tasks as $task)
+                                                                            <li>
+                                                                                <span class="handle ui-sortable-handle">
+                                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                                    <i class="fas fa-ellipsis-v"></i>
+                                                                                </span>
+
+                                                                                <div class="icheck-primary d-inline ml-2">
+                                                                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
+                                                                                    <label for="todoCheck1"></label>
+                                                                                </div>
+
+                                                                                <span class="text">{{ $task->title }}</span>
+
+                                                                                <div class="tools">
+                                                                                    <i class="task-delete-button fas fa-trash" data-id="{{ $task->id }}"></i>
+                                                                                </div>
+                                                                            </li>
+
+                                                                        @endforeach
+
+                                                                    </ul>
+
+                                                                </div>
+
+                                                                <div class="card-footer clearfix">
+                                                                    <button type="button" class="btn btn-primary float-right add-task-btn"><i class="fas fa-plus"></i> Add item</button>
+
                                                                     <div class="row">
-                                                                        <div class="col-6">
-                                                                            <h5 class="task-title w-75 mb-0" data-task-heading="{{ $task->title }}">
-                                                                                {{ $task->title }}
-                                                                            </h5>
-                                                                            <p class="task-date font-12 text-muted">{{ $task->created_at->format('d-m-Y') }}</p>
-                                                                        </div>
-                                                                        <div class="col-6">
-                                                                            <div class="custom-control custom-checkbox">
-                                                                                <input class="custom-control-input complete-task" type="checkbox" {{ $task->complete_date ? 'checked' : '' }} id="complete-task{{ $task->id }}">
-                                                                                <label for="complete-task{{ $task->id }}" class="custom-control-label">Complete</label>
-                                                                            </div>
-                                                                            @if ($task->complete_date)
-                                                                                @php
-                                                                                    $dateTime = strtotime( $task->complete_date )
-                                                                                @endphp
-                                                                                <p class="task-update-date font-12 text-muted">{{ date('d-m-Y', $dateTime) }}</p>
-                                                                            @else
-                                                                                <p class="task-update-date font-12 text-muted"></p>
-                                                                            @endif
+                                                                        <div class="col-lg-10">
+                                                                            <form action="addTask" style="display:none" class="card p-2 add-task-form" method="post">
+                                                                                @csrf
+                                                                                <div>
+                                                                                    <input type="hidden" name="status" value="{{ $opportunity->opportunity_statuses_id }}">
+                                                                                    <input type="hidden" name="opportunity" value="{{ $opportunity->id }}">
+
+                                                                                    <label for="newNote">Add task text</label>
+                                                                                    <input class="form-control" type="text" name="title">
+
+                                                                                    <input type="submit" class="btn btn-success mt-1">
+                                                                                </div>
+                                                                            </form>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="task-content">
-                                                                        <p class="task-inner-content text-muted" data-notecontent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">
-                                                                            {{ $task->status->name }}
-                                                                        </p>
-                                                                    </div>
-
-                                                                    <div class="align-items-center d-flex">
-                                                                        <button class="btn task-delete-button mr-1" data-id="{{ $task->id }}">
-                                                                            <i class="fa fa-trash remove-task"></i>
-                                                                        </button>
-                                                                    </div>
-
-                                                                    {{-- <div class="align-items-center d-flex"><span class=mr-1><i class="fa fa-star favourite-note"></i></span> <span class=mr-1><i class="fa fa-trash remove-note"></i></span><div class=ml-auto><div class="btn-group category-selector"><a class="category-dropdown dropdown-toggle label-group nav-link p-0"href=# aria-expanded=true aria-haspopup=true data-toggle=dropdown role=button><div class=category><div class=category-business></div><div class=category-social></div><div class=category-important></div><span class="more-options text-dark"><i class=icon-options-vertical></i></span></div></a><div class="category-menu dropdown-menu dropdown-menu-right"><a class="badge-group-item dropdown-item position-relative badge-business category-business note-business text-success"href=javascript:void(0);><i class="mr-1 mdi mdi-checkbox-blank-circle-outline"></i>Business </a><a class="badge-group-item dropdown-item position-relative badge-social category-social note-social text-info"href=javascript:void(0);><i class="mr-1 mdi mdi-checkbox-blank-circle-outline"></i> Social </a><a class="badge-group-item dropdown-item position-relative badge-important category-important note-important text-danger"href=javascript:void(0);><i class="mr-1 mdi mdi-checkbox-blank-circle-outline"></i> Important</a></div></div></div></div> --}}
                                                                 </div>
+
+
                                                             </div>
-                                                        @endforeach
+
+                                                        </div>
                                                     </div>
 
                                                </div>
