@@ -80,7 +80,7 @@
                                                     @endif
 
                                                     <div class="form-group add-image {{ !is_null($partner->image) ? 'd-none' : '' }}">
-                                                        <label for="images">Ավելացնել Նկար</label>
+                                                        <label for="images">Add image</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
                                                                 <input type="file" class="custom-file-input" name="image">

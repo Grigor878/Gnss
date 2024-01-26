@@ -45,8 +45,8 @@ Route::prefix('dashboard')
     });
 
     Route::post('product/deleteFile/{id}/{type}', [ProductController::class, 'deleteFile']);
-    Route::post('categories/deleteImage/{id}', [CategoryController::class, 'deleteImage']);
-    Route::post('subcategories/deleteImage/{id}', [SubcategoryController::class, 'deleteImage']);
+    Route::post('categories/deleteImage/{id}/{bg_image}', [CategoryController::class, 'deleteImage']);
+    Route::post('subcategories/deleteImage/{id}/{bg_image}', [SubcategoryController::class, 'deleteImage']);
     Route::post('partners/deleteImage/{id}', [PartnerController::class, 'deleteImage']);
 
     Route::get('inquiries', [InquiryController::class, 'index'])->name('inquiries');

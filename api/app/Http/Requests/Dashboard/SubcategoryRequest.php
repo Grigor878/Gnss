@@ -27,7 +27,8 @@ class SubcategoryRequest extends FormRequest
             'category' => 'required',
             'subcategory' => '',
             'level' => '',
-            'image' => ''
+            'image' => '',
+            'bg_image' => ''
         ];
     }
 }

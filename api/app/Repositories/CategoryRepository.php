@@ -52,6 +52,16 @@ class CategoryRepository
             ]);
         }
 
+        if ( isset($data['bg_image']) ) {
+            $imageFileName = rand(1000000, 99999999999) . '_category_' . $category->id . '_bg_image.' . strtolower($data['bg_image']->getClientOriginalExtension());
+
+            $path = $this->fileServices->savePhoto(1000, $data['bg_image'], 'categories', $imageFileName);
+
+            Category::where('id', $category->id)->update([
+                'bg_image' => $path
+            ]);
+        }
+
         DB::commit();
 
         return $category;
@@ -85,6 +95,16 @@ class CategoryRepository
 
             $category->update([
                 'image' => $path
+            ]);
+        }
+
+        if ( isset($data['bg_image']) ) {
+            $imageFileName = rand(1000000, 99999999999) . '_category_' . $category->id . '_bg_image.' . strtolower($data['bg_image']->getClientOriginalExtension());
+
+            $path = $this->fileServices->savePhoto(1000, $data['bg_image'], 'categories', $imageFileName);
+
+            $category->update([
+                'bg_image' => $path
             ]);
         }
 

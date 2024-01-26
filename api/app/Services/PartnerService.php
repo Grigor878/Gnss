@@ -85,7 +85,7 @@ class PartnerService
         $partner->image = null;
         $partner->save();
 
-        $this->fileService->deleteImage($url);
+        $this->fileService->deleteFile($url);
 
         DB::commit();
 

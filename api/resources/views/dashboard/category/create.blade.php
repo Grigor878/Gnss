@@ -128,12 +128,27 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <div class="form-group">
-                                                        <label for="images">Ավելացնել Նկար</label>
+                                                        <label for="images">Add image</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
                                                                 <input type="file" class="custom-file-input" name="image">
                                                                 <label class="custom-file-label" for="images">Choose file</label>
                                                                 @error('image')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label for="bg_image">Add background image</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" name="bg_image">
+                                                                <label class="custom-file-label" for="bg_image">Choose file</label>
+                                                                @error('bg_image')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>

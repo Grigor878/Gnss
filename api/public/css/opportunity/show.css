@@ -138,3 +138,8 @@
 .rotate {
     transform: rotate(180deg);
 }
+
+.unseted {
+    font-weight: 500;
+    text-decoration: line-through;
+}

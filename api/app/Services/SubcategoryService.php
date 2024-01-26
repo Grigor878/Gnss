@@ -77,17 +77,21 @@ class SubcategoryService
      * @param  mixed $id
      * @return void
      */
-    public function deleteImage(string $id)
+    public function deleteImage(string $id, $bg_image)
     {
         DB::beginTransaction();
 
         $subcategory = Subcategory::find($id);
-        $url = 'public/' . $subcategory->image;
-
-        $subcategory->image = null;
+        if ($bg_image == 'bg-image') {
+            $url = 'public/' . $subcategory->bg_image;
+            $subcategory->bg_image = null;
+        } else if ($bg_image == 'image') {
+            $url = 'public/' . $subcategory->image;
+            $subcategory->image = null;
+        }
         $subcategory->save();
 
-        $this->fileService->deleteImage($url);
+        $this->fileService->deleteFile($url);
 
         DB::commit();
 

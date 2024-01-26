@@ -112,7 +112,8 @@ class SubcategoryController extends Controller
     {
         $subcategory = Subcategory::with('translations')->find($id);
 
-        $this->subcategoryService->deleteImage($id);
+        $this->subcategoryService->deleteImage($id, 'image');
+        $this->subcategoryService->deleteImage($id, 'bg-image');
 
         $this->subcategoryService->delete($subcategory);
 
@@ -125,10 +126,10 @@ class SubcategoryController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function deleteImage (string $id)
+    public function deleteImage (string $id, $bg_image = false)
     {
         try {
-            $this->subcategoryService->deleteImage($id);
+            $this->subcategoryService->deleteImage($id, $bg_image);
             return [
                 'status' => 1,
                 'message' => 'Image Deleted'
@@ -136,7 +137,7 @@ class SubcategoryController extends Controller
         } catch (\Exception $e) {
             return [
                 'status' => 0,
-                'message' => $e
+                'message' => $e->getMessage()
             ];
         }
     }

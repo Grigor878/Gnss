@@ -144,8 +144,8 @@
                                                         </div>
                                                     @endif
 
-                                                    <div class="form-group add-image {{ !is_null($category->image) ? 'd-none' : '' }}">
-                                                        <label for="images">Ավելացնել Նկար</label>
+                                                    <div class="form-group add-image cat-image {{ !is_null($category->image) ? 'd-none' : '' }}">
+                                                        <label for="images">Add image</label>
                                                         <div class="input-group">
                                                             <div class="custom-file">
                                                                 <input type="file" class="custom-file-input" name="image">
@@ -157,6 +157,35 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="col-sm-6">
+                                                    @if(!is_null($category->bg_image))
+                                                        <div class="image-box bg-image position-relative w-25 m-2">
+                                                            <a class="position-absolute text-danger delete-bg-image-btn" data-category-id="{{ $category->id }}">
+                                                                <i class="nav-icon fas fa-times-circle fa-2x"></i>
+                                                            </a>
+                                                            <img
+                                                                class="w-100"
+                                                                src="{{ URL::asset('/storage/'.$category->bg_image) }}"
+                                                                alt="img"
+                                                            >
+                                                        </div>
+                                                    @endif
+
+                                                    <div class="form-group add-image bg-image {{ !is_null($category->bg_image) ? 'd-none' : '' }}">
+                                                        <label for="bg_image">Add background image</label>
+                                                        <div class="input-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" class="custom-file-input" name="bg_image">
+                                                                <label class="custom-file-label" for="bg_image">Choose file</label>
+                                                                @error('bg_image')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

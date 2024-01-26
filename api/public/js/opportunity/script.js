@@ -76,6 +76,7 @@ $(".file-delete-button").click(function(){
 $(".complete-task").change(function() {
     let taskId = $(this).closest('.task').data('task-id')
     let check = $(this).is(':checked')
+    let task = $(this).closest('.task')
 
     let taskUpdateTeg = $(this).closest('.task').find('.task-update-date')
 
@@ -83,14 +84,20 @@ $(".complete-task").change(function() {
         id: taskId,
         done: check,
     }).done(function (data) {
-        console.log(data);
-
         if (data.status == 200) {
-
-            console.log(taskUpdateTeg)
             if (check) {
-                taskUpdateTeg.text("Just Now")
+                let date = new Date();
+                let day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+                let month = (date.getMonth()+1) < 10 ? '0' + (date.getMonth()+1) : (date.getMonth()+1)
+                let year = date.getFullYear()
+                let dateTime = day + '-' + month + '-' + year
+
+                taskUpdateTeg.text(dateTime)
+                taskUpdateTeg.removeClass('d-none')
             } else {
+                console.log(task);
+                task.find('.text').removeClass('unseted')
+                taskUpdateTeg.addClass('d-none')
                 taskUpdateTeg.text("")
             }
         }

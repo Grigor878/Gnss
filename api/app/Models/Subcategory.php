@@ -18,7 +18,7 @@ class Subcategory extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'category_id', 'image', 'parent_id', 'level'];
+    protected $fillable = ['name', 'category_id', 'image', 'bg_image', 'parent_id', 'level'];
 
     /**
      * Get the category that owns the Subcategory

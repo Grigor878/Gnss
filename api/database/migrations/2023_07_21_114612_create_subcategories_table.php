@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image')->nullable();
+            $table->string('bg_image')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->integer('level')->default(1);

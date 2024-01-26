@@ -17,7 +17,7 @@ class Category extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'image'];
+    protected $fillable = ['name', 'image', 'bg_image'];
 
     /**
      * Get all of the subcategories for the Category

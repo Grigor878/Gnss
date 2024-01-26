@@ -75,17 +75,21 @@ class CategoryService
      * @param  mixed $id
      * @return void
      */
-    public function deleteImage(string $id)
+    public function deleteImage(string $id, $bg_image)
     {
         DB::beginTransaction();
 
         $category = Category::find($id);
-        $url = 'public/' . $category->image;
-
-        $category->image = null;
+        if ($bg_image == 'bg-image') {
+            $url = 'public/' . $category->bg_image;
+            $category->bg_image = null;
+        } else if ($bg_image == 'image') {
+            $url = 'public/' . $category->image;
+            $category->image = null;
+        }
         $category->save();
 
-        $this->fileService->deleteImage($url);
+        $this->fileService->deleteFile($url);
 
         DB::commit();
 

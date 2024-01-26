@@ -302,18 +302,37 @@
                                                                     <ul class="todo-list ui-sortable" data-widget="todo-list">
 
                                                                         @foreach ($opportunity->tasks as $task)
-                                                                            <li>
+                                                                            <li class="task " data-task-id="{{ $task->id }}">
                                                                                 <span class="handle ui-sortable-handle">
                                                                                     <i class="fas fa-ellipsis-v"></i>
                                                                                     <i class="fas fa-ellipsis-v"></i>
                                                                                 </span>
 
                                                                                 <div class="icheck-primary d-inline ml-2">
-                                                                                    <input type="checkbox" value="" name="todo1" id="todoCheck1">
-                                                                                    <label for="todoCheck1"></label>
+                                                                                    <input
+                                                                                        type="checkbox"
+                                                                                        value=""
+                                                                                        class="complete-task"
+                                                                                        name="todo1"
+                                                                                        id="todoCheck{{ $loop->iteration }}"
+                                                                                        @if ($task->complete_date)
+                                                                                            checked
+                                                                                        @endif
+                                                                                    >
+                                                                                    <label for="todoCheck{{ $loop->iteration }}"></label>
                                                                                 </div>
 
-                                                                                <span class="text">{{ $task->title }}</span>
+                                                                                <span class="text {{ $task->complete_date != Null ? 'unseted' : '' }}">{{ $task->title }}</span>
+
+                                                                                @if ($task->complete_date)
+                                                                                    @php
+                                                                                        $dateTime = strtotime( $task->complete_date )
+                                                                                    @endphp
+                                                                                    <small class="badge task-update-date"><i class="far fa-clock"></i> {{ date('d-m-Y', $dateTime) }}</small>
+                                                                                @else
+                                                                                    <small class="badge task-update-date d-none"><i class="far fa-clock"></i></small>
+                                                                                @endif
+
 
                                                                                 <div class="tools">
                                                                                     <i class="task-delete-button fas fa-trash" data-id="{{ $task->id }}"></i>

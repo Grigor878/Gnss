@@ -54,6 +54,16 @@ class SubcategoryRepository
             ]);
         }
 
+        if ( isset($data['bg_image']) ) {
+            $imageFileName = rand(1000000, 99999999999) . '_subcategory_' . $subcategory->id . '_bg_image.' . strtolower($data['bg_image']->getClientOriginalExtension());
+
+            $path = $this->fileServices->savePhoto(1000, $data['bg_image'], 'subcategories', $imageFileName);
+
+            Subcategory::where('id', $subcategory->id)->update([
+                'bg_image' => $path
+            ]);
+        }
+
         DB::commit();
 
         return $subcategory;
@@ -90,6 +100,16 @@ class SubcategoryRepository
 
             $subcategory->update([
                 'image' => $path
+            ]);
+        }
+
+        if ( isset($data['bg_image']) ) {
+            $imageFileName = rand(1000000, 99999999999) . '_category_' . $subcategory->id . '_bg_image.' . strtolower($data['bg_image']->getClientOriginalExtension());
+
+            $path = $this->fileServices->savePhoto(1000, $data['bg_image'], 'subcategories', $imageFileName);
+
+            $subcategory->update([
+                'bg_image' => $path
             ]);
         }
 
