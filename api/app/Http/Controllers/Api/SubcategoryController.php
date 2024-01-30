@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
 
@@ -133,6 +134,8 @@ class SubcategoryController extends Controller
     {
         $dataSubcategories = [];
 
+        $categoryImage = Category::where('id', $id)->pluck('bg_image')[0];
+
         $subcategories = Subcategory::select('id', 'name', 'image', 'category_id')
         ->with('translations', 'category.translations')
         ->where([
@@ -170,11 +173,14 @@ class SubcategoryController extends Controller
 
             $thisSubcategory['category_id'] = $sub->category_id;
 
-
             array_push($dataSubcategories, $thisSubcategory);
         }
 
-        return response()->json($dataSubcategories);
+        
+        return response()->json([
+            'bg_image' => $categoryImage,
+            'data' => $dataSubcategories
+        ]);
     }
 
     /**
@@ -253,6 +259,8 @@ class SubcategoryController extends Controller
         ])
         ->get();
 
+        $categoryImage = Subcategory::where('id', $id)->pluck('bg_image')[0];
+
 
         foreach ($childSubcategories as $sub) {
 
@@ -296,7 +304,9 @@ class SubcategoryController extends Controller
 
         }
 
-
-        return response()->json($dataChildSubcategories);
+        return response()->json([
+            'bg_image' => $categoryImage,
+            'data' => $dataChildSubcategories
+        ]);
     }
 }
