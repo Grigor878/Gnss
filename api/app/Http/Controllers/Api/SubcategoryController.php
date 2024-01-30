@@ -262,7 +262,6 @@ class SubcategoryController extends Controller
 
 
         foreach ($childSubcategories as $sub) {
-
             $thisSubcategory['id'] = $sub->id;
 
             if (isset($sub->translations)) {
