@@ -2,8 +2,6 @@ $(".delete-file-btn").click(function () {
     let fileId = $(this).data('file-id')
     let type = $(this).data('file-type')
 
-    console.log(fileId, type);
-
     $.post( "/dashboard/product/deleteFile/"+fileId+"/"+type)
     .done(function( data ) {
         alert( data.message );

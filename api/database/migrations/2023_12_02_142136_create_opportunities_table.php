@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('product_id');
             $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('user_id');
             $table->integer('count');
             $table->string('opportunity_statuses_id');
             $table->timestamps();

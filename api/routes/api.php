@@ -42,4 +42,4 @@ Route::get('getSingleProduct/{id}/{lang}', [ProductController::class, 'getSingle
 
 Route::get('getPartners', [PartnerController::class, 'getPartners']);
 
-Route::post('startOrder', [InquiryController::class, 'index']);
+Route::post('newInquiry', [InquiryController::class, 'index']);

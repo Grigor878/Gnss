@@ -65,6 +65,7 @@ class OpportunityService
 
         $opportunity = [
             'product_id' => $data['product_id'],
+            'user_id' => $data['user_id'],
             'count' => $data['count'],
             'opportunity_statuses_id' => 1
         ];

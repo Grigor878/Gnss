@@ -48,16 +48,16 @@
         @endcan
 
         <div class="nav-tabs"></div>
-
-        <li class="nav-item">
-            <a href="{{ route('inquiries') }}" class="nav-link">
-                <i class="nav-icon fas fa-handshake"></i>
-                <p>
-                    Inquiries
-                </p>
-            </a>
-        </li>
-
+        @can('view', auth()->user())
+            <li class="nav-item">
+                <a href="{{ route('inquiries') }}" class="nav-link">
+                    <i class="nav-icon fas fa-handshake"></i>
+                    <p>
+                        Inquiries
+                    </p>
+                </a>
+            </li>
+        @endcan
         <li class="nav-item">
             <a href="{{ route('opportunities.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-handshake"></i>

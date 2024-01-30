@@ -42,6 +42,11 @@ Route::prefix('dashboard')
 
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('users', UserController::class);
+
+        Route::get('inquiries', [InquiryController::class, 'index'])->name('inquiries');
+        Route::get('inquiries/{id}', [InquiryController::class, 'show'])->name('inquiries.show');
+        Route::post('inquiries/{id}/reject', [InquiryController::class, 'reject'])->name('inquiries.reject');
+        Route::post('inquiries/toOpportunity', [InquiryController::class, 'toOpportunity'])->name('inquiries.toOpportunity');
     });
 
     Route::post('product/deleteFile/{id}/{type}', [ProductController::class, 'deleteFile']);
@@ -49,9 +54,5 @@ Route::prefix('dashboard')
     Route::post('subcategories/deleteImage/{id}/{bg_image}', [SubcategoryController::class, 'deleteImage']);
     Route::post('partners/deleteImage/{id}', [PartnerController::class, 'deleteImage']);
 
-    Route::get('inquiries', [InquiryController::class, 'index'])->name('inquiries');
-    Route::get('inquiries/{id}', [InquiryController::class, 'show'])->name('inquiries.show');
-    Route::post('inquiries/{id}/reject', [InquiryController::class, 'reject'])->name('inquiries.reject');
-    Route::post('inquiries/{inquiry}/toOpportunity', [InquiryController::class, 'toOpportunity'])->name('inquiries.toOpportunity');
 });
 

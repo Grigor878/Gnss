@@ -25,7 +25,7 @@ class InquiryRequest extends FormRequest
             'id' => 'required|integer',
             'mail' => 'required',
             'phone' => 'required',
-            'fullname' => '',
+            'fullName' => '',
             'company' => '',
             'count' => 'integer',
             'notes' => ''

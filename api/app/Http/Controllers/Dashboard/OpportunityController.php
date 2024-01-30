@@ -48,9 +48,16 @@ class OpportunityController extends Controller
      */
     public function index()
     {
-        $opportunities = Opportunity::with('product', 'customer')
-        ->orderBy('created_at', 'desc')
-        ->paginate('10');
+        $opportunities = Opportunity::query();
+        $opportunities = $opportunities->with('product', 'customer');
+
+
+        if ( auth()->user()->id != 1 ) {
+            $opportunities = $opportunities->where('user_id', auth()->user()->id);
+        }
+        $opportunities = $opportunities->orderBy('created_at', 'desc');
+        $opportunities = $opportunities->paginate('10');
+
         $statuses = OpportunityStatuses::withCount('opportunities')
         ->get();
 

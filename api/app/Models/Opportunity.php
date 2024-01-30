@@ -17,7 +17,7 @@ class Opportunity extends Model
      *
      * @var array
      */
-    protected  $fillable = ['product_id', 'customer_id', 'count', 'note', 'opportunity_statuses_id'];
+    protected  $fillable = ['product_id', 'customer_id', 'user_id', 'count', 'note', 'opportunity_statuses_id'];
 
     /**
      * Get the status that owns the opportunity
@@ -77,5 +77,15 @@ class Opportunity extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(OpportunityTasks::class)->orderBy('created_at', 'DESC');
+    }
+
+    /**
+     * Get the manager that owns the Opportunity
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function manager(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

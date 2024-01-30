@@ -15,8 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(10)->create();
-
         $this->call([
             AdminUserSeeder::class,
             CategorySeeder::class,
@@ -24,5 +22,6 @@ class DatabaseSeeder extends Seeder
             RolesSeeder::class,
             OpportunityStatusesSeeder::class
         ]);
+        User::factory(10)->create();
     }
 }

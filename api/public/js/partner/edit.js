@@ -9,3 +9,9 @@ $(".delete-image-btn").click(function () {
         $('.add-image').removeClass('d-none')
     });
 })
+
+$(".manager-selector").change(function() {
+    if ($(this).val()) {
+        $(".to-opportunity-btn").removeClass("d-none")
+    }
+})

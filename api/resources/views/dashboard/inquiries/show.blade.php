@@ -38,21 +38,36 @@
                                 <div class="card-header">
                                     <p class="product-name">{{ $inquiry->product->name }}</p>
 
-                                    @if (!$inquiry->is_rejected)
-                                        <div>
-                                            <form action="{{ route('inquiries.reject', $inquiry->id) }}" method="POST" class="d-inline-block">
-                                                @csrf
-                                                @method('POST')
-                                                <input type="submit" value="Reject" class="btn btn-danger card-link">
-                                            </form>
+                                    <div class="row">
+                                        @if (!$inquiry->is_rejected)
+                                            <div class="col-lg-2">
+                                                <form action="{{ route('inquiries.reject', $inquiry->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <input type="submit" value="Reject" class="btn btn-danger card-link">
+                                                </form>
+                                            </div>
+                                        @endif
 
-                                            <form action="{{ route('inquiries.toOpportunity', $inquiry->id) }}" method="POST" class="d-inline-block">
+                                        <div class="col-lg-10">
+                                            <form action="{{ route('inquiries.toOpportunity') }}" method="POST" class="row">
                                                 @csrf
                                                 @method('POST')
-                                                <input type="submit" value="Move to opportunities" class="btn btn-success card-link">
+                                                <input type="hidden" name="id" value="{{ $inquiry->id }}">
+                                                <div class="col-lg-8">
+                                                    <select name="manager" class="manager-selector form-control d-inline-block">
+                                                        <option value="0" selected disabled>Choose Sales Manager</option>
+                                                        @foreach ($managers as $manager)
+                                                            <option value="{{ $manager->id }}" class="">{{ $manager->name . " " . $manager->surname }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input type="submit" value="Move to opportunities" class="btn btn-success card-link to-opportunity-btn d-none">
+                                                </div>
                                             </form>
                                         </div>
-                                    @endif
+                                    </div>
 
                                 </div>
                                 <div class="card-body row">
@@ -80,17 +95,11 @@
                                     </div>
 
                                 </div>
-
-
                             </div>
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
 

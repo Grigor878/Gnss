@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Models\Inquiry;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\Api\InquiryService;
 use App\Services\OpportunityService;
 
@@ -58,8 +59,9 @@ class InquiryController extends Controller
      */
     public function show($id)
     {
+        $managers = User::where('role_id', '2')->get();
         $inquiry = Inquiry::with('product.images')->find($id);
-        return view('dashboard.inquiries.show', compact('inquiry'));
+        return view('dashboard.inquiries.show', compact('inquiry', 'managers'));
     }
 
     /**
@@ -80,11 +82,13 @@ class InquiryController extends Controller
      * @param  mixed $inquiry
      * @return void
      */
-    public function toOpportunity (Inquiry $inquiry)
+    public function toOpportunity (Request $request)
     {
-        $data = $inquiry->toArray();
-        $delete = $this->inquiryService->delete($inquiry->id);
-        $opportunity = $this->opportunityService->create($data);
+        $data = $request->all();
+        $inquiry = Inquiry::find($data['id'])->toArray();
+        $inquiry['user_id'] = $data['manager'];
+        $delete = $this->inquiryService->delete($inquiry['id']);
+        $opportunity = $this->opportunityService->create($inquiry);
         return redirect()->route('inquiries');
     }
 
