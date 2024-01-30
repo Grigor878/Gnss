@@ -176,7 +176,7 @@ class SubcategoryController extends Controller
             array_push($dataSubcategories, $thisSubcategory);
         }
 
-        
+
         return response()->json([
             'bg_image' => $categoryImage,
             'data' => $dataSubcategories
