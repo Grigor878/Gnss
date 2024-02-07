@@ -33,8 +33,18 @@
                                 <span class="info-box-icon bg-info"><i class="far fa-window-restore"></i></span>
                                 <div class="info-box-content">
                                     <span class="info-box-text">{{ $status->name }}</span>
-                                    <a href="{{ route('byStatus', $status->id) }}" class="info-box-number">
-                                        <span class="text-green text-xl" style="line-height: 1;">{{ $status->opportunities_count }}</span>
+                                    <a href="{{ route('opportunities.index', ['status' => $status->id]) }}" class="info-box-number">
+                                        @php
+                                            foreach ($opportunitiesByStatus as $key => $opp) {
+                                                if ($status->id == $key) {
+                                                    $count = count($opp);
+                                                    break;
+                                                } else {
+                                                    $count = 0;
+                                                }
+                                            }
+                                        @endphp
+                                        <span class="text-green text-xl" style="line-height: 1;">{{ $count ?? 0 }}</span>
                                         <span class="text-dark">Opportunities</span>
                                     </a>
                                 </div>

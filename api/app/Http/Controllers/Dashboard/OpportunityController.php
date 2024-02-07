@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Models\Product;
+use App\Models\Customer;
 use App\Models\Opportunity;
 use Illuminate\Http\Request;
+use App\Services\FilterService;
+use Illuminate\Support\Facades\DB;
 use App\Models\OpportunityStatuses;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\OpportunityRequest;
-use App\Models\Customer;
-use App\Models\Product;
 use App\Services\OpportunityService;
 use App\Services\OpportunityNotesService;
+use App\Http\Requests\Dashboard\OpportunityRequest;
 
 class OpportunityController extends Controller
 {
@@ -29,39 +31,51 @@ class OpportunityController extends Controller
     private $opportunityNotesService;
 
     /**
+     * filterService
+     *
+     * @var mixed
+     */
+    private $filterService;
+
+    /**
      * __construct
      *
      * @param  OpportunityService $opportunityService
      * @param  OpportunityNotesService $opportunityNotesService
+     * @param  FilterService $filterService
      * @return void
      */
     public function __construct(
         OpportunityService $opportunityService,
-        OpportunityNotesService $opportunityNotesService
+        OpportunityNotesService $opportunityNotesService,
+        FilterService $filterService
     ) {
         $this->opportunityService = $opportunityService;
         $this->opportunityNotesService = $opportunityNotesService;
+        $this->filterService = $filterService;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $data = $request->all();
+
         $opportunities = Opportunity::query();
-        $opportunities = $opportunities->with('product', 'customer');
+        $opportunities = $opportunities->with('product', 'customer', 'status');
+        $opportunities = $this->filterService->opportunityFilter($opportunities, $data);
+        $opportunitiesByStatus = clone $opportunities;
+        $opportunities = $opportunities
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
 
+        $opportunitiesByStatus = $opportunitiesByStatus->get();
+        $opportunitiesByStatus = $opportunitiesByStatus->groupBy('opportunity_statuses_id');
 
-        if ( auth()->user()->id != 1 ) {
-            $opportunities = $opportunities->where('user_id', auth()->user()->id);
-        }
-        $opportunities = $opportunities->orderBy('created_at', 'desc');
-        $opportunities = $opportunities->paginate('10');
+        $statuses = OpportunityStatuses::select('id', 'name')->get();
 
-        $statuses = OpportunityStatuses::withCount('opportunities')
-        ->get();
-
-        return view('dashboard.opportunities.index', compact('opportunities', 'statuses'));
+        return view('dashboard.opportunities.index', compact('opportunities', 'statuses', 'opportunitiesByStatus'));
     }
 
     /**
@@ -73,11 +87,13 @@ class OpportunityController extends Controller
     public function byStatus(int $id)
     {
         $opportunities = Opportunity::with('product', 'customer')
-        ->where('opportunity_statuses_id', $id)
-        ->orderBy('created_at', 'desc')
-        ->paginate('10');
+            ->where('opportunity_statuses_id', $id)
+            ->orderBy('created_at', 'desc')
+            ->paginate('10');
+
         $statuses = OpportunityStatuses::withCount('opportunities')
-        ->get();
+            ->get();
+
         $selectedStatus = OpportunityStatuses::find($id);
 
         return view('dashboard.opportunities.index', compact('opportunities', 'statuses', 'selectedStatus'));
@@ -189,7 +205,6 @@ class OpportunityController extends Controller
         $file = $this->opportunityService->attachFile($data);
 
         return redirect()->back();
-
     }
 
     /**

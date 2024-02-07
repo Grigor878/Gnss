@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\ProductController;
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\CustomerController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\InquiryController;
 use App\Http\Controllers\Dashboard\OpportunityController;
-use App\Http\Controllers\Dashboard\OrderController;
 use App\Http\Controllers\Dashboard\PartnerController;
 use App\Http\Controllers\Dashboard\SubcategoryController;
 use App\Http\Controllers\Dashboard\UserController;
@@ -25,14 +25,21 @@ Route::prefix('dashboard')
     Route::resource('categories', CategoryController::class);
     Route::resource('subcategories', SubcategoryController::class);
     Route::resource('partners', PartnerController::class);
-    Route::resource('opportunities', OpportunityController::class);
-    Route::get('opportunities/byStatus/{status}', [OpportunityController::class, 'byStatus'])->name('byStatus');
+    Route::resource('customers', CustomerController::class);
+
+    Route::resource('opportunities', OpportunityController::class)
+        ->middleware('manager');
 
     Route::post('opportunities/updateStatus', [OpportunityController::class, 'updateStatus']);
     Route::post('opportunities/addNote', [OpportunityController::class, 'addNote']);
     Route::post('opportunities/deleteNote', [OpportunityController::class, 'deleteNote']);
     Route::post('opportunities/attachFile', [OpportunityController::class, 'attachFile']);
     Route::post('opportunities/deleteFile', [OpportunityController::class, 'deleteFile']);
+
+
+    Route::get('opportunities/byStatus/{status}', [OpportunityController::class, 'byStatus'])
+        ->middleware('manager')
+        ->name('byStatus');
 
     Route::post('opportunities/addTask', [OpportunityController::class, 'addTask']);
     Route::post('opportunities/completeTask', [OpportunityController::class, 'completeTask']);

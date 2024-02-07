@@ -51,13 +51,21 @@
         @can('view', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('inquiries') }}" class="nav-link">
-                    <i class="nav-icon fas fa-handshake"></i>
+                    <i class="nav-icon fas fa-window-restore"></i>
                     <p>
                         Inquiries
                     </p>
                 </a>
             </li>
         @endcan
+        <li class="nav-item">
+            <a href="{{ route('customers.index') }}" class="nav-link">
+                <i class="nav-icon fas fa-child"></i>
+                <p>
+                    Customers
+                </p>
+            </a>
+        </li>
         <li class="nav-item">
             <a href="{{ route('opportunities.index') }}" class="nav-link">
                 <i class="nav-icon fas fa-handshake"></i>
