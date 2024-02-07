@@ -16,20 +16,22 @@ export const Tab = ({ active, setActive, description, files, media }) => {
                 >
                     {t("description")}
                 </li>
-                {files?.length && <li
+                {files?.length ? <li
                     onClick={() => setActive('files')}
                     className={active !== "files" ? 'tab-link' : 'tab-linkActive'}
 
                 >
                     {t("download")}
-                </li>}
-                {media?.length && <li
+                </li>
+                    : null}
+                {media?.length ? <li
                     onClick={() => setActive('media')}
                     className={active !== "media" ? 'tab-link' : 'tab-linkActive'}
 
                 >
                     {t("media")}
-                </li>}
+                </li>
+                    : null}
             </ul>
 
             {active === "description"
