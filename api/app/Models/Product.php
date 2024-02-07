@@ -18,7 +18,7 @@ class Product extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'price', 'description', 'count'];
+    protected $fillable = ['name', 'price', 'description', 'text', 'count'];
 
     /**
      * Get all of the productTraslations for the Product

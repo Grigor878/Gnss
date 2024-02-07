@@ -99,6 +99,23 @@
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="form-group">
+                                                                <label>Product Text</label>
+                                                                <textarea
+                                                                    class="form-control"
+                                                                    rows="3"
+                                                                    placeholder="Text ..."
+                                                                    name="en_text"
+                                                                >{{ old('en_text') ?? ($product->translations[0]->text ?? '' )}}</textarea>
+                                                                @error('en_text')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
                                                                 <label>Product Description</label>
                                                                 <textarea
                                                                     class="form-control"
@@ -132,6 +149,20 @@
                                                                     name="am_name"
                                                                 >
                                                                 @error('am_name')
+                                                                    <div class="text-danger">{{ $message }}</div>
+                                                                @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="form-group">
+                                                                <label>Ապրանքի տեքստ</label>
+                                                                <textarea class="form-control" rows="3" placeholder="տեքստ ..." name="am_text">
+                                                                    {{ old('am_text') ?? ($product->translations[1]->text ?? '' )}}
+                                                                </textarea>
+                                                                @error('am_text')
                                                                     <div class="text-danger">{{ $message }}</div>
                                                                 @enderror
                                                             </div>
@@ -364,8 +395,6 @@
 
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
 

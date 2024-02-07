@@ -24,6 +24,7 @@ class ProductController extends Controller
                 if ( $tr->language == $lang  ) {
                     $dataProduct['title'] = $tr->name;
                     $dataProduct['description'] = $tr->description;
+                    $dataProduct['text'] = $tr->text;
                 }
             }
         }

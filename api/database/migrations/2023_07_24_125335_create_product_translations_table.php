@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('language');
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('text')->nullable();
         });
     }
 

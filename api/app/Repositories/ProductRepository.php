@@ -48,6 +48,7 @@ class ProductRepository
             'name' => $data['en_name'],
             'price' => $data['price'],
             'description' => $data['en_description'],
+            'text' => $data['en_text'],
             'count' => $data['count']
         ]);
 
@@ -56,13 +57,15 @@ class ProductRepository
                 'product_id' => $product->id,
                 'language' => 'en',
                 'name' => $data['en_name'],
-                'description' => $data['en_description'],
+                'description' => trim($data['en_description']),
+                'text' => trim($data['en_text']),
             ],
             [
                 'product_id' => $product->id,
                 'language' => 'am',
                 'name' => $data['am_name'],
-                'description' => $data['am_description'],
+                'description' => trim($data['am_description']),
+                'text' => trim($data['am_description']),
             ]
         ]);
 
@@ -142,6 +145,7 @@ class ProductRepository
             'name' => $data['en_name'],
             'price' => $data['price'],
             'description' => $data['en_description'],
+            'text' => $data['en_text'],
             'count' => $data['count']
         ]);
 
@@ -152,13 +156,15 @@ class ProductRepository
                 'product_id' => $product->id,
                 'language' => 'en',
                 'name' => $data['en_name'],
-                'description' => $data['en_description'],
+                'description' => trim($data['en_description']),
+                'text' => trim($data['en_text']),
             ],
             [
                 'product_id' => $product->id,
                 'language' => 'am',
                 'name' => $data['am_name'],
-                'description' => $data['am_description'],
+                'description' => trim($data['am_description']),
+                'text' => trim($data['am_text']),
             ]
         ]);
 

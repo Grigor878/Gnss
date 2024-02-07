@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedBigInteger('price')->nullable();
             $table->text('description')->nullable();
+            $table->text('text')->nullable();
             $table->boolean('count')->nullable();
             $table->timestamps();
             $table->softDeletes();
