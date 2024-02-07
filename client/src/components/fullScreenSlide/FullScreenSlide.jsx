@@ -15,7 +15,7 @@ export const FullScreenSlide = ({ startIndex, images, onClose }) => {
         items={images}
         startIndex={currentIndex}
         showPlayButton={false}
-        showFullscreenButton={true}
+        showFullscreenButton={false}
         onSlide={(index) => setCurrentIndex(index)}
       />
       <button

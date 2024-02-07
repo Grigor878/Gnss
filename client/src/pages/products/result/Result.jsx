@@ -63,6 +63,16 @@ const Result = () => {
                     {singleProduct &&
                         <div className='result__main'>
                             <div className='result__main-context'>
+                                <div
+                                    className="result__main-context-img"
+                                    onClick={() => openFullscreen(0)}
+                                >
+                                    <img
+                                        src={singleProduct?.images?.length ? APP_BASE_URL + singleProduct?.images[0] : noImg}
+                                        alt="productImg"
+                                    />
+                                </div>
+
                                 <div className="result__main-context-imgs">
                                     {sliderImages?.slice(1, 5)?.map((el, index) => {
                                         return (
@@ -77,29 +87,24 @@ const Result = () => {
                                     })}
                                 </div>
 
-                                <div
-                                    className="result__main-context-img"
-                                    onClick={() => openFullscreen(0)}
-                                >
-                                    <img
-                                        src={singleProduct?.images?.length ? APP_BASE_URL + singleProduct?.images[0] : noImg}
-                                        alt="productImg"
-                                    />
-                                </div>
+                                <div>
 
-                                <div className="result__main-context-box">
-                                    <div className="result__main-context-box-top">
-                                        <span># {id}</span>
-                                        <p>{t("available")}</p>
-                                    </div>
+                                    <div className="result__main-context-box">
+                                        <div className="result__main-context-box-top">
+                                            <span># {id}</span>
+                                            <p>{t("available")}</p>
+                                        </div>
 
-                                    <p className="result__main-context-box-price">{moneyFormater(singleProduct?.price)}</p>
+                                        {/* <p className="result__main-context-box-price">{moneyFormater(singleProduct?.price)}</p> */}
 
-                                    <button onClick={() => setOpen(true)}>{t("order")}</button>
+                                        <button onClick={() => setOpen(true)}>{t("order")}</button>
 
-                                    <div className="result__main-context-box-top">
-                                        <p>{t("created")}</p>
-                                        <span><BsFillCalendarCheckFill /> {singleProduct?.updated_at}</span>
+                                        {/* <div className="result__main-context-box-top">
+                                            <p>{t("created")}</p>
+                                            <span><BsFillCalendarCheckFill /> {singleProduct?.updated_at}</span>
+                                        </div> */}
+
+                                        <p>{singleProduct?.text}</p>
                                     </div>
 
                                 </div>
