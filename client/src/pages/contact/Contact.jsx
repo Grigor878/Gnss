@@ -43,7 +43,7 @@ const Contact = () => {
               <input
                 type="text"
                 name="fullname"
-                placeholder="First Name *"
+                placeholder="Full Name *"
                 required
               />
               <input

@@ -16,7 +16,7 @@ const ChildSub = ({ id, parent, title }) => {
     const combinedText = `${parent} - ${title}`;
 
     const { language, products } = useSelector((state => state.home))
-    // console.log(products);//
+
     const dispatch = useDispatch();
 
     useEffect(() => {

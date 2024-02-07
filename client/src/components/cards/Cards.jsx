@@ -1,16 +1,16 @@
 import React, { useRef } from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { clearSubCategories } from "../../store/slices/homeSlice";
 import { capitalizeText } from "../../helpers/formatters";
-import noImg from "../../assets/imgs/noImg.png";
+// import noImg from "../../assets/imgs/noImg.png";
 import { APP_BASE_URL } from "../../apis/config";
 import "./Cards.scss";
 
 export const Cards = ({ data }) => {
-  const { t } = useTranslation();
+  // const { t } = useTranslation();
 
   const { pathname } = useLocation();
   const navigate = useNavigate();
@@ -54,6 +54,7 @@ export const Cards = ({ data }) => {
               style={{
                 backgroundImage: `url(${APP_BASE_URL + image})`,
                 backgroundSize: "cover",
+                backgroundPosition:"center"
               }}
               key={id}
               onClick={() => handleNavigate(path)}

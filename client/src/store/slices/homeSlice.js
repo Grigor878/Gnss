@@ -18,6 +18,7 @@ const initialState = {
   partners: [],
 
   orderStatus: "",
+  bgImage: null,
 };
 
 // get header routes
@@ -74,9 +75,10 @@ export const getAllChildSubCategories = createAsyncThunk(
 // get sub categories
 export const getSubCategories = createAsyncThunk(
   "home/subCategories",
-  async ({ id, language }) => {
+  async ({ id, language }, thunkAPI) => {
     try {
       const { data } = await baseApi.get(`getSubcategories/${id}/${language}`);
+      // thunkAPI.dispatch(setBgImage(data?.bg_iamge));
       return data;
     } catch (err) {
       console.log(`Get Sub Categories Error: ${err.message}`);
@@ -87,11 +89,12 @@ export const getSubCategories = createAsyncThunk(
 // get child sub categories
 export const getChildSubCategories = createAsyncThunk(
   "home/childSubCategories",
-  async ({ id, language }) => {
+  async ({ id, language }, thunkAPI) => {
     try {
       const { data } = await baseApi.get(
         `getChildSubcategories/${id}/${language}`
       );
+      // thunkAPI.dispatch(setBgImage(data?.bg_iamge));
       return data;
     } catch (err) {
       console.log(`Get Child Sub Categories Error: ${err.message}`);
@@ -163,6 +166,10 @@ const homeSlice = createSlice({
     clearSubCategories: (state, action) => {
       state.subCategories = [];
     },
+    // set bg_image
+    setBgImage: (state, action) => {
+      state.bgImage = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getHeaderRoutes.fulfilled, (state, action) => {
@@ -178,10 +185,12 @@ const homeSlice = createSlice({
       state.allChildSubCategories = action.payload;
     });
     builder.addCase(getSubCategories.fulfilled, (state, action) => {
-      state.subCategories = action.payload;
+      state.subCategories = action.payload.data;
+      state.bgImage = action.payload.bg_image; //
     });
     builder.addCase(getChildSubCategories.fulfilled, (state, action) => {
-      state.childSubcategories = action.payload;
+      state.childSubcategories = action.payload.data;
+      state.bgImage = action.payload.bg_image; //
     });
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       state.products = action.payload;

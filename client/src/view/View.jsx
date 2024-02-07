@@ -21,7 +21,9 @@ const NotFound = lazy(() => pMinDelay(import("../pages/404/NotFound"), 500));
 
 const View = () => {
   const { language, allCategories, allSubCategories, allChildSubCategories } = useSelector((state) => state.home);
-
+console.log("1",allCategories);
+console.log("2",allSubCategories);
+console.log("3",allChildSubCategories);
   const dispatch = useDispatch();
 
   useEffect(() => {
