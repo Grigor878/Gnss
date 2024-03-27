@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Partner;
+use App\Models\PartnerContactPerson;
 use Illuminate\Support\Facades\DB;
 use App\Repositories\PartnerRepository;
 
@@ -90,5 +91,16 @@ class PartnerService
         DB::commit();
 
         return $partner;
+    }
+    
+    /**
+     * deletePerson
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deletePerson(string $id)
+    {
+        return $this->partnerRepository->deletePerson($id);
     }
 }

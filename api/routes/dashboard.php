@@ -60,6 +60,7 @@ Route::prefix('dashboard')
     Route::post('categories/deleteImage/{id}/{bg_image}', [CategoryController::class, 'deleteImage']);
     Route::post('subcategories/deleteImage/{id}/{bg_image}', [SubcategoryController::class, 'deleteImage']);
     Route::post('partners/deleteImage/{id}', [PartnerController::class, 'deleteImage']);
+    Route::post('partners/deletePerson/{id}', [PartnerController::class, 'deletePerson']);
 
 });
 

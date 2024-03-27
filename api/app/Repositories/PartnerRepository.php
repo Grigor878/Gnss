@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Partner;
+use App\Models\PartnerContactPerson;
 use App\Services\FileServices;
 use Illuminate\Support\Facades\DB;
 
@@ -38,9 +39,16 @@ class PartnerRepository
         DB::beginTransaction();
 
         $partner = Partner::create([
-            'name' => $data['name']
+            'name' => $data['name'],
+            'address' => $data['address']
         ]);
 
+        foreach ($data['contactPersons'] as $person) {
+            if ($person['name'] != null) {
+                $person['partner_id'] = $partner->id;
+                PartnerContactPerson::create($person);
+            }
+        }
 
         if ( isset($data['image']) ) {
             $imageFileName = rand(1000000, 99999999999) . '_partner_' . $partner->id . '_image.' . strtolower($data['image']->getClientOriginalExtension());
@@ -68,10 +76,23 @@ class PartnerRepository
     {
         DB::beginTransaction();
 
-        $partner->update([
-            'name' => $data['name']
-        ]);
+        if ( isset($data['contactPersons']) ) {
+            foreach ($data['contactPersons'] as $person) {
+                if (isset($person['id'])) {
+                    PartnerContactPerson::where('id', $person['id'])->update($person);
+                } else {
+                    if ($person['name'] != null) {
+                        $person['partner_id'] = $partner->id;
+                        PartnerContactPerson::create($person);
+                    }
+                }
+            }
+        }
 
+        $partner->update([
+            'name' => $data['name'],
+            'address' => $data['address']
+        ]);
 
         if ( isset($data['image']) ) {
             $imageFileName = rand(1000000, 99999999999) . '_partner_' . $partner->id . '_image.' . strtolower($data['image']->getClientOriginalExtension());
@@ -103,5 +124,20 @@ class PartnerRepository
         DB::commit();
 
         return $partner;
+    }
+
+    /**
+     * deletePerson
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deletePerson(string $id)
+    {
+        DB::beginTransaction();
+        $person = PartnerContactPerson::where('id', $id)->delete();
+        DB::commit();
+
+        return $person;
     }
 }

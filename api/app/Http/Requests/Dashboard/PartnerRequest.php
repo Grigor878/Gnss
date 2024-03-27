@@ -23,7 +23,9 @@ class PartnerRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'image' => ''
+            'address' => '',
+            'image' => '',
+            'contactPersons' => ''
         ];
     }
 }

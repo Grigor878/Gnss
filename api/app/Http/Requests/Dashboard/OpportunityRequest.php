@@ -28,7 +28,8 @@ class OpportunityRequest extends FormRequest
             'customer_phone' => '',
             'customer_name' => '',
             'company' => '',
-            'customer' => ''
+            'customer' => '',
+            'user_id' => ''
         ];
     }
 }

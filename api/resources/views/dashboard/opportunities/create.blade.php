@@ -47,6 +47,15 @@
                                                     </div>
 
                                                     <div class="form-group">
+                                                        <label for="user">Select user</label>
+                                                        <select name="user_id" id="user" class="form-control">
+                                                            @foreach ($users as $user)
+                                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="form-group">
                                                         <label for="count">Count</label>
                                                         <input type="number" name="count" id="count" class="form-control" required>
                                                     </div>

@@ -19,14 +19,6 @@ class DashboardController extends Controller
         $allPartners = Partner::query()->count();
         $allUsers = User::query()->count();
 
-//         dd(
-//             $allProducts,
-// $allCategories,
-// $allSubcategories,
-// $allPartners,
-// $allUsers
-//         );
-
         return view('dashboard.index',
             compact (
                 'allProducts',

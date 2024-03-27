@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Services\OpportunityService;
 use App\Services\OpportunityNotesService;
 use App\Http\Requests\Dashboard\OpportunityRequest;
+use App\Models\User;
 
 class OpportunityController extends Controller
 {
@@ -106,8 +107,9 @@ class OpportunityController extends Controller
     {
         $products = Product::select('id', 'name')->get();
         $customers = Customer::all();
+        $users = User::where('role_id', '2')->get();
 
-        return view('dashboard.opportunities.create', compact('products', 'customers'));
+        return view('dashboard.opportunities.create', compact('products', 'customers', 'users'));
     }
 
     /**
@@ -124,6 +126,7 @@ class OpportunityController extends Controller
             "phone" => $data['customer_phone'],
             "email" => $data['customer_email'],
             "company" => $data['company'],
+            "user_id" => $data['user_id'],
         ];
 
         if (isset($data['customer'])) {

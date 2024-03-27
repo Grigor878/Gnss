@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\PartnerRequest;
 use App\Models\Partner;
 use App\Services\PartnerService;
-use Illuminate\Http\Request;
 
 class PartnerController extends Controller
 {
@@ -33,7 +32,7 @@ class PartnerController extends Controller
      */
     public function index()
     {
-        $partners = Partner::all();
+        $partners = Partner::orderBy('created_at', 'desc')->get();
 
         return view('dashboard.partner.index', compact('partners'));
     }
@@ -71,7 +70,7 @@ class PartnerController extends Controller
      */
     public function edit(string $id)
     {
-        $partner = Partner::find($id);
+        $partner = Partner::with('contactPersons')->find($id);
 
         return view('dashboard.partner.edit', compact('partner'));
     }
@@ -111,13 +110,35 @@ class PartnerController extends Controller
         try {
             $this->partnerService->deleteImage($id);
             return [
-                'status' => 1,
+                'status' => 200,
                 'message' => 'Image Deleted'
             ];
         } catch (\Exception $e) {
             return [
-                'status' => 0,
+                'status' => 500,
                 'message' => $e
+            ];
+        }
+    }
+
+    /**
+     * deletePerson
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deletePerson(string $id)
+    {
+        try {
+            $this->partnerService->deletePerson($id);
+            return [
+                'status' => 200,
+                'message' => 'Person Deleted'
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => 500,
+                'message' => $e->getMessage()
             ];
         }
     }
