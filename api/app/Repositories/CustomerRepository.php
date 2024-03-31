@@ -3,41 +3,78 @@
 namespace App\Repositories;
 
 use App\Models\Customer;
+use App\Models\CustomerContactPerson;
+use Illuminate\Support\Facades\DB;
 
 class CustomerRepository
 {
-
     /**
-     * checkCustomerByPhone
+     * create
      *
-     * @param  mixed $phone
+     * @param  mixed $data
      * @return void
      */
-    public function checkCustomerByPhone($phone)
+    public function create($data)
     {
-        $customer = Customer::where('phone', $phone);
+        DB::beginTransaction();
 
-        if ( $customer->exists() ) {
-            return $customer->get()[0];
-        } else {
-            return false;
-        }
-    }
+        $customer = Customer::create([
+            'name' => $data['name'],
+            'address' => $data['address']
+        ]);
 
-    public function CheckAndCreate($data)
-    {
-        try {
-            $customer = Customer::where('phone', $data['phone'])->first();
-            if ($customer == null) {
-                $customer = Customer::create($data);
+        foreach ($data['contactPersons'] as $person) {
+            if ($person['name'] != null) {
+                $person['customer_id'] = $customer->id;
+                CustomerContactPerson::create($person);
             }
-            return $customer;
-        } catch (\Exception $e) {
-            return [
-                'status' => 400,
-                'message' => "Something went wrong",
-                'data' => $e->getMessage(),
-            ];
         }
+
+        DB::commit();
+
+        return $customer;
     }
+
+    public function update($customer, $data)
+    {
+        DB::beginTransaction();
+
+        if ( isset($data['contactPersons']) ) {
+            foreach ($data['contactPersons'] as $person) {
+                if (isset($person['id'])) {
+                    CustomerContactPerson::where('id', $person['id'])->update($person);
+                } else {
+                    if ($person['name'] != null) {
+                        $person['customer_id'] = $customer->id;
+                        CustomerContactPerson::create($person);
+                    }
+                }
+            }
+        }
+
+        $customer->update([
+            'name' => $data['name'],
+            'address' => $data['address']
+        ]);
+
+        DB::commit();
+
+        return $customer;
+    }
+
+    /**
+     * deletePerson
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deletePerson(string $id)
+    {
+        DB::beginTransaction();
+        $person = CustomerContactPerson::where('id', $id)->delete();
+        DB::commit();
+
+        return $person;
+    }
+
 }

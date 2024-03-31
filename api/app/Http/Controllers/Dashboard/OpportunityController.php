@@ -7,7 +7,6 @@ use App\Models\Customer;
 use App\Models\Opportunity;
 use Illuminate\Http\Request;
 use App\Services\FilterService;
-use Illuminate\Support\Facades\DB;
 use App\Models\OpportunityStatuses;
 use App\Http\Controllers\Controller;
 use App\Services\OpportunityService;
@@ -119,21 +118,7 @@ class OpportunityController extends Controller
     {
         $data = $request->validated();
 
-        $opportunityData = [
-            "product_id" => $data['product'],
-            "count" => $data['count'],
-            "fullName" => $data['customer_name'],
-            "phone" => $data['customer_phone'],
-            "email" => $data['customer_email'],
-            "company" => $data['company'],
-            "user_id" => $data['user_id'],
-        ];
-
-        if (isset($data['customer'])) {
-            $opportunityData["phone"] = $data['customer'];
-        }
-
-        $opportunity = $this->opportunityService->create($opportunityData);
+        $opportunity = $this->opportunityService->create($data);
 
         return redirect()->route('opportunities.index');
     }

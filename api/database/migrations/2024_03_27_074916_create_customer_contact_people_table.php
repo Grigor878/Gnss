@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('opportunities', function (Blueprint $table) {
+        Schema::create('customer_contact_people', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
+            $table->string('name');
+            $table->string('phone');
+            $table->string('email');
             $table->unsignedBigInteger('customer_id');
-            $table->unsignedBigInteger('user_id');
-            $table->integer('count');
-            $table->string('opportunity_statuses_id')->default(1);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('opportunities');
+        Schema::dropIfExists('customer_contact_people');
     }
 };

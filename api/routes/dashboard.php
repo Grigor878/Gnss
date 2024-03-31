@@ -61,6 +61,7 @@ Route::prefix('dashboard')
     Route::post('subcategories/deleteImage/{id}/{bg_image}', [SubcategoryController::class, 'deleteImage']);
     Route::post('partners/deleteImage/{id}', [PartnerController::class, 'deleteImage']);
     Route::post('partners/deletePerson/{id}', [PartnerController::class, 'deletePerson']);
+    Route::post('customers/deletePerson/{id}', [CustomerController::class, 'deletePerson']);
 
 });
 

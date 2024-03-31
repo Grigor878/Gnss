@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->text('text')->nullable();
             $table->boolean('count')->nullable();
+            $table->string('unique_code')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

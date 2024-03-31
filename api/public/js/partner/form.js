@@ -11,8 +11,6 @@ $("#add-person").click(function() {
         parent.remove()
     })
 
-    console.log(newPerson.find('.remove-partner'))
-
     let inputs = newPerson.find('input')
     inputs.each(function() {
         let newAttrVal = $(this).attr('name').replace('personNumber', personCount)
@@ -36,11 +34,15 @@ $(".delete-image-btn").click(function () {
 $(".remove-partner").click(function () {
     let personId = $(this).data("person-id")
 
-    $.post("/dashboard/partners/deletePerson/"+personId)
-    .done( function( data ) {
-        alert( data.message );
-        $('.remove-partner[data-person-id='+personId+']').closest('.person').remove()
-    })
+    if (personId) {
+        $.post("/dashboard/partners/deletePerson/"+personId)
+        .done( function( data ) {
+            alert( data.message );
+            $('.remove-partner[data-person-id='+personId+']').closest('.person').remove()
+        })
+    } else {
+        $(this).closest('.person').remove()
+    }
 })
 
 $(".manager-selector").change(function() {

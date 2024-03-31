@@ -16,7 +16,7 @@ class Customer extends Model
      *
      * @var array
      */
-    protected $fillable = ['email', 'phone', 'fullName', 'company'];
+    protected $fillable = ['name', 'address'];
 
     /**
      * Get all of the opportunities for the Customer
@@ -38,4 +38,13 @@ class Customer extends Model
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * Get all of the contactPersons for the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function contactPersons(): HasMany
+    {
+        return $this->hasMany(CustomerContactPerson::class);
+    }
 }

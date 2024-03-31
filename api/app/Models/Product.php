@@ -21,6 +21,31 @@ class Product extends Model
     protected $fillable = ['name', 'price', 'description', 'text', 'count'];
 
     /**
+     * guarded
+     *
+     * @var array
+     */
+    protected $guarded = ['unique_code'];
+
+    /**
+     * boot
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($model) {
+            if (!$model->unique_code) {
+                do {
+                    $model->unique_code = time() . mt_rand(1000, 9999); // Generates a unique integer code
+                } while (static::where('unique_code', $model->unique_code)->exists());
+            }
+        });
+    }
+
+    /**
      * Get all of the productTraslations for the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

@@ -68,10 +68,8 @@ class PartnerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Partner $partner)
     {
-        $partner = Partner::with('contactPersons')->find($id);
-
         return view('dashboard.partner.edit', compact('partner'));
     }
 

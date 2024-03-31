@@ -27,7 +27,13 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Customers Table</h3>
+                        <div class="card-tools">
+                            <div>
+                                <a href="{{ route('customers.create') }}" class="btn btn-block btn-primary">Add Partner</a>
+                            </div>
+                        </div>
                     </div>
+
 
                     <div class="card-body p-0">
                         <table class="table">
@@ -35,19 +41,16 @@
                                 <tr>
                                     <th style="width: 10px">#</th>
                                     <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
                                     <th style="width: 200px">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($customers as $customer)
-                                    <tr class="{{ $customer->is_rejected ? 'bg-dark' : '' }}">
+                                    <tr>
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $customer->fullName }}</td>
-                                        <td>{{ $customer->email }}</td>
-                                        <td>{{ $customer->phone }}</td>
+                                        <td>{{ $customer->name }}</td>
                                         <td>
+                                            <span><a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning">Edit</a></span>
                                             <span><a href="{{ route('customers.show', $customer->id) }}" class="btn btn-info">View</a></span>
                                         </td>
                                     </tr>

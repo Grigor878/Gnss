@@ -24,27 +24,17 @@ class OpportunityService
     private $opportunityNoteService;
 
     /**
-     * customerRepository
-     *
-     * @var mixed
-     */
-    private $customerRepository;
-
-    /**
      * __construct
      *
      * @param  OpportunityRepository $opportunityRepository
-     * @param  CustomerRepository $customerRepository
      * @param  OpportunityNotesService $opportunityNoteService
      * @return void
      */
     public function __construct(
         OpportunityRepository $opportunityRepository,
-        CustomerRepository $customerRepository,
         OpportunityNotesService $opportunityNoteService
     ) {
         $this->opportunityRepository = $opportunityRepository;
-        $this->customerRepository = $customerRepository;
         $this->opportunityNoteService = $opportunityNoteService;
     }
 
@@ -56,23 +46,7 @@ class OpportunityService
      */
     public function create($data)
     {
-        $thisCostomer = [
-            'email' => $data['email'],
-            'fullName' => $data['fullName'],
-            'phone' => $data['phone'],
-            'company' => $data['company']
-        ];
-
-        $opportunity = [
-            'product_id' => $data['product_id'],
-            'user_id' => $data['user_id'],
-            'count' => $data['count'],
-            'opportunity_statuses_id' => 1
-        ];
-
-        $customer = $this->customerRepository->CheckAndCreate($thisCostomer);
-        $opportunity['customer_id'] = $customer->id;
-        $opportunity = $this->opportunityRepository->create($opportunity);
+        $opportunity = $this->opportunityRepository->create($data);
 
         if (isset($data['note'])) {
             $note = [

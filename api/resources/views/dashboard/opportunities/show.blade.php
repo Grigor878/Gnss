@@ -359,7 +359,7 @@
                                                                                     <label for="newNote">Add task text</label>
                                                                                     <input class="form-control" type="text" name="title">
 
-                                                                                    <input type="submit" class="btn btn-success mt-1">
+                                                                                    <input type="submit" value="Submit" class="btn btn-success mt-1">
                                                                                 </div>
                                                                             </form>
                                                                         </div>

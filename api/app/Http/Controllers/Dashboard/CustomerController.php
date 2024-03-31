@@ -3,11 +3,31 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Customer;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\CustomerRequest;
+use App\Services\CustomerService;
 
 class CustomerController extends Controller
 {
+    /**
+     * customerService
+     *
+     * @var mixed
+     */
+    private $customerService;
+
+    /**
+     * __construct
+     *
+     * @param  CustomerService $customerService
+     * @return void
+     */
+    public function __construct(
+        CustomerService $customerService
+    ) {
+        $this->customerService = $customerService;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -22,15 +42,19 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.customers.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        $this->customerService->create($data);
+
+        return redirect()->route('partners.index');
     }
 
     /**
@@ -38,24 +62,27 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        // dd($customer);
         return view('dashboard.customers.show', compact('customer'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Customer $customer)
     {
-        //
+        return view('dashboard.customers.edit', compact('customer'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CustomerRequest $request, Customer $customer)
     {
-        //
+        $data = $request->validated();
+
+        $this->customerService->update($customer, $data);
+
+        return redirect()->route('customers.index');
     }
 
     /**
@@ -64,5 +91,27 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * deletePerson
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function deletePerson(string $id)
+    {
+        try {
+            $this->customerService->deletePerson($id);
+            return [
+                'status' => 200,
+                'message' => 'Person Deleted'
+            ];
+        } catch (\Exception $e) {
+            return [
+                'status' => 500,
+                'message' => $e->getMessage()
+            ];
+        }
     }
 }
