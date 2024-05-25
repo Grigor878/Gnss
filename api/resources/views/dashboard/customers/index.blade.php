@@ -29,7 +29,7 @@
                         <h3 class="card-title">Customers Table</h3>
                         <div class="card-tools">
                             <div>
-                                <a href="{{ route('customers.create') }}" class="btn btn-block btn-primary">Add Partner</a>
+                                <a href="{{ route('customers.create') }}" class="btn btn-block btn-primary">Add Customer</a>
                             </div>
                         </div>
                     </div>

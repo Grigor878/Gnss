@@ -77,9 +77,7 @@
                                     <th>Name</th>
                                     <th>Product</th>
                                     <th>Count</th>
-                                    <th>Email</th>
-                                    <th>Phone</th>
-                                    <th>Price</th>
+                                    <th>Status</th>
                                     <th style="width: 200px">Action</th>
                                 </tr>
                             </thead>
@@ -87,12 +85,10 @@
                                 @foreach ($opportunities as $opportunity)
                                     <tr>
                                         <td>{{ $loop->iteration }}.</td>
-                                        <td>{{ $opportunity->customer->fullName }}</td>
+                                        <td>{{ $opportunity->customer->name }}</td>
                                         <td>{{ $opportunity->product->name }}</td>
                                         <td>{{ $opportunity->count }}</td>
-                                        <td>{{ $opportunity->customer->email }}</td>
-                                        <td>{{ $opportunity->customer->phone }}</td>
-                                        <td>{{ $opportunity->product->price }}</td>
+                                        <td>{{ $opportunity->status->name }}</td>
                                         <td>
                                             <span><a href="{{ route('opportunities.show', $opportunity->id) }}" class="btn btn-info">View</a></span>
                                         </td>

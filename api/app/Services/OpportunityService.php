@@ -48,6 +48,8 @@ class OpportunityService
     {
         $opportunity = $this->opportunityRepository->create($data);
 
+        dd($opportunity);
+
         if (isset($data['note'])) {
             $note = [
                 'text' => $data['note'],

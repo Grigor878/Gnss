@@ -115,37 +115,58 @@
                                                 <input id="oppStatusId" type="hidden"
                                                     data-status-id="{{ $opportunity->status->id }}">
 
-                                                <div class="card-header">
-                                                    <p class="product-name">{{ $opportunity->product->name }}</p>
-                                                </div>
                                                 <div class="card-body row">
                                                     <div class="col-lg-6">
-                                                        <h5>Count</h5>
-                                                        <p class="order-count">{{ $opportunity->count }}</p>
-                                                        <div>
-                                                            <h5>Product</h5>
-                                                            <p class="product-name">{{ $opportunity->product->name }}</p>
-                                                            <p class="product-price">{{ $opportunity->product->price }}
-                                                            </p>
-                                                            <p class="product-description">
-                                                                {{ $opportunity->product->description }}</p>
 
-                                                            @if ( count($opportunity->product->images) > 0 )
-                                                                <img class="product-image w-25"
-                                                                    src="{{ asset('storage/' . $opportunity->product->images[0]->filename) }}"
-                                                                    alt="image">
-                                                            @endif
-                                                        </div>
-                                                        <hr>
+                                                        <h4>Product</h4>
+
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <td>Product name</td>
+                                                                <td>{{ $opportunity->product->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Price</td>
+                                                                <td>{{ $opportunity->product->price }}</td>
+                                                            </tr>
+                                                        </table>
+
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <h5>Customer</h5>
-                                                        <p class="customer-name">{{ $opportunity->customer->fullName }}
-                                                        </p>
-                                                        <p class="customer-email">{{ $opportunity->customer->email }}</p>
-                                                        <p class="customer-phone">{{ $opportunity->customer->phone }}</p>
-                                                        <p class="customer-company">{{ $opportunity->customer->company }}
-                                                        </p>
+                                                        <h4>Customer</h4>
+
+                                                        <table class="table table-bordered">
+                                                            <tr>
+                                                                <td>name</td>
+                                                                <td>{{ $opportunity->customer->name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>address</td>
+                                                                <td>{{ $opportunity->customer->address }}</td>
+                                                            </tr>
+
+                                                        </table>
+
+                                                        <h5>Contact persons</h5>
+
+                                                        <table class="table table-striped">
+
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>name</th>
+                                                                    <th>phone</th>
+                                                                    <th>email</th>
+                                                                </tr>
+                                                            </thead>
+
+                                                            @foreach ($opportunity->customer->contactPersons as $person)
+                                                                <tr>
+                                                                    <td>{{ $person->name }}</td>
+                                                                    <td>{{ $person->phone }}</td>
+                                                                    <td>{{ $person->email }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </table>
                                                     </div>
 
                                                 </div>

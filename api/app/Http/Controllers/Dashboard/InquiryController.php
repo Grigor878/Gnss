@@ -85,11 +85,15 @@ class InquiryController extends Controller
     public function toOpportunity (Request $request)
     {
         $data = $request->all();
-        $inquiry = Inquiry::find($data['id'])->toArray();
-        $inquiry['user_id'] = $data['manager'];
-        $delete = $this->inquiryService->delete($inquiry['id']);
-        $opportunity = $this->opportunityService->create($inquiry);
-        return redirect()->route('inquiries');
+        $opportunity = $this->inquiryService->toOpportunity($data);
+        dd($data);
+
+
+        // $inquiry = Inquiry::find($data['id'])->toArray();
+        // $inquiry['user_id'] = $data['manager'];
+        // $delete = $this->inquiryService->delete($inquiry['id']);
+        // $opportunity = $this->opportunityService->create($inquiry);
+        // return redirect()->route('inquiries');
     }
 
 }

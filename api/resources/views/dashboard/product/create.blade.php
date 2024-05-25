@@ -241,6 +241,7 @@
                                                                 <option
                                                                     value="{{ @$subCategory->id }}"
                                                                     data-category="{{ @$subCategory->category_id }}"
+                                                                    data-parentSubCategory="{{ @$subCategory->parent_id }}"
                                                                     data-en-name="{{ @$subCategory->translations[0]->name }}"
                                                                     data-am-name="{{ @$subCategory->translations[1]->name }}"
                                                                 >

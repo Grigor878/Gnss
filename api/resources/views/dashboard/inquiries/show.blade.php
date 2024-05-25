@@ -55,10 +55,15 @@
                                                 @method('POST')
                                                 <input type="hidden" name="id" value="{{ $inquiry->id }}">
                                                 <div class="col-lg-8">
-                                                    <select name="manager" class="manager-selector form-control d-inline-block">
+                                                    <select name="manager" class="manager-selector form-control selectpicker d-inline-block" data-live-search="true">
                                                         <option value="0" selected disabled>Choose Sales Manager</option>
                                                         @foreach ($managers as $manager)
-                                                            <option value="{{ $manager->id }}" class="">{{ $manager->name . " " . $manager->surname }}</option>
+                                                            <option
+                                                                data-tokens="{{ $manager->name . " " . $manager->surname }}"
+                                                                value="{{ $manager->id }}" class=""
+                                                            >
+                                                                {{ $manager->name . " " . $manager->surname }}
+                                                            </option>
                                                         @endforeach
                                                     </select>
                                                 </div>
@@ -79,9 +84,11 @@
                                             <p class="product-name">{{ $inquiry->product->name }}</p>
                                             <p class="product-price">{{ $inquiry->product->price }}</p>
                                             <p class="product-description">{{ $inquiry->product->description }}</p>
-                                            <img class="product-image w-25"
-                                                src="{{ asset('storage/' . $inquiry->product->images[0]->filename) }}"
-                                                alt="image">
+                                            @if (count($inquiry->product->images))
+                                                <img class="product-image w-25"
+                                                    src="{{ asset('storage/' . $inquiry->product->images[0]->filename) }}"
+                                                    alt="image">
+                                            @endif
                                         </div>
                                         <hr>
                                         <p class="order-note">{{ $inquiry->note }}</p>

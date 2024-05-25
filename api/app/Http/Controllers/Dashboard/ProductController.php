@@ -56,7 +56,7 @@ class ProductController extends Controller
         ])
         ->get();
 
-        $childSubCategories = Subcategory::select('id', 'name', 'category_id')->with('translations')
+        $childSubCategories = Subcategory::select('id', 'name', 'category_id', 'parent_id')->with('translations')
         ->where([
             ['level', '!=' , 1],
             ['parent_id', '!=' , NULL],

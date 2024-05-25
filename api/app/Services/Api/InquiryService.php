@@ -2,6 +2,7 @@
 
 namespace App\Services\Api;
 
+use App\Models\Inquiry;
 use App\Repositories\Api\InquiryRepository;
 
 class InquiryService
@@ -57,4 +58,37 @@ class InquiryService
     {
         return $this->inquiryRepository->delete($id);
     }
+
+    /**
+     * toOpportunity
+     *
+     * @param  mixed $data
+     * @return void
+     */
+    public function toOpportunity($data)
+    {
+        $inquiry = Inquiry::find($data['id'])->toArray();
+
+        $customer = [
+            'name' => 'required',
+            'address' => '',
+            'contactPersons' => [
+                
+            ]
+        ];
+
+
+
+
+
+        $opportunity = [
+            'product_id' => $inquiry['product_id'],
+            'customer_id' => '----',
+            'user_id' => $data['manager'],
+            'count' => $inquiry['product_id']
+        ];
+
+        dd($inquiry, $opportunity);
+    }
+
 }

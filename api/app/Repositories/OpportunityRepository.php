@@ -39,6 +39,7 @@ class OpportunityRepository
     {
         DB::beginTransaction();
         try {
+            dd($data);
             $opportunity = Opportunity::create($data);
             DB::commit();
             return $opportunity;
