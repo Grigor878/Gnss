@@ -42,7 +42,7 @@ class InquiryRepository
             $newInquiry = [
                 'product_id' => $data['id'],
                 'count' => $data['count'],
-                'fullName' => $data['fullName'],
+                'fullName' => $data['fullname'],
                 'company' => $data['company'],
                 'phone' => $data['phone'],
                 'email' => $data['mail'],
