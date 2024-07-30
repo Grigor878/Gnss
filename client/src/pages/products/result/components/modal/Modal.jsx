@@ -26,7 +26,7 @@ export const Modal = ({ open, setOpen }) => {
     const { orderStatus } = useSelector((state) => state.home);
 
     function statusChecking() {
-        if (orderStatus === "orderSuccess") {
+        if (orderStatus === 200 || orderStatus === "200") {
             setMail("")
             setPhone("")
             setFullname("")
@@ -51,7 +51,8 @@ export const Modal = ({ open, setOpen }) => {
 
         if (check) {
             return oops(t("attention"))
-        } else {
+        } 
+        else {
             dispatch(order({ orderData })).then(() => {
                 statusChecking()
             })
